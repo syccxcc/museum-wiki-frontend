@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Museum} from '../models/Museum';
+import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component';
 
 @Component({
   selector: 'app-museum-list',
@@ -12,9 +13,6 @@ export class MuseumListComponent implements OnInit {
     new Museum('Pfaffmann Museum', 'A museum created by Pfaffmann.', 1),
     new Museum('Smith Museum', 'A museum created by Smith', 1),
     new Museum('Lekso Museum', 'A museum created by Lekso', 1)];
-
-  constructor() {
-  }
 
   ngOnInit(): void {
   }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component';
 
 @Component({
   selector: 'app-search',
@@ -12,7 +13,8 @@ export class SearchComponent implements OnInit {
 
   searchText = new FormControl('');
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

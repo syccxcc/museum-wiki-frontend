@@ -8,8 +8,8 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
+  { path: '', redirectTio: '/home', pathMatch: 'full'},
   { path: 'museum-list', component: MuseumListComponent },
   { path: 'search', component: SearchComponent },
   { path: 'about', component: AboutComponent },

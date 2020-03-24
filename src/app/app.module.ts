@@ -9,6 +9,7 @@ import { SearchComponent } from './search/search.component';
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     HomeComponent,
     SearchComponent,
     AboutComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
