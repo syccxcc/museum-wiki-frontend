@@ -1,1 +1,28 @@
-<p>museum-list works!</p>
+<!-- Page Content -->
+<div class="container">
+
+  <!-- Page Heading -->
+  <div style="height: 50px" class="my-4">
+    <h1 class="float-left">Museum List</h1>
+    <p class="float-right">Sort by: </p>
+  </div>
+
+  <!-- Project One -->
+  <div *ngFor="let museum of museums" class="row mb-3">
+      <div class="col-md-7">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+        </a>
+      </div>
+      <div class="col-md-5">
+        <h3>{{museum.name}}</h3>
+        <p>{{museum.description}}</p>
+        <a class="btn btn-primary" href="#">View Museum</a>
+      </div>
+  </div>
+  <!-- /.row -->
+
+  <hr>
+
+</div>
+<!-- /.container -->
