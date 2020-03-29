@@ -9,7 +9,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
-  { path: '', redirectTio: '/home', pathMatch: 'full'},
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'museum-list', component: MuseumListComponent },
   { path: 'search', component: SearchComponent },
   { path: 'about', component: AboutComponent },
@@ -20,4 +20,5 @@ const appRoutes: Routes = [
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
