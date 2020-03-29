@@ -11,8 +11,8 @@ export class NavigationBarComponent {
 
   navigationBarStatus = {};
 
-  navigationBarItemLinks = ['home', 'museum-list', 'search', 'about'];
-  navigationBarItemNames = ['Home', 'Museum List', 'Search', 'About'];
+  navigationBarItemLinks = ['user-profile', 'home', 'museum-list', 'search', 'about'];
+  navigationBarItemNames = ['Username: Peter', 'Home', 'Museum List', 'Search', 'About'];
 
   DEFAULT_NAVIGATION_BAR_STATUS = 'nav-item';
   ACTIVE_NAVIGATION_BAR_STATUS = 'nav-item active';
