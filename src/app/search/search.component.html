@@ -2,14 +2,20 @@
   <h3>Search within Museum Wiki</h3>
 </div>
 <div class="mt-3">
-  <div class="form-group form-inline">
-    <label for="search-for" class="mr-1">Search for: </label>
-    <select id="search-for" class="form-control">
-      <option *ngFor="let searchOption of SEARCH_OPTIONS" [value]="searchOption">{{searchOption}}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="search" class="float-left mr-1">Keywords: </label>
-    <input id="search" type="text" class="form-control" placeholder="Put keywords here" [formControl]="searchText">
-  </div>
+  <form class="form-group" #searchForm="ngForm">
+    <div class="form-inline">
+      <label for="search-category" class="mr-1">Search for: </label>
+      <select id="search-category" class="form-control" [(ngModel)]="searchCategory" name="search-category">
+        <option *ngFor="let searchOption of SEARCH_OPTIONS" [value]="searchOption">{{searchOption}}</option>
+      </select>
+    </div>
+    <div class="mt-3">
+      <label for="search" class="float-left mr-1">Keywords: </label>
+      <input id="search" type="text" class="form-control"
+             placeholder="Put keywords here"
+             name="search-text" [(ngModel)]="searchText"
+             required>
+      <button class="btn btn-lg btn-primary mt-3" (click)="search()">Search</button>
+    </div>
+  </form>
 </div>

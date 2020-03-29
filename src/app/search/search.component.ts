@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -9,13 +9,22 @@ import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component
 })
 export class SearchComponent implements OnInit {
 
+  searchCategory: string;
+
+  searchText: string;
+
   SEARCH_OPTIONS = ['All', 'Museum', 'Collection', 'Artifact'];
+  private DEFAULT_SEARCH_CATEGORY = this.SEARCH_OPTIONS[0];
 
-  searchText = new FormControl('');
-
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+    this.searchCategory = this.DEFAULT_SEARCH_CATEGORY;
+    this.searchText = '';
+  }
+
+  public search(): void {
+    this.router.navigateByUrl('search/' + this.searchCategory.toLowerCase() + '/' + this.searchText).then();
   }
 }
