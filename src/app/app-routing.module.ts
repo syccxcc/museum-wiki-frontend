@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {MuseumListComponent} from './museum-list/museum-list.component';
-import {SearchComponent} from './search/search.component';
-import {AboutComponent} from './about/about.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {HomeComponent} from './static/home/home.component';
+import {MuseumListComponent} from './static/museum-list/museum-list.component';
+import {SearchComponent} from './search/search/search.component';
+import {AboutComponent} from './static/about/about.component';
+import {PageNotFoundComponent} from './static/page-not-found/page-not-found.component';
+import {SearchInCategoryComponent} from './search/search-in-category/search-in-category.component';
 
 
 const appRoutes: Routes = [
@@ -12,6 +13,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'museum-list', component: MuseumListComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'search/:searchCategory/:searchText', component: SearchInCategoryComponent},
   { path: 'about', component: AboutComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
