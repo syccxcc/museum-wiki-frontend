@@ -17,7 +17,7 @@
       <div class="col-md-5">
         <h3>{{museum.name}}</h3>
         <p>{{museum.description}}</p>
-        <a class="btn btn-primary" href="#">View Museum</a>
+        <button class="btn btn-primary" (click)="goToMuseum(museum.id)">View Museum</button>
       </div>
   </div>
   <!-- /.row -->

@@ -6,6 +6,7 @@ import {SearchComponent} from './search/search/search.component';
 import {AboutComponent} from './static/about/about.component';
 import {PageNotFoundComponent} from './static/page-not-found/page-not-found.component';
 import {SearchInCategoryComponent} from './search/search-in-category/search-in-category.component';
+import {ViewComponent} from './view/view/view.component';
 
 
 const appRoutes: Routes = [
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'search/:searchCategory/:searchText', component: SearchInCategoryComponent},
   { path: 'about', component: AboutComponent },
+  { path: 'view/:viewCategory/:id', component: ViewComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

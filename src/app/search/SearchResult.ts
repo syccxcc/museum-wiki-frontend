@@ -1,12 +1,12 @@
 export class SearchResult {
   name: string;
   description: string;
-  link: string;
+  id: string;
 
-  constructor(name, descrption, link) {
+  constructor(name, descrption, id) {
     this.name = name;
     this.description = descrption;
-    this.link = link;
+    this.id = id;
   }
 
 }
