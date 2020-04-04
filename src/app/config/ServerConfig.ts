@@ -1,21 +1,25 @@
-import {ProjectConfigService} from '../services/project-config.service';
 import {ProjectConfig} from './ProjectConfig';
 
 export class ServerConfig {
-  readonly static deploymentServerUrl = '';
-  readonly static localTestingServerUrl = '';
+  private static readonly deploymentServerUrl = '';
+  private static readonly localInRamTestingServerUrl = 'api/';
+  private static readonly localCppTestingServerUrl = 'localhost:5300/get-data/museum-list/';
 
-  readonly activeUrl;
+  private readonly activeUrl: string;
 
   constructor(private projectConfig: ProjectConfig) {
     if (projectConfig.isTesting()) {
-      this.activeUrl = ServerConfig.localTestingServerUrl;
+      if (projectConfig.isUsingInRamServer()) {
+        this.activeUrl = ServerConfig.localInRamTestingServerUrl;
+      } else {
+        this.activeUrl = ServerConfig.localCppTestingServerUrl;
+      }
     } else {
       this.activeUrl = ServerConfig.deploymentServerUrl;
     }
   }
 
-  public getUrl() {
+  public getUrl(): string {
     return this.activeUrl;
   }
 }

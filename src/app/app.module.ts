@@ -13,6 +13,9 @@ import { NavigationBarComponent } from './static/navigation-bar/navigation-bar.c
 import { SearchInCategoryComponent } from './search/search-in-category/search-in-category.component';
 import { ViewComponent } from './view/view/view.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDataService} from './services/in-memory-data.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false})
   ],
   providers: [],
   bootstrap: [AppComponent]

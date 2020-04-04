@@ -1,9 +1,12 @@
-import {templateVisitAll} from '@angular/compiler';
-
 export class ProjectConfig {
-  private testing = true;
+  private readonly testing = true;
+  private readonly usingInRamServer = true;
 
   public isTesting(): boolean {
     return this.testing;
+  }
+
+  public isUsingInRamServer(): boolean {
+    return this.usingInRamServer;
   }
 }

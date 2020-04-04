@@ -7,7 +7,7 @@ import {ServerConfig} from '../config/ServerConfig';
 })
 export class ServerConfigService {
 
-  readonly serverConfig: ServerConfig;
+  private readonly serverConfig: ServerConfig;
 
   constructor(private projectConfigService: ProjectConfigService) {
     this.serverConfig = new ServerConfig(projectConfigService.getProjectConfig());

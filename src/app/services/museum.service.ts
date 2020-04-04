@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpService} from './http.service';
+import {ServerConfigService} from './server-config.service';
+import {Museum} from '../models/Museum';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,14 @@ import {HttpService} from './http.service';
 
 export class MuseumService {
 
-  constructor(private httpService: HttpService) {
+  private readonly url: string;
 
+  constructor(private serverConfigService: ServerConfigService,
+              private http: HttpClient) {
+    this.url = serverConfigService.getServerConfig().getUrl();
+  }
+
+  public getMuseumList(): Promise<Museum[]> {
+    return this.http.get<Museum[]>(this.url + 'museum-list/').toPromise();
   }
 }

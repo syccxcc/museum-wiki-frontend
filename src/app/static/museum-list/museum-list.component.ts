@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Museum} from '../../models/Museum';
 import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component';
 import {Router} from '@angular/router';
+import {MuseumService} from '../../services/museum.service';
 
 @Component({
   selector: 'app-museum-list',
@@ -10,15 +11,15 @@ import {Router} from '@angular/router';
 })
 export class MuseumListComponent implements OnInit {
 
-  museums: Museum[] = [
-    new Museum('Pfaffmann Museum', 'A museum created by Pfaffmann.', 'p', 1),
-    new Museum('Smith Museum', 'A museum created by Smith', 's', 1),
-    new Museum('Lekso Museum', 'A museum created by Lekso', 'l', 1)];
+  museums: Museum[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private museumService: MuseumService) {
   }
 
   ngOnInit(): void {
+    this.museumService.getMuseumList().then((museums: Museum[]) => {
+      this.museums = museums;
+    });
   }
 
   public sortByName(): void {
