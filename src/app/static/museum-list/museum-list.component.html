@@ -1,13 +1,10 @@
-<!-- Page Content -->
 <div class="container">
 
-  <!-- Page Heading -->
   <div style="height: 50px" class="my-4">
     <h1 class="float-left">Museum List</h1>
     <p class="float-right">Sort by: </p>
   </div>
 
-  <!-- Project One -->
   <div *ngFor="let museum of museums" class="row mb-3">
       <div class="col-md-7">
         <a href="#">
@@ -20,9 +17,8 @@
         <button class="btn btn-primary" (click)="goToMuseum(museum.id)">View Museum</button>
       </div>
   </div>
-  <!-- /.row -->
 
-  <hr>
+  <app-loading [waiting]="waiting" [error]="error"></app-loading>
 
 </div>
 <!-- /.container -->

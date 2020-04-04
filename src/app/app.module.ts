@@ -16,6 +16,7 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './services/in-memory-data.service';
+import { LoadingComponent } from './static/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {InMemoryDataService} from './services/in-memory-data.service';
     NavigationBarComponent,
     SearchInCategoryComponent,
     ViewComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

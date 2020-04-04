@@ -12,14 +12,21 @@ import {MuseumService} from '../../services/museum.service';
 export class MuseumListComponent implements OnInit {
 
   museums: Museum[] = [];
+  waiting = true;
+  error = false;
 
   constructor(private router: Router, private museumService: MuseumService) {
   }
 
   ngOnInit(): void {
     this.museumService.getMuseumList().then((museums: Museum[]) => {
-      this.museums = museums;
-    });
+        this.museums = museums;
+        this.waiting = false;
+      },
+      (error => {
+        this.error = true;
+        console.log(error);
+      }));
   }
 
   public sortByName(): void {
