@@ -1,9 +1,9 @@
 import {templateVisitAll} from '@angular/compiler';
 
 export class ProjectConfig {
-  private static testing = true;
+  private testing = true;
 
-  public static isTesting(): boolean {
-    return ProjectConfig.testing;
+  public isTesting(): boolean {
+    return this.testing;
   }
 }

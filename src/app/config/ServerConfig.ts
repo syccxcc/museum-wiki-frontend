@@ -1,13 +1,21 @@
+import {ProjectConfigService} from '../services/project-config.service';
 import {ProjectConfig} from './ProjectConfig';
 
 export class ServerConfig {
-  private static deploymentServerUrl = '';
-  private static localTestingServerUrl = '';
+  readonly static deploymentServerUrl = '';
+  readonly static localTestingServerUrl = '';
 
-  public static getUrl() {
-    if (ProjectConfig.isTesting()) {
-      return this.localTestingServerUrl;
+  readonly activeUrl;
+
+  constructor(private projectConfig: ProjectConfig) {
+    if (projectConfig.isTesting()) {
+      this.activeUrl = ServerConfig.localTestingServerUrl;
+    } else {
+      this.activeUrl = ServerConfig.deploymentServerUrl;
     }
-    return this.deploymentServerUrl;
+  }
+
+  public getUrl() {
+    return this.activeUrl;
   }
 }

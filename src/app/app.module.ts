@@ -11,8 +11,8 @@ import { PageNotFoundComponent } from './static/page-not-found/page-not-found.co
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavigationBarComponent } from './static/navigation-bar/navigation-bar.component';
 import { SearchInCategoryComponent } from './search/search-in-category/search-in-category.component';
-import { ViewMuseumComponent } from './view/view-museum/view-museum.component';
 import { ViewComponent } from './view/view/view.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { ViewComponent } from './view/view/view.component';
     PageNotFoundComponent,
     NavigationBarComponent,
     SearchInCategoryComponent,
-    ViewMuseumComponent,
-    ViewComponent
+    ViewComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

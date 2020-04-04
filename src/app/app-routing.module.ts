@@ -7,6 +7,7 @@ import {AboutComponent} from './static/about/about.component';
 import {PageNotFoundComponent} from './static/page-not-found/page-not-found.component';
 import {SearchInCategoryComponent} from './search/search-in-category/search-in-category.component';
 import {ViewComponent} from './view/view/view.component';
+import {UserProfileComponent} from './user/user-profile/user-profile.component';
 
 
 const appRoutes: Routes = [
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   { path: 'search/:searchCategory/:searchText', component: SearchInCategoryComponent},
   { path: 'about', component: AboutComponent },
   { path: 'view/:viewCategory/:id', component: ViewComponent},
+  { path: 'user-profile', component: UserProfileComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
