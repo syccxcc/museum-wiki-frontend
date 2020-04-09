@@ -5,18 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { MuseumListComponent } from './static/museum-list/museum-list.component';
 import { HomeComponent } from './static/home/home.component';
-import { SearchComponent } from './search/search/search.component';
+import { SearchComponent } from './static/search/search/search.component';
 import { AboutComponent } from './static/about/about.component';
 import { PageNotFoundComponent } from './static/page-not-found/page-not-found.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavigationBarComponent } from './static/navigation-bar/navigation-bar.component';
-import { SearchInCategoryComponent } from './search/search-in-category/search-in-category.component';
+import { SearchInCategoryComponent } from './static/search/search-in-category/search-in-category.component';
 import { ViewComponent } from './view/view/view.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './services/in-memory-data.service';
 import { LoadingComponent } from './static/loading/loading.component';
+import { CreateComponent } from './edit/create/create.component';
+import { MarkdownEditorComponent } from './edit/markdown-editor/markdown-editor.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LoadingComponent } from './static/loading/loading.component';
     SearchInCategoryComponent,
     ViewComponent,
     UserProfileComponent,
-    LoadingComponent
+    LoadingComponent,
+    CreateComponent,
+    MarkdownEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,7 @@ import { LoadingComponent } from './static/loading/loading.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false})
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: true})
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 export class ProjectConfig {
   private readonly testing = true;
-  private readonly usingInRamServer = false;
+  private readonly usingInRamServer = true;
 
   public isTesting(): boolean {
     return this.testing;

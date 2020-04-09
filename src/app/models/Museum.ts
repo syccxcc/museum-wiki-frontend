@@ -1,10 +1,7 @@
-import {SearchResult} from '../search/SearchResult';
+import {BasicInfo} from './BasicInfo';
 
-export class Museum extends SearchResult {
-  curatorId: number;
-
-  constructor(name: string, description: string, link: string, curatorId: number) {
-    super(name, description, link);
-    this.curatorId = curatorId;
+export class Museum extends BasicInfo {
+  constructor(name: string, description: string, id: string) {
+    super(name, description, id);
   }
 }

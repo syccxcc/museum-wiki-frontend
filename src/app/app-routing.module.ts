@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './static/home/home.component';
 import {MuseumListComponent} from './static/museum-list/museum-list.component';
-import {SearchComponent} from './search/search/search.component';
+import {SearchComponent} from './static/search/search/search.component';
 import {AboutComponent} from './static/about/about.component';
 import {PageNotFoundComponent} from './static/page-not-found/page-not-found.component';
-import {SearchInCategoryComponent} from './search/search-in-category/search-in-category.component';
+import {SearchInCategoryComponent} from './static/search/search-in-category/search-in-category.component';
 import {ViewComponent} from './view/view/view.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
+import {CreateComponent} from './edit/create/create.component';
 
 
 const appRoutes: Routes = [
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'view/:viewCategory/:id', component: ViewComponent},
   { path: 'user-profile', component: UserProfileComponent},
+  { path: 'create/:category', component: CreateComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,4 +1,4 @@
-export class SearchResult {
+export class BasicInfo {
   name: string;
   description: string;
   id: string;

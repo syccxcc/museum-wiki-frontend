@@ -2,8 +2,13 @@
 
   <div style="height: 50px" class="my-4">
     <h1 class="float-left">Museum List</h1>
-    <p class="float-right">Sort by: </p>
+    <button class="btn btn-info ml-2 mt-2 float-left" routerLink="/create/museum/">Create New Museum</button>
+    <div class="float-right mt-2">
+      <p>Sort by: </p>
+    </div>
   </div>
+
+  <br>
 
   <div *ngFor="let museum of museums" class="row mb-3">
       <div class="col-md-7">

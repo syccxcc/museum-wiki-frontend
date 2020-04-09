@@ -22,6 +22,7 @@ export class MuseumListComponent implements OnInit {
     this.museumService.getMuseumList().then((museums: Museum[]) => {
         this.museums = museums;
         this.waiting = false;
+        console.log(this.museums);
       },
       (error => {
         this.error = true;
