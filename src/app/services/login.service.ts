@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BasicUserInfo} from '../models/BasicUserInfo';
-import {ServerConfigService} from './server-config.service';
+import {ServerConfigService} from './config/server-config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,9 @@ export class LoginService {
   }
 
   public login(userCredentials: BasicUserInfo): Promise<any> {
-    return this.http.get(this.url + '/user/', {}).toPromise();
+    return this.http
+      .put(this.url + 'user/' + userCredentials.username + '/',
+        {username: userCredentials.username, password: userCredentials.password})
+      .toPromise();
   }
 }

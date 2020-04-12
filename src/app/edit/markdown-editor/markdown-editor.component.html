@@ -3,18 +3,25 @@
     <textarea placeholder="Input markdown text here"
               class="form-control"
               style="min-height: 300px"
-              [(ngModel)]="markdownText">
+              [(ngModel)]="inputText">
     </textarea>
-    <input id="realTimeRendering"
-           type="checkbox"
-           [(ngModel)]="realTimeRendering">
-    <label class="form-check-label ml-1" for="realTimeRendering">
-      Enable real time rendering
-    </label>
+    <div class="mt-3">
+      <button [class]="'btn btn-info mr-3' + (realTimeRendering ? ' disabled' : '')"
+              (click)="renderMarkdown()" type="button">
+        Preview
+      </button>
+
+      <input id="realTimeRendering"
+             type="checkbox"
+             [(ngModel)]="realTimeRendering">
+      <label class="form-check-label ml-1" for="realTimeRendering">
+        Enable real time rendering
+      </label>
+    </div>
   </div>
   <!-- form-group -->
-  <div *ngIf="realTimeRendering">
-    <h4>Preview: </h4>
-    <div [innerHTML]="markdownText | marked"></div>
+
+  <div>
+    <app-markdown-display [markdownText]="realTimeRendering ? inputText : previewText"></app-markdown-display>
   </div>
 </div>

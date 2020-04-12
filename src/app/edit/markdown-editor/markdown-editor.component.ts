@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-markdown-editor',
@@ -9,13 +8,19 @@ import {FormControl} from '@angular/forms';
 
 export class MarkdownEditorComponent implements OnInit {
 
-  markdownText: string;
+  public inputText: string;
+  previewText: string;
 
   realTimeRendering: boolean;
 
-  constructor() { }
+  constructor() {
+    this.previewText = '';
+  }
 
   ngOnInit(): void {
   }
 
+  public renderMarkdown(): void {
+    this.previewText = this.inputText;
+  }
 }

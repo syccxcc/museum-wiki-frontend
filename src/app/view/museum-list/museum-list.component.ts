@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Museum} from '../../models/Museum';
-import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component';
+import {NavigationBarComponent} from '../../static/navigation-bar/navigation-bar.component';
 import {Router} from '@angular/router';
 import {MuseumService} from '../../services/museum.service';
 
@@ -12,7 +12,7 @@ import {MuseumService} from '../../services/museum.service';
 export class MuseumListComponent implements OnInit {
 
   museums: Museum[] = [];
-  waiting = true;
+  loading = true;
   error = false;
 
   constructor(private router: Router, private museumService: MuseumService) {
@@ -21,8 +21,7 @@ export class MuseumListComponent implements OnInit {
   ngOnInit(): void {
     this.museumService.getMuseumList().then((museums: Museum[]) => {
         this.museums = museums;
-        this.waiting = false;
-        console.log(this.museums);
+        this.loading = false;
       },
       (error => {
         this.error = true;

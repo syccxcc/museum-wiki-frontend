@@ -1,0 +1,13 @@
+{
+  "museum": {
+    "name": "name",
+    "introduction": "an introduction of the museum in plain text",
+    "description": "detailed description of the museum in Markdown, which is interpreted as plain text",
+    "id": "ignore this field because the id should be assigned by the database"
+  },
+  "user": {
+    "username": "username",
+    "password": "password, should be a SHA-512 hash"
+  }
+}
+

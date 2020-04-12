@@ -2,6 +2,10 @@
   <p>You are viewing {{viewCategory}} with id {{id}}</p>
 </div>
 
-<div>
+<div *ngIf="loading">
+  <app-loading [loading]="loading" [error]="error"></app-loading>
+</div>
 
+<div *ngIf="!loading">
+  <app-basic-info-view [basicInfo]="content"></app-basic-info-view>
 </div>

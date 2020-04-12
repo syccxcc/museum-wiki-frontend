@@ -1,6 +1,6 @@
-<div *ngIf="waiting && !error">
+<div *ngIf="loading && !error">
   <p>Loading, please wait...</p>
 </div>
-<div *ngIf="waiting && error">
+<div *ngIf="loading && error">
   <p>An error occurred. Please check browser console for details.</p>
 </div>

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ProjectConfigService} from './project-config.service';
-import {ServerConfig} from '../config/ServerConfig';
+import {ServerConfig} from '../../config/ServerConfig';
 
 @Injectable({
   providedIn: 'root'

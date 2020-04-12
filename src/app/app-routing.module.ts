@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './static/home/home.component';
-import {MuseumListComponent} from './static/museum-list/museum-list.component';
+import {MuseumListComponent} from './view/museum-list/museum-list.component';
 import {SearchComponent} from './static/search/search/search.component';
 import {AboutComponent} from './static/about/about.component';
 import {PageNotFoundComponent} from './static/page-not-found/page-not-found.component';
