@@ -9,6 +9,8 @@ import {SearchInCategoryComponent} from './static/search/search-in-category/sear
 import {ViewComponent} from './view/view/view.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {CreateComponent} from './edit/create/create.component';
+import {LoginGuardService} from './services/user/login-guard.service';
+import {LoginComponent} from './user/login/login.component';
 
 
 const appRoutes: Routes = [
@@ -19,8 +21,9 @@ const appRoutes: Routes = [
   { path: 'search/:searchCategory/:searchText', component: SearchInCategoryComponent},
   { path: 'about', component: AboutComponent },
   { path: 'view/:viewCategory/:id', component: ViewComponent},
-  { path: 'user-profile', component: UserProfileComponent},
-  { path: 'create/:category', component: CreateComponent},
+  { path: 'create/:category', component: CreateComponent, canActivate: [LoginGuardService]},
+  { path: 'login', component: LoginComponent},
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [LoginGuardService]},
   { path: '**', component: PageNotFoundComponent }
 ];
 

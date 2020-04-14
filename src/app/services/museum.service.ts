@@ -20,11 +20,11 @@ export class MuseumService implements BasicInfoService {
   }
 
   public getMuseumList(): Promise<Museum[]> {
-    return this.http.get<Museum[]>(this.url + 'museum-list/').toPromise();
+    return this.http.get<Museum[]>(this.url + 'museum-list').toPromise();
   }
 
   public getMuseum(id: string): Promise<Museum> {
-    return this.http.get<Museum>(this.url + 'museum/' + id + '/').toPromise();
+    return this.http.get<Museum>(this.url + 'museum/' + id).toPromise();
   }
 
   public getWithId(id: string): Promise<BasicInfo> {
@@ -32,14 +32,14 @@ export class MuseumService implements BasicInfoService {
   }
 
   public addMuseum(museum: BasicInfo, user: BasicUserInfo): Promise<any> {
-    return this.http.post(this.url + 'museum-list/', {museum, user}).toPromise();
+    return this.http.post(this.url + 'museum-list', {museum, user}).toPromise();
   }
 
   public updateMuseumInfo(museum: Museum, user: BasicUserInfo): Promise<any> {
-    return this.http.put(this.url + 'museum-list/' + museum.id + '/', {museum, user}, {}).toPromise();
+    return this.http.put(this.url + 'museum-list/' + museum.id, {museum, user}, {}).toPromise();
   }
 
   public deleteMuseum(museumId: string, user: BasicUserInfo): Promise<any> {
-    return this.http.delete(this.url + 'museum-list/' + museumId + '/').toPromise();
+    return this.http.delete(this.url + 'museum-list/' + museumId).toPromise();
   }
 }

@@ -29,12 +29,20 @@ export class CreateComponent implements OnInit {
   }
 
   public submit(): void {
+    // FIXME: add form validation to disallow trivial mistakes
     const newMuseum = Museum.of(this.basicInfoEditor.getBasicInfo());
     console.log(newMuseum);
 
     this.museumService
       .addMuseum(newMuseum, this.userService.getBasicUserInfo())
-      .then();
+      .then(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
 
     // TODO: complete the then statement
   }

@@ -1,6 +1,7 @@
 import {Component, OnInit, OnChanges} from '@angular/core';
 import {NavigationEnd, Router, Event} from '@angular/router';
 import {log} from 'util';
+import {UserInfoService} from '../../services/user-info.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -12,18 +13,20 @@ export class NavigationBarComponent {
   navigationBarStatus = {};
 
   navigationBarItemLinks = ['user-profile', 'home', 'museum-list', 'search', 'about'];
-  navigationBarItemNames = ['Username: Peter', 'Home', 'Museum List', 'Search', 'About'];
+  navigationBarItemNames = ['', 'Home', 'Museum List', 'Search', 'About'];
 
   DEFAULT_NAVIGATION_BAR_STATUS = 'nav-item';
   ACTIVE_NAVIGATION_BAR_STATUS = 'nav-item active';
 
-  private setAllLinksInactive(): void {
-    for (const link of this.navigationBarItemLinks) {
-      this.navigationBarStatus[link] = this.DEFAULT_NAVIGATION_BAR_STATUS;
+  constructor(private router: Router,
+              private userInfoService: UserInfoService) {
+    if (this.userInfoService.isLoggedIn) {
+      this.navigationBarItemNames[0] = 'Username: ' + userInfoService.getBasicUserInfo().username;
+    } else {
+      this.navigationBarItemLinks[0] = 'login';
+      this.navigationBarItemNames[0] = 'Login';
     }
-  }
 
-  constructor(private router: Router) {
     this.setAllLinksInactive();
     router.events.subscribe((value: Event) => {
       if (value instanceof NavigationEnd) {
@@ -31,6 +34,13 @@ export class NavigationBarComponent {
       }
       return;
     });
+  }
+
+
+  private setAllLinksInactive(): void {
+    for (const link of this.navigationBarItemLinks) {
+      this.navigationBarStatus[link] = this.DEFAULT_NAVIGATION_BAR_STATUS;
+    }
   }
 
   public highlight(link: string): void {

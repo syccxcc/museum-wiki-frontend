@@ -24,6 +24,8 @@ import { MarkdownDisplayComponent } from './edit/markdown-display/markdown-displ
 import { BasicInfoEditorComponent } from './edit/basic-info-editor/basic-info-editor.component';
 import { BasicInfoViewComponent } from './view/basic-info-view/basic-info-view.component';
 import { LoginComponent } from './user/login/login.component';
+import { ModalComponent } from './user/modal/modal.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { LoginComponent } from './user/login/login.component';
     MarkdownDisplayComponent,
     BasicInfoEditorComponent,
     BasicInfoViewComponent,
-    LoginComponent
+    LoginComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { LoginComponent } from './user/login/login.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: true, delay: 500}),
+    NgbModule,
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: true, delay: 500}),
   ],
   providers: [],
   bootstrap: [AppComponent]

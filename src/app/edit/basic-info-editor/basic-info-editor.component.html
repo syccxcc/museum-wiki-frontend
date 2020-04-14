@@ -1,0 +1,14 @@
+<div class="form-group">
+  <label class="form-check-label" for="name">Name: </label>
+  <input class="form-control" id="name"
+         type="text" placeholder="Please input name here"
+         [(ngModel)]="name">
+
+  <label class="form-check-label" for="introduction">Introduction: </label>
+  <input class="form-control" id="introduction" type="text"
+         placeholder="Please input a short text as the introduction"
+         [(ngModel)]="introduction">
+
+  <label class="form-check-label">Description: </label>
+  <app-markdown-editor></app-markdown-editor>
+</div>
