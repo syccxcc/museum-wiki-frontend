@@ -10,6 +10,8 @@ import {UserInfoService} from '../../services/user-info.service';
 })
 export class NavigationBarComponent {
 
+  navBarCollapse: boolean;
+
   navigationBarStatus = {};
 
   navigationBarItemLinks = ['user-profile', 'home', 'museum-list', 'search', 'about'];
@@ -20,6 +22,9 @@ export class NavigationBarComponent {
 
   constructor(private router: Router,
               private userInfoService: UserInfoService) {
+    this.navBarCollapse = true;
+
+    // FIXME: this part does not take into account the changing login status of the user
     if (this.userInfoService.isLoggedIn) {
       this.navigationBarItemNames[0] = 'Username: ' + userInfoService.getBasicUserInfo().username;
     } else {
@@ -36,7 +41,6 @@ export class NavigationBarComponent {
     });
   }
 
-
   private setAllLinksInactive(): void {
     for (const link of this.navigationBarItemLinks) {
       this.navigationBarStatus[link] = this.DEFAULT_NAVIGATION_BAR_STATUS;
@@ -46,6 +50,15 @@ export class NavigationBarComponent {
   public highlight(link: string): void {
     this.setAllLinksInactive();
     this.navigationBarStatus[link] = this.ACTIVE_NAVIGATION_BAR_STATUS;
+  }
+
+  public expandNavBar(): void {
+    this.navBarCollapse = !this.navBarCollapse;
+  }
+
+  public navigate(link: string): void {
+    this.navBarCollapse = true;
+    this.router.navigateByUrl(link);
   }
 
 }

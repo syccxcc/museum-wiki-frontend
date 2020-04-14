@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BasicUserInfo} from '../models/BasicUserInfo';
 import {ServerConfigService} from './config/server-config.service';
 import {ServerResponse} from './user/ServerResponse';
+import {User} from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,13 @@ export class LoginService {
       .put<ServerResponse>(this.url + 'user/' + userCredentials.username,
         {username: userCredentials.username, password: userCredentials.password})
       .toPromise();
+  }
+
+  public getCompleteUserInfo(userCredentials: BasicUserInfo): Promise<User> {
+    // FIXME: differentiate between get info and login
+    return this.http.post<User>(this.url + 'user/' + userCredentials.username, {
+      username: userCredentials.username,
+      password: userCredentials.password
+    }).toPromise();
   }
 }

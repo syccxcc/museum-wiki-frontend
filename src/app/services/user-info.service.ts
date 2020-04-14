@@ -3,6 +3,7 @@ import {BasicUserInfo} from '../models/BasicUserInfo';
 import {LoginService} from './login.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ServerResponse} from './user/ServerResponse';
+import {User} from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +28,20 @@ export class UserInfoService {
   public login(loginCredentials: BasicUserInfo): Promise<ServerResponse> {
     const loginPromise: Promise<ServerResponse> = this.loginService.login(loginCredentials);
     loginPromise.then((res: ServerResponse) => {
-      if (res.success) {
-        this.isLoggedIn = true;
-        this.basicUserInfo = loginCredentials;
-      } else {
-        this.isLoggedIn = false;
-      }
-    });
+        if (res.success) {
+          this.isLoggedIn = true;
+          this.basicUserInfo = loginCredentials;
+        } else {
+          this.isLoggedIn = false;
+        }
+      },
+      (error) => {
+        console.log(error);
+      });
     return loginPromise;
+  }
+
+  public getCompleteUserInfo(): Promise<User> {
+    return this.loginService.
   }
 }

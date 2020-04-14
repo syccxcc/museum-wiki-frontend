@@ -4,6 +4,7 @@ import {BasicUserInfo} from '../../models/BasicUserInfo';
 import {ServerResponse} from '../../services/user/ServerResponse';
 import {Router} from '@angular/router';
 import {PreviousRouteService} from '../../services/previous-route.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -21,27 +22,49 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
               private previousRoute: PreviousRouteService,
               private userInfoService: UserInfoService) {
+    if (userInfoService.isLoggedIn) {
+      router.navigateByUrl('/user-profile');
+    }
+
     this.tryingToLogin = false;
     this.loginMessage = '';
+    this.username = '';
+    this.password = '';
   }
 
   ngOnInit(): void {
-    // TODO: create login page
   }
 
   public login(): void {
+    const REDIRECT_WAIT_TIME = 200;
+
     this.tryingToLogin = true;
     const userInfo = new BasicUserInfo(this.username, this.password);
-    this.loginMessage = 'Trying to login...';
+    this.loginMessage = 'Sending request to server...';
     this.userInfoService.login(userInfo).then(
       (response: ServerResponse) => {
         if (response.success) {
           if (this.previousRoute.previousRoute != null) {
-            this.router.navigateByUrl(this.previousRoute.previousRoute.url.join());
+            this.loginMessage = 'Login successful! Redirecting to previous page...';
+            setTimeout(() => {
+              this.router.navigateByUrl(this.previousRoute.previousRoute.url.join());
+            }, REDIRECT_WAIT_TIME);
           } else {
-            this.router.navigateByUrl('/home');
+            this.loginMessage = 'Login successful! Redirecting to home page...';
+            setTimeout(() => {
+              this.router.navigateByUrl('/home');
+            }, REDIRECT_WAIT_TIME);
           }
+        } else {
+          this.loginMessage = response.message;
         }
+      },
+      (error) => {
+        console.log(error);
+        this.loginMessage =
+          'An error occurred and login request cannot be processed. ' +
+          'Either you are not connected to the internet or the server is down. ' +
+          'Check browser console for details.';
       }
     );
   }
