@@ -17,16 +17,19 @@ export class LoginService {
     this.url = serverConfig.getServerConfig().getUrl();
   }
 
+  public register(user: User): Promise<ServerResponse> {
+    return this.http.post<ServerResponse>(this.url + 'user', user).toPromise();
+  }
+
   public login(userCredentials: BasicUserInfo): Promise<ServerResponse> {
     return this.http
-      .put<ServerResponse>(this.url + 'user/' + userCredentials.username,
+      .put<ServerResponse>(this.url + 'login/' + userCredentials.username,
         {username: userCredentials.username, password: userCredentials.password})
       .toPromise();
   }
 
   public getCompleteUserInfo(userCredentials: BasicUserInfo): Promise<User> {
-    // FIXME: differentiate between get info and login
-    return this.http.post<User>(this.url + 'user/' + userCredentials.username, {
+    return this.http.put<User>(this.url + 'user/' + userCredentials.username, {
       username: userCredentials.username,
       password: userCredentials.password
     }).toPromise();

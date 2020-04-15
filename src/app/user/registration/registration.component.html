@@ -1,0 +1,23 @@
+<h3>Please Register</h3>
+
+<form class="form-group">
+  <label class="form-check-label" for="username">Username: </label>
+  <input class="form-control" name="username" id="username" type="text"
+         [(ngModel)]="username">
+
+  <label class="form-check-label" for="password">Password: </label>
+  <input class="form-control" name="password" id="password" type="password"
+         [(ngModel)]="password">
+
+  <label class="form-check-label" for="retypePassword">Retype Password: </label>
+  <input class="form-control" name="retypePassword" id="retypePassword" type="password"
+         [(ngModel)]="retypePassword">
+
+  <label class="form-check-label" for="email">Email: </label>
+  <input class="form-control" name="email" id="email" type="email"
+         [(ngModel)]="email">
+
+  <div class="mt-2">
+    <button class="btn btn-success btn-lg" (click)="register()">Register</button>
+  </div>
+</form>

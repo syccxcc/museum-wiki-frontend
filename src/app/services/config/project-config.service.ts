@@ -9,7 +9,7 @@ export class ProjectConfigService {
   private readonly projectConfig: ProjectConfig;
 
   constructor() {
-    this.projectConfig = new ProjectConfig();
+    this.projectConfig = ProjectConfig.getInstance();
   }
 
   public getProjectConfig(): ProjectConfig {

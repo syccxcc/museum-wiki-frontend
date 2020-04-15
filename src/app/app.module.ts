@@ -19,13 +19,15 @@ import {InMemoryDataService} from './services/in-ram-server/in-memory-data.servi
 import {LoadingComponent} from './static/loading/loading.component';
 import {CreateComponent} from './edit/create/create.component';
 import {MarkdownEditorComponent} from './edit/markdown-editor/markdown-editor.component';
-import { MarkedPipe } from './edit/marked.pipe';
-import { MarkdownDisplayComponent } from './edit/markdown-display/markdown-display.component';
-import { BasicInfoEditorComponent } from './edit/basic-info-editor/basic-info-editor.component';
-import { BasicInfoViewComponent } from './view/basic-info-view/basic-info-view.component';
-import { LoginComponent } from './user/login/login.component';
-import { ModalComponent } from './user/modal/modal.component';
+import {MarkedPipe} from './edit/marked.pipe';
+import {MarkdownDisplayComponent} from './edit/markdown-display/markdown-display.component';
+import {BasicInfoEditorComponent} from './edit/basic-info-editor/basic-info-editor.component';
+import {BasicInfoViewComponent} from './view/basic-info-view/basic-info-view.component';
+import {LoginComponent} from './user/login/login.component';
+import {ModalComponent} from './user/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ProjectConfig} from './config/ProjectConfig';
+import { RegistrationComponent } from './user/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BasicInfoEditorComponent,
     BasicInfoViewComponent,
     LoginComponent,
-    ModalComponent
+    ModalComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: true, delay: 500}),
+    /* HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false,
+      passThruUnknownUrl: true,
+      delay: 500
+    }), */
   ],
   providers: [],
   bootstrap: [AppComponent]

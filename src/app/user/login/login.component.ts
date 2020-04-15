@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    const REDIRECT_WAIT_TIME = 200;
+    const REDIRECT_WAIT_TIME = 500;
 
     this.tryingToLogin = true;
     const userInfo = new BasicUserInfo(this.username, this.password);
@@ -73,6 +73,10 @@ export class LoginComponent implements OnInit {
     // FIXME: remove this when testing is done
     this.userInfoService.isLoggedIn = true;
     this.userInfoService.basicUserInfo = new BasicUserInfo('Test User', '123456');
+  }
+
+  public register(): void {
+    this.router.navigateByUrl('/register');
   }
 
 }

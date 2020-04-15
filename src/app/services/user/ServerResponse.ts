@@ -1,6 +1,11 @@
 export class ServerResponse {
   success: boolean;
   message: string;
+
+  constructor(success, message) {
+    this.success = success;
+    this.message = message;
+  }
 }
 
 /*

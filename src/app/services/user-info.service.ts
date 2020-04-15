@@ -18,7 +18,16 @@ export class UserInfoService {
     this.isLoggedIn = false;
     this.basicUserInfo = null;
 
-    // TODO: login automatically with cookie
+    if (cookieService.check('username') && cookieService.check('password')) {
+      this
+        .login(new BasicUserInfo(cookieService.get('username'), cookieService.get('password')))
+        .then((res: ServerResponse) => {
+          if (!res.success) {
+            cookieService.delete('username');
+            cookieService.delete('password');
+          }
+        });
+    }
   }
 
   public getBasicUserInfo(): BasicUserInfo {
@@ -31,6 +40,9 @@ export class UserInfoService {
         if (res.success) {
           this.isLoggedIn = true;
           this.basicUserInfo = loginCredentials;
+
+          this.cookieService.set('username', loginCredentials.username);
+          this.cookieService.set('password', loginCredentials.password);
         } else {
           this.isLoggedIn = false;
         }
@@ -42,6 +54,6 @@ export class UserInfoService {
   }
 
   public getCompleteUserInfo(): Promise<User> {
-    return this.loginService.
+    return this.loginService.getCompleteUserInfo(this.basicUserInfo);
   }
 }

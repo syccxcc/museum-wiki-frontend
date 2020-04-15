@@ -11,6 +11,7 @@ import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {CreateComponent} from './edit/create/create.component';
 import {LoginGuardService} from './services/user/login-guard.service';
 import {LoginComponent} from './user/login/login.component';
+import {RegistrationComponent} from './user/registration/registration.component';
 
 
 const appRoutes: Routes = [
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'create/:category', component: CreateComponent, canActivate: [LoginGuardService]},
   { path: 'login', component: LoginComponent},
   { path: 'user-profile', component: UserProfileComponent, canActivate: [LoginGuardService]},
+  { path: 'register', component: RegistrationComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
