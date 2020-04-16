@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {BasicUserInfo} from '../models/BasicUserInfo';
 import {BasicInfo} from '../models/BasicInfo';
 import {BasicInfoService} from './basic-info-service';
+import {ServerResponse} from './user/ServerResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class MuseumService implements BasicInfoService {
     return this.getMuseum(id);
   }
 
-  public addMuseum(museum: BasicInfo, user: BasicUserInfo): Promise<any> {
-    return this.http.post(this.url + 'museum-list', {museum, user}).toPromise();
+  public addMuseum(museum: BasicInfo, user: BasicUserInfo): Promise<ServerResponse> {
+    return this.http.post<ServerResponse>(this.url + 'museum-list', {museum, user}).toPromise();
   }
 
   public updateMuseumInfo(museum: Museum, user: BasicUserInfo): Promise<any> {
