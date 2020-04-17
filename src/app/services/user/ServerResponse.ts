@@ -13,5 +13,4 @@ Example JSON message:
 {
   "success": false,
   "message": "wrong username and password combination"
-}
 */

@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron": "ng build --prod=true --base-href ./ && electron ."
+    "electron": "electron .",
+    "electron-build": "ng build --prod=true --base-href ./ && electron ."
   },
   "private": true,
   "dependencies": {
@@ -25,11 +26,13 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.2",
     "angular-in-memory-web-api": "^0.10.0",
     "bootstrap": "^4.4.1",
+    "electron-packager": "^14.2.1",
     "jquery": "^3.4.1",
     "js-sha512": "^0.8.0",
     "marked": "^0.8.2",
     "ngx-cookie-service": "^3.0.4",
     "popper": "^1.0.1",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
