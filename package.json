@@ -1,13 +1,16 @@
 {
   "name": "museum-wiki-frontend",
   "version": "0.0.0",
+  "main": "electron-main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron": "electron .",
+    "electron-build": "ng build --prod=true --base-href ./ && electron ."
   },
   "private": true,
   "dependencies": {
@@ -23,11 +26,13 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.2",
     "angular-in-memory-web-api": "^0.10.0",
     "bootstrap": "^4.4.1",
+    "electron-packager": "^14.2.1",
     "jquery": "^3.4.1",
     "js-sha512": "^0.8.0",
     "marked": "^0.8.2",
     "ngx-cookie-service": "^3.0.4",
     "popper": "^1.0.1",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -37,10 +42,11 @@
     "@angular/cli": "~9.0.7",
     "@angular/compiler-cli": "~9.0.7",
     "@angular/language-service": "~9.0.7",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "electron": "^8.2.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.3.0",
