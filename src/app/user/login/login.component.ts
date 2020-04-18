@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit {
     // FIXME: remove this when testing is done
     this.userInfoService.isLoggedIn = true;
     this.userInfoService.basicUserInfo = new BasicUserInfo('Test User', '123456');
+    this.userInfoService.loginEvent.next(true);
   }
 
   public register(): void {

@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, OnInit} from '@angular/core';
 import {BasicUserInfo} from '../../models/BasicUserInfo';
 import {LoginService} from './login.service';
 import {CookieService} from 'ngx-cookie-service';
@@ -71,4 +71,5 @@ export class UserInfoService {
   public trackLoginStatus(): Observable<boolean> {
     return this.loginEvent.asObservable();
   }
+
 }

@@ -14,7 +14,7 @@ export class NavigationBarComponent {
 
   navigationBarStatus = {};
 
-  navigationBarItemLinks = ['user-profile', 'home', 'museum-list', 'search', 'about'];
+  navigationBarItemLinks = ['', 'home', 'museum-list', 'search', 'about'];
   navigationBarItemNames = ['', 'Home', 'Museum List', 'Search', 'About'];
 
   DEFAULT_NAVIGATION_BAR_STATUS = 'nav-item';
@@ -24,13 +24,9 @@ export class NavigationBarComponent {
               private userInfoService: UserInfoService) {
     this.navBarCollapse = true;
 
+    this.adjustNavbarBasedOnLoginStatus(userInfoService.isLoggedIn);
     this.userInfoService.trackLoginStatus().subscribe((loggedIn: boolean) => {
-        if (loggedIn) {
-          this.navigationBarItemNames[0] = 'Username: ' + userInfoService.getBasicUserInfo().username;
-        } else {
-          this.navigationBarItemLinks[0] = 'login';
-          this.navigationBarItemNames[0] = 'Login';
-        }
+        this.adjustNavbarBasedOnLoginStatus(loggedIn);
       }
     );
 
@@ -41,6 +37,16 @@ export class NavigationBarComponent {
       }
       return;
     });
+  }
+
+  private adjustNavbarBasedOnLoginStatus(loggedIn: boolean): void {
+    if (loggedIn) {
+      this.navigationBarItemNames[0] = 'Username: ' + this.userInfoService.getBasicUserInfo().username;
+      this.navigationBarItemLinks[0] = 'user-profile';
+    } else {
+      this.navigationBarItemLinks[0] = 'login';
+      this.navigationBarItemNames[0] = 'Login';
+    }
   }
 
   private setAllLinksInactive(): void {
