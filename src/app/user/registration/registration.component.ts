@@ -5,6 +5,8 @@ import {UserInfoService} from '../../services/user/user-info.service';
 import {ServerResponse} from '../../services/user/ServerResponse';
 import {Router} from '@angular/router';
 import {PreviousRouteService} from '../../services/previous-route.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
 
 @Component({
   selector: 'app-registration',
@@ -21,7 +23,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private router: Router,
               private loginService: LoginService,
               private userInfoService: UserInfoService,
-              private previousRoute: PreviousRouteService) {
+              private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -29,34 +31,29 @@ export class RegistrationComponent implements OnInit {
 
   register(): void {
     // TODO: add form validation
-    // TODO: add more elaborate response
     const newUser: User = new User(this.username, this.email, this.password);
+
+    const modal = this.modalService.open(ModalMessageComponent);
+    const modalComponent = modal.componentInstance;
+    modalComponent.title = 'Registration';
+    modalComponent.modal = modal;
+    modalComponent.waitingForServerResponse();
+
     this
       .loginService
       .register(newUser)
-      .then((registrationResponse: ServerResponse) => {
-        if (registrationResponse.success) {
-          this.userInfoService.login(newUser).then(
-            (loginResponse: ServerResponse) => {
-              if (loginResponse.success) {
-                if (this.previousRoute.previousRoute !== null) {
-                  this.router.navigateByUrl(this.previousRoute.previousRoute.url.join());
-                } else {
-                  this.router.navigateByUrl('/home');
-                }
-              } else {
-                console.log(loginResponse);
-              }
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-        } else {
-          console.log(registrationResponse);
+      .then(
+        (res: ServerResponse) => {
+          modalComponent.fromServerResponse(res);
+          if (res.success) {
+            modalComponent.message += '\nRedirecting to login page in 3 seconds.';
+            setTimeout(() => this.router.navigateByUrl('/login'), 3000);
+          }
+        },
+        (error) => {
+          modalComponent.fromNetworkError();
+          console.log(error);
         }
-      }, (error) => {
-        console.log(error);
-      });
+      );
   }
 }

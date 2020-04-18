@@ -14,8 +14,6 @@ import {SearchInCategoryComponent} from './static/search/search-in-category/sear
 import {ViewComponent} from './view/view/view.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from './services/in-ram-server/in-memory-data.service';
 import {LoadingComponent} from './static/loading/loading.component';
 import {CreateComponent} from './edit/create/create.component';
 import {MarkdownEditorComponent} from './edit/markdown-editor/markdown-editor.component';
@@ -26,7 +24,6 @@ import {BasicInfoViewComponent} from './view/basic-info-view/basic-info-view.com
 import {LoginComponent} from './user/login/login.component';
 import {ModalComponent} from './user/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ProjectConfig} from './config/ProjectConfig';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { ModalMessageComponent } from './static/modal-message/modal-message.component';
 
@@ -60,12 +57,7 @@ import { ModalMessageComponent } from './static/modal-message/modal-message.comp
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,
-    /* HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false,
-      passThruUnknownUrl: true,
-      delay: 500
-    }), */
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
