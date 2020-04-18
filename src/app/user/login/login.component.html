@@ -15,10 +15,6 @@
            id="password" placeholder="Password" autocomplete="on"
            [(ngModel)]="password">
 
-    <div *ngIf="tryingToLogin">
-      {{loginMessage}}
-    </div>
-
     <button class="btn btn-lg btn-primary mt-2"
             (click)="login()">
       Login

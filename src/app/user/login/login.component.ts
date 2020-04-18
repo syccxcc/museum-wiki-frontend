@@ -5,6 +5,7 @@ import {ServerResponse} from '../../services/user/ServerResponse';
 import {Router} from '@angular/router';
 import {PreviousRouteService} from '../../services/previous-route.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
 
 @Component({
   selector: 'app-login',
@@ -16,18 +17,16 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  tryingToLogin: boolean;
-  loginMessage: string;
 
   constructor(private router: Router,
               private previousRoute: PreviousRouteService,
-              private userInfoService: UserInfoService) {
+              private userInfoService: UserInfoService,
+              private modalService: NgbModal) {
+
     if (userInfoService.isLoggedIn) {
       router.navigateByUrl('/user-profile');
     }
 
-    this.tryingToLogin = false;
-    this.loginMessage = '';
     this.username = '';
     this.password = '';
   }
@@ -36,35 +35,34 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    const REDIRECT_WAIT_TIME = 500;
+    const REDIRECT_WAIT_TIME = 3000;
 
-    this.tryingToLogin = true;
     const userInfo = new BasicUserInfo(this.username, this.password);
-    this.loginMessage = 'Sending request to server...';
+    const modal = this.modalService.open(ModalMessageComponent);
+    const modalComponent = modal.componentInstance;
+    modalComponent.title = 'Trying to Login';
+    modalComponent.modal = modal;
+    modalComponent.waitingForServerResponse();
     this.userInfoService.login(userInfo).then(
       (response: ServerResponse) => {
+        modalComponent.fromServerResponse(response);
         if (response.success) {
           if (this.previousRoute.previousRoute != null) {
-            this.loginMessage = 'Login successful! Redirecting to previous page...';
+            modalComponent.message += '\nRedirecting to previous page...';
             setTimeout(() => {
               this.router.navigateByUrl(this.previousRoute.previousRoute.url.join());
             }, REDIRECT_WAIT_TIME);
           } else {
-            this.loginMessage = 'Login successful! Redirecting to home page...';
+            modalComponent.message += '\nRedirecting to home page...';
             setTimeout(() => {
               this.router.navigateByUrl('/home');
             }, REDIRECT_WAIT_TIME);
           }
-        } else {
-          this.loginMessage = response.message;
         }
       },
       (error) => {
+        modalComponent.fromNetworkError();
         console.log(error);
-        this.loginMessage =
-          'An error occurred and login request cannot be processed. ' +
-          'Either you are not connected to the internet or the server is down. ' +
-          'Check browser console for details.';
       }
     );
   }
