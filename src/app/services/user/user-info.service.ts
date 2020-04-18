@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
-import {BasicUserInfo} from '../models/BasicUserInfo';
+import {EventEmitter, Injectable} from '@angular/core';
+import {BasicUserInfo} from '../../models/BasicUserInfo';
 import {LoginService} from './login.service';
 import {CookieService} from 'ngx-cookie-service';
-import {ServerResponse} from './user/ServerResponse';
-import {User} from '../models/User';
+import {ServerResponse} from './ServerResponse';
+import {User} from '../../models/User';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class UserInfoService {
 
   isLoggedIn: boolean;
   basicUserInfo: BasicUserInfo;
+
+  loginEvent = new Subject<boolean>();
 
   constructor(private loginService: LoginService,
               private cookieService: CookieService) {
@@ -40,11 +43,14 @@ export class UserInfoService {
         if (res.success) {
           this.isLoggedIn = true;
           this.basicUserInfo = loginCredentials;
+          this.loginEvent.next(true);
 
           this.cookieService.set('username', loginCredentials.username);
           this.cookieService.set('password', loginCredentials.password);
+
         } else {
           this.isLoggedIn = false;
+          this.loginEvent.next(false);
         }
       },
       (error) => {
@@ -53,7 +59,16 @@ export class UserInfoService {
     return loginPromise;
   }
 
+  public logOff(): void {
+    this.isLoggedIn = false;
+    this.loginEvent.next(false);
+  }
+
   public getCompleteUserInfo(): Promise<User> {
     return this.loginService.getCompleteUserInfo(this.basicUserInfo);
+  }
+
+  public trackLoginStatus(): Observable<boolean> {
+    return this.loginEvent.asObservable();
   }
 }

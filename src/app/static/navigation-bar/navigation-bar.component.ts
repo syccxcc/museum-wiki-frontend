@@ -1,7 +1,7 @@
 import {Component, OnInit, OnChanges} from '@angular/core';
 import {NavigationEnd, Router, Event} from '@angular/router';
 import {log} from 'util';
-import {UserInfoService} from '../../services/user-info.service';
+import {UserInfoService} from '../../services/user/user-info.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -24,13 +24,15 @@ export class NavigationBarComponent {
               private userInfoService: UserInfoService) {
     this.navBarCollapse = true;
 
-    // FIXME: this part does not take into account the changing login status of the user
-    if (this.userInfoService.isLoggedIn) {
-      this.navigationBarItemNames[0] = 'Username: ' + userInfoService.getBasicUserInfo().username;
-    } else {
-      this.navigationBarItemLinks[0] = 'login';
-      this.navigationBarItemNames[0] = 'Login';
-    }
+    this.userInfoService.trackLoginStatus().subscribe((loggedIn: boolean) => {
+        if (loggedIn) {
+          this.navigationBarItemNames[0] = 'Username: ' + userInfoService.getBasicUserInfo().username;
+        } else {
+          this.navigationBarItemLinks[0] = 'login';
+          this.navigationBarItemNames[0] = 'Login';
+        }
+      }
+    );
 
     this.setAllLinksInactive();
     router.events.subscribe((value: Event) => {

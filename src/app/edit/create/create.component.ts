@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MuseumService} from '../../services/museum.service';
-import {UserInfoService} from '../../services/user-info.service';
+import {UserInfoService} from '../../services/user/user-info.service';
 import {Museum} from '../../models/Museum';
 import {BasicInfoEditorComponent} from '../basic-info-editor/basic-info-editor.component';
 
