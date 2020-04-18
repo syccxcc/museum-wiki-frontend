@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlSegment, UrlSegmentGroup, UrlTree} from '@angular/router';
-import {UserInfoService} from '../user-info.service';
+import {UserInfoService} from './user-info.service';
 import {PreviousRouteService} from '../previous-route.service';
 
 @Injectable({

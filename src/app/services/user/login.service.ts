@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BasicUserInfo} from '../models/BasicUserInfo';
-import {ServerConfigService} from './config/server-config.service';
-import {ServerResponse} from './user/ServerResponse';
-import {User} from '../models/User';
+import {BasicUserInfo} from '../../models/BasicUserInfo';
+import {ServerConfigService} from '../config/server-config.service';
+import {ServerResponse} from './ServerResponse';
+import {User} from '../../models/User';
 
 @Injectable({
   providedIn: 'root'

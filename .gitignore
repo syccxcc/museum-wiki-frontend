@@ -46,5 +46,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Electron builds
-electron-builds
+# electron build files
+/electron-builds
