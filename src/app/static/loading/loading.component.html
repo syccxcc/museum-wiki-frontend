@@ -2,7 +2,5 @@
   <p>Loading, please wait...</p>
 </div>
 <div *ngIf="loading && error">
-  <p>An error occurred.
-    Either you are not connected to the Internet, or the server is down.
-    Please check browser console for details.</p>
+  <p>{{errorMessage}}</p>
 </div>

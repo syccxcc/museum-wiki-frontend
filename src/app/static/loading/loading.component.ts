@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ServerCannotConnect} from '../../config/ServerCannotConnect';
 
 @Component({
   selector: 'app-loading',
@@ -9,6 +10,8 @@ export class LoadingComponent implements OnInit {
 
   @Input() loading: boolean;
   @Input() error: boolean;
+
+  errorMessage = ServerCannotConnect.MESSAGE;
 
   constructor() {
     this.loading = false;

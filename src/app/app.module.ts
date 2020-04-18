@@ -28,6 +28,7 @@ import {ModalComponent} from './user/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ProjectConfig} from './config/ProjectConfig';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { ModalMessageComponent } from './static/modal-message/modal-message.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { RegistrationComponent } from './user/registration/registration.componen
     BasicInfoViewComponent,
     LoginComponent,
     ModalComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ModalMessageComponent
   ],
   imports: [
     BrowserModule,

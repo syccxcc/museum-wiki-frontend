@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfoService} from '../../services/user-info.service';
+import {UserInfoService} from '../../services/user/user-info.service';
 import {BasicUserInfo} from '../../models/BasicUserInfo';
 import {ServerResponse} from '../../services/user/ServerResponse';
 import {Router} from '@angular/router';
@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit {
     // FIXME: remove this when testing is done
     this.userInfoService.isLoggedIn = true;
     this.userInfoService.basicUserInfo = new BasicUserInfo('Test User', '123456');
+    this.userInfoService.loginEvent.next(true);
   }
 
   public register(): void {

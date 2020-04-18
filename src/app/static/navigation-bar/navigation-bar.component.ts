@@ -1,7 +1,6 @@
-import {Component, OnInit, OnChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavigationEnd, Router, Event} from '@angular/router';
-import {log} from 'util';
-import {UserInfoService} from '../../services/user-info.service';
+import {UserInfoService} from '../../services/user/user-info.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -14,23 +13,21 @@ export class NavigationBarComponent {
 
   navigationBarStatus = {};
 
-  navigationBarItemLinks = ['user-profile', 'home', 'museum-list', 'search', 'about'];
+  navigationBarItemLinks = ['', 'home', 'museum-list', 'search', 'about'];
   navigationBarItemNames = ['', 'Home', 'Museum List', 'Search', 'About'];
 
-  DEFAULT_NAVIGATION_BAR_STATUS = 'nav-item';
-  ACTIVE_NAVIGATION_BAR_STATUS = 'nav-item active';
+  readonly DEFAULT_NAVIGATION_BAR_STATUS = 'nav-item';
+  readonly ACTIVE_NAVIGATION_BAR_STATUS = 'nav-item active';
 
   constructor(private router: Router,
               private userInfoService: UserInfoService) {
     this.navBarCollapse = true;
 
-    // FIXME: this part does not take into account the changing login status of the user
-    if (this.userInfoService.isLoggedIn) {
-      this.navigationBarItemNames[0] = 'Username: ' + userInfoService.getBasicUserInfo().username;
-    } else {
-      this.navigationBarItemLinks[0] = 'login';
-      this.navigationBarItemNames[0] = 'Login';
-    }
+    this.adjustNavbarBasedOnLoginStatus(userInfoService.isLoggedIn);
+    this.userInfoService.trackLoginStatus().subscribe((loggedIn: boolean) => {
+        this.adjustNavbarBasedOnLoginStatus(loggedIn);
+      }
+    );
 
     this.setAllLinksInactive();
     router.events.subscribe((value: Event) => {
@@ -39,6 +36,16 @@ export class NavigationBarComponent {
       }
       return;
     });
+  }
+
+  private adjustNavbarBasedOnLoginStatus(loggedIn: boolean): void {
+    if (loggedIn) {
+      this.navigationBarItemNames[0] = 'Username: ' + this.userInfoService.getBasicUserInfo().username;
+      this.navigationBarItemLinks[0] = 'user-profile';
+    } else {
+      this.navigationBarItemLinks[0] = 'login';
+      this.navigationBarItemNames[0] = 'Login';
+    }
   }
 
   private setAllLinksInactive(): void {
