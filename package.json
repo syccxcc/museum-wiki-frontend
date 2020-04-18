@@ -9,8 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron": "electron .",
-    "electron-build": "ng build --prod=true --base-href ./ && electron ."
+    "electron": "electron electron/electron-main.js",
+    "electron-build": "ng build --prod=true --base-href ./ --outputPath=electron/dist && electron electron/electron-main.js"
   },
   "private": true,
   "dependencies": {
