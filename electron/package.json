@@ -1,0 +1,18 @@
+{
+  "name": "museum-wiki-electron",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron"
+  ],
+  "author": "Peter Li",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^8.2.2"
+  }
+}
