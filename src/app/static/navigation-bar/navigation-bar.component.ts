@@ -1,6 +1,5 @@
-import {Component, OnInit, OnChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavigationEnd, Router, Event} from '@angular/router';
-import {log} from 'util';
 import {UserInfoService} from '../../services/user/user-info.service';
 
 @Component({
@@ -17,8 +16,8 @@ export class NavigationBarComponent {
   navigationBarItemLinks = ['', 'home', 'museum-list', 'search', 'about'];
   navigationBarItemNames = ['', 'Home', 'Museum List', 'Search', 'About'];
 
-  DEFAULT_NAVIGATION_BAR_STATUS = 'nav-item';
-  ACTIVE_NAVIGATION_BAR_STATUS = 'nav-item active';
+  readonly DEFAULT_NAVIGATION_BAR_STATUS = 'nav-item';
+  readonly ACTIVE_NAVIGATION_BAR_STATUS = 'nav-item active';
 
   constructor(private router: Router,
               private userInfoService: UserInfoService) {

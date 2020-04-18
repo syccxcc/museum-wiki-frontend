@@ -4,6 +4,9 @@ import {MuseumService} from '../../services/museum.service';
 import {UserInfoService} from '../../services/user/user-info.service';
 import {Museum} from '../../models/Museum';
 import {BasicInfoEditorComponent} from '../basic-info-editor/basic-info-editor.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
+import {ServerCannotConnect} from '../../config/ServerCannotConnect';
 
 @Component({
   selector: 'app-create',
@@ -19,7 +22,8 @@ export class CreateComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private museumService: MuseumService,
-              private userService: UserInfoService) {
+              private userService: UserInfoService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -31,20 +35,22 @@ export class CreateComponent implements OnInit {
   public submit(): void {
     // FIXME: add form validation to disallow trivial mistakes
     const newMuseum = Museum.of(this.basicInfoEditor.getBasicInfo());
-    console.log(newMuseum);
+    const modal = this.modalService.open(ModalMessageComponent);
+    const modalComponent = modal.componentInstance;
+    modalComponent.title = 'Create New Museum';
+    modalComponent.modal = modal;
+    modalComponent.waitingForServerResponse();
 
     this.museumService
       .addMuseum(newMuseum, this.userService.getBasicUserInfo())
       .then(
         (res) => {
-          console.log(res);
+          modalComponent.fromServerResponse(res);
         },
         (err) => {
+          modalComponent.fromNetworkError();
           console.log(err);
         }
       );
-
-    // TODO: complete the then statement
   }
-
 }
