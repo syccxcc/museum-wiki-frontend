@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ServerResponse} from '../../services/user/ServerResponse';
 import {ServerCannotConnect} from '../../config/ServerCannotConnect';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-message',
@@ -34,10 +35,18 @@ export class ModalMessageComponent implements OnInit {
     this.message = res.message;
   }
 
-  public fromNetworkError(): void {
+  public fromNetworkError(err: HttpErrorResponse): void {
     this.loading = false;
     this.success = false;
-    this.message = ServerCannotConnect.MESSAGE;
-  }
 
+    if (err.status === 0) {
+      this.message = ServerCannotConnect.MESSAGE;
+    } else {
+      if (err.error && err.error.message) {
+        this.message = err.error.message;
+      } else {
+        this.message = err.message;
+      }
+    }
+  }
 }

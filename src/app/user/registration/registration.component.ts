@@ -54,7 +54,7 @@ export class RegistrationComponent implements OnInit {
           }
         },
         (error) => {
-          modalComponent.fromNetworkError();
+          modalComponent.fromNetworkError(error);
           console.log(error);
         }
       );

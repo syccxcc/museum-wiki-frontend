@@ -7,6 +7,8 @@ import {BasicInfoEditorComponent} from '../basic-info-editor/basic-info-editor.c
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
 import {ServerCannotConnect} from '../../config/ServerCannotConnect';
+import {ServerResponse} from '../../services/user/ServerResponse';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-create',
@@ -44,11 +46,11 @@ export class CreateComponent implements OnInit {
     this.museumService
       .addMuseum(newMuseum, this.userService.getBasicUserInfo())
       .then(
-        (res) => {
+        (res: ServerResponse) => {
           modalComponent.fromServerResponse(res);
         },
-        (err) => {
-          modalComponent.fromNetworkError();
+        (err: HttpErrorResponse) => {
+          modalComponent.fromNetworkError(err);
           console.log(err);
         }
       );
