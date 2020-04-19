@@ -50,11 +50,13 @@ export class LoginComponent implements OnInit {
           if (this.previousRoute.previousRoute != null) {
             modalComponent.message += '\nRedirecting to previous page...';
             setTimeout(() => {
+              modal.close();
               this.router.navigateByUrl(this.previousRoute.previousRoute.url.join());
             }, REDIRECT_WAIT_TIME);
           } else {
             modalComponent.message += '\nRedirecting to home page...';
             setTimeout(() => {
+              modal.close();
               this.router.navigateByUrl('/home');
             }, REDIRECT_WAIT_TIME);
           }

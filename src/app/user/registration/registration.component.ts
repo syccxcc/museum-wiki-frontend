@@ -47,7 +47,10 @@ export class RegistrationComponent implements OnInit {
           modalComponent.fromServerResponse(res);
           if (res.success) {
             modalComponent.message += '\nRedirecting to login page in 3 seconds.';
-            setTimeout(() => this.router.navigateByUrl('/login'), 3000);
+            setTimeout(() => {
+              modal.close();
+              this.router.navigateByUrl('/login');
+            }, 3000);
           }
         },
         (error) => {
