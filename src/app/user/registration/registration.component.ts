@@ -4,9 +4,9 @@ import {User} from '../../models/User';
 import {UserInfoService} from '../../services/user/user-info.service';
 import {ServerResponse} from '../../services/user/ServerResponse';
 import {Router} from '@angular/router';
-import {PreviousRouteService} from '../../services/previous-route.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
+import {FormGroup, FormControl, Validators, AbstractControl, ValidatorFn, ValidationErrors} from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -15,10 +15,25 @@ import {ModalMessageComponent} from '../../static/modal-message/modal-message.co
 })
 export class RegistrationComponent implements OnInit {
 
-  username: string;
-  password: string;
-  retypePassword: string;
-  email: string;
+  private static readonly _MIN_USERNAME_LENGTH = 2;
+  private static readonly _MAX_USERNAME_LENGTH = 20;
+
+  private static readonly _MIN_PASSWORD_LENGTH = 6;
+  private static readonly _MAX_PASSWORD_LENGTH = 20;
+
+  registrationForm = new FormGroup({
+    username: new FormControl(
+      '',
+      [
+        Validators.required,
+        Validators.minLength(RegistrationComponent._MIN_USERNAME_LENGTH),
+        Validators.maxLength(RegistrationComponent._MAX_USERNAME_LENGTH)]),
+    password: new FormControl('',
+      [Validators.minLength(RegistrationComponent._MIN_PASSWORD_LENGTH),
+        Validators.maxLength(RegistrationComponent._MAX_PASSWORD_LENGTH)]),
+    retypePassword: new FormControl(''),
+    email: new FormControl('', [Validators.email])
+  }, {validators: [RegistrationComponent.retypePasswordValidator]});
 
   constructor(private router: Router,
               private loginService: LoginService,
@@ -26,12 +41,22 @@ export class RegistrationComponent implements OnInit {
               private modalService: NgbModal) {
   }
 
+  private static retypePasswordValidator(form: FormGroup): ValidationErrors | null {
+    const password = form.value.password;
+    const retypePassword = form.value.retypePassword;
+    return password === retypePassword ? null : {passwordNotMatch: true};
+  }
+
   ngOnInit(): void {
   }
 
   register(): void {
-    // TODO: switch to reactive forms and add form validation
-    const newUser: User = new User(this.username, this.email, this.password);
+    // FIXME: form validation feedback styling change?
+    const form = this.registrationForm;
+    const newUser: User = new User(
+      form.get('username').value,
+      form.get('email').value,
+      form.get('password').value);
 
     const modal = this.modalService.open(ModalMessageComponent);
     const modalComponent = modal.componentInstance;
@@ -58,5 +83,22 @@ export class RegistrationComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+
+  get MIN_USERNAME_LENGTH(): number {
+    return RegistrationComponent._MIN_USERNAME_LENGTH;
+  }
+
+  get MAX_USERNAME_LENGTH(): number {
+    return RegistrationComponent._MAX_USERNAME_LENGTH;
+  }
+
+  get MIN_PASSWORD_LENGTH(): number {
+    return RegistrationComponent._MIN_PASSWORD_LENGTH;
+  }
+
+  get MAX_PASSWORD_LENGTH(): number {
+    return RegistrationComponent._MAX_PASSWORD_LENGTH;
   }
 }

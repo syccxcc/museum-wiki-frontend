@@ -59,7 +59,7 @@ export class UserInfoService {
     return loginPromise;
   }
 
-  public logOff(): void {
+  public logout(): void {
     this.isLoggedIn = false;
     this.loginEvent.next(false);
   }

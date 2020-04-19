@@ -1,23 +1,43 @@
 <h3>Please Register</h3>
 
-<form class="form-group">
+<form class="form-group" [formGroup]="registrationForm" (ngSubmit)="register()">
   <label class="form-check-label" for="username">Username: </label>
-  <input class="form-control" name="username" id="username" type="text"
-         [(ngModel)]="username">
+  <input class="form-control" id="username" type="text" required
+         formControlName="username">
+  <div *ngIf="!registrationForm.get('username').valid"
+       class="alert alert-danger">
+    Username must contain at least {{this.MIN_USERNAME_LENGTH}} characters
+    and at most {{this.MAX_USERNAME_LENGTH}} characters.
+  </div>
 
   <label class="form-check-label" for="password">Password: </label>
-  <input class="form-control" name="password" id="password" type="password"
-         [(ngModel)]="password">
+  <input class="form-control" id="password" type="password" required
+         formControlName="password">
+  <div *ngIf="!registrationForm.get('password').valid"
+       class="alert alert-danger">
+    Password must contain at least {{this.MIN_PASSWORD_LENGTH}} characters
+    and at most {{this.MAX_PASSWORD_LENGTH}} characters.
+  </div>
 
   <label class="form-check-label" for="retypePassword">Retype Password: </label>
-  <input class="form-control" name="retypePassword" id="retypePassword" type="password"
-         [(ngModel)]="retypePassword">
+  <input class="form-control" id="retypePassword" type="password" required
+         formControlName="retypePassword">
+  <div *ngIf="registrationForm.errors?.passwordNotMatch"
+       class="alert alert-danger">
+    Retyped password does not match password.
+  </div>
 
   <label class="form-check-label" for="email">Email: </label>
-  <input class="form-control" name="email" id="email" type="email"
-         [(ngModel)]="email">
+  <input class="form-control" id="email" type="email" required
+         formControlName="email">
+  <div *ngIf="!registrationForm.get('email').valid"
+       class="alert alert-danger">
+    Invalid email address.
+  </div>
 
   <div class="mt-2">
-    <button class="btn btn-success btn-lg" (click)="register()">Register</button>
+    <button class="btn btn-success btn-lg" type="submit" [disabled]="!registrationForm.valid">
+      Register
+    </button>
   </div>
 </form>

@@ -31,4 +31,8 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  logout(): void {
+    this.userInfoService.logout();
+  }
+
 }

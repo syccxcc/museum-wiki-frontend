@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class PreviousRouteService {
 
   private route: ActivatedRouteSnapshot;
 
-  constructor() {
+  constructor(private router: Router) {
     this.route = null;
   }
 
@@ -22,5 +22,9 @@ export class PreviousRouteService {
 
   set previousRoute(previousRoute: ActivatedRouteSnapshot) {
     this.route = previousRoute;
+  }
+
+  public toPreviousRoute(): Promise<boolean> {
+    return this.router.navigateByUrl(this.route.url.join('/'));
   }
 }
