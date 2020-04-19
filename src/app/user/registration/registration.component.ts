@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(): void {
-    // TODO: add form validation
+    // TODO: switch to reactive forms and add form validation
     const newUser: User = new User(this.username, this.email, this.password);
 
     const modal = this.modalService.open(ModalMessageComponent);

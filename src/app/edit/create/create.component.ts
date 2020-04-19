@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit {
   }
 
   public submit(): void {
-    // FIXME: add form validation to disallow trivial mistakes
+    // TODO: switch to reactive forms and add form validation
     const newMuseum = Museum.of(this.basicInfoEditor.getBasicInfo());
     const modal = this.modalService.open(ModalMessageComponent);
     const modalComponent = modal.componentInstance;
