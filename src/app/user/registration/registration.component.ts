@@ -51,7 +51,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(): void {
-    // FIXME: form validation feedback styling change?
     const form = this.registrationForm;
     const newUser: User = new User(
       form.get('username').value,

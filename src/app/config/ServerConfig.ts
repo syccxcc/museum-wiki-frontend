@@ -4,7 +4,6 @@ export class ServerConfig {
   private static readonly deploymentServerUrl = '';
   private static readonly localInRamTestingServerUrl = 'api/';
   private static readonly localCppTestingServerUrl = 'http://localhost:5300/get-data/';
-  // ''
 
   private readonly activeUrl: string;
 

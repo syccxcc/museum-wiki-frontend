@@ -11,14 +11,9 @@
   <div class="clearfix"></div>
 
   <div *ngFor="let museum of museums" class="row mb-3">
-      <div class="col-md-7">
-        <a href="#">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-        </a>
-      </div>
-      <div class="col-md-5">
+      <div class="w-100">
         <h3>{{museum.name}}</h3>
-        <p>{{museum.introduction}}</p>
+        <p>{{museum.introduction | textLimit: ['200']}}</p>
         <button class="btn btn-primary" (click)="goToMuseum(museum.id)">View Museum</button>
       </div>
   </div>

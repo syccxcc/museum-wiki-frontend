@@ -26,6 +26,7 @@ import {ModalComponent} from './user/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { ModalMessageComponent } from './static/modal-message/modal-message.component';
+import { TextLimitPipe } from './helper/text-limit.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ModalMessageComponent } from './static/modal-message/modal-message.comp
     LoginComponent,
     ModalComponent,
     RegistrationComponent,
-    ModalMessageComponent
+    ModalMessageComponent,
+    TextLimitPipe
   ],
   imports: [
     BrowserModule,

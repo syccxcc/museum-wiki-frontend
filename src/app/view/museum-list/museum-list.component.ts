@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Museum} from '../../models/Museum';
-import {NavigationBarComponent} from '../../static/navigation-bar/navigation-bar.component';
 import {Router} from '@angular/router';
 import {MuseumService} from '../../services/museum.service';
 
@@ -15,8 +14,9 @@ export class MuseumListComponent implements OnInit {
   loading = true;
   error = false;
 
-  constructor(private router: Router, private museumService: MuseumService) {
-    // TODO: remove pictures, limit length of introduction, and add pagination
+  constructor(private router: Router,
+              private museumService: MuseumService) {
+    // TODO: limit length of introduction, and add pagination
   }
 
   ngOnInit(): void {
