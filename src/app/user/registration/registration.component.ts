@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
     password: new FormControl('',
       [Validators.minLength(RegistrationComponent._MIN_PASSWORD_LENGTH),
         Validators.maxLength(RegistrationComponent._MAX_PASSWORD_LENGTH)]),
-    retypePassword: new FormControl(''),
+    retypePassword: new FormControl('', RegistrationComponent.retypePasswordValidator),
     email: new FormControl('', [Validators.email])
   }, {validators: [RegistrationComponent.retypePasswordValidator]});
 
