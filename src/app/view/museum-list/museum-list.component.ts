@@ -16,7 +16,7 @@ export class MuseumListComponent implements OnInit {
 
   constructor(private router: Router,
               private museumService: MuseumService) {
-    // TODO: limit length of introduction, and add pagination
+    // TODO: add pagination
   }
 
   ngOnInit(): void {

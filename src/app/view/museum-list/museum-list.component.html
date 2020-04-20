@@ -11,11 +11,18 @@
   <div class="clearfix"></div>
 
   <div *ngFor="let museum of museums" class="row mb-3">
-      <div class="w-100">
-        <h3>{{museum.name}}</h3>
-        <p>{{museum.introduction | textLimit: ['200']}}</p>
-        <button class="btn btn-primary" (click)="goToMuseum(museum.id)">View Museum</button>
-      </div>
+    <div class="col-md-7">
+      <a (click)="goToMuseum(museum.id)">
+        <img class="img-fluid rounded mb-3 mb-md-0"
+             [src]="museum.image"
+             [alt]="'Image with url ' + museum.image + ' cannot be loaded.'">
+      </a>
+    </div>
+    <div class="col-md-5">
+      <h3>{{museum.name}}</h3>
+      <p>{{museum.introduction | textLimit: ['200']}}</p>
+      <button class="btn btn-primary" (click)="goToMuseum(museum.id)">View Museum</button>
+    </div>
   </div>
 
   <app-loading [loading]="loading" [error]="error"></app-loading>
