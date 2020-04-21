@@ -20,7 +20,7 @@ export class CreateComponent implements OnInit {
   category: string;
 
   @ViewChild(BasicInfoEditorComponent)
-  private basicInfoEditor: BasicInfoEditorComponent;
+  basicInfoEditor: BasicInfoEditorComponent;
 
   constructor(private route: ActivatedRoute,
               private museumService: MuseumService,
@@ -35,7 +35,9 @@ export class CreateComponent implements OnInit {
   }
 
   public submit(): void {
-    // TODO: switch to reactive forms and add form validation
+    if (!this.basicInfoEditor.basicInfoFormGroup.valid) {
+      return;
+    }
     const newMuseum = Museum.of(this.basicInfoEditor.getBasicInfo());
     const modal = this.modalService.open(ModalMessageComponent);
     const modalComponent = modal.componentInstance;

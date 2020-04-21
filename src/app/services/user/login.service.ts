@@ -18,18 +18,18 @@ export class LoginService {
   }
 
   public register(user: User): Promise<ServerResponse> {
-    return this.http.post<ServerResponse>(this.url + 'user', user).toPromise();
+    return this.http.post<ServerResponse>(this.url + 'register', user).toPromise();
   }
 
   public login(userCredentials: BasicUserInfo): Promise<ServerResponse> {
     return this.http
-      .put<ServerResponse>(this.url + 'login/' + userCredentials.username,
+      .post<ServerResponse>(this.url + 'login',
         {username: userCredentials.username, password: userCredentials.password})
       .toPromise();
   }
 
   public getCompleteUserInfo(userCredentials: BasicUserInfo): Promise<User> {
-    return this.http.put<User>(this.url + 'user/' + userCredentials.username, {
+    return this.http.put<User>(this.url + 'user-profile', {
       username: userCredentials.username,
       password: userCredentials.password
     }).toPromise();

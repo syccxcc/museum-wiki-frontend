@@ -6,6 +6,7 @@ import {BasicUserInfo} from '../models/BasicUserInfo';
 import {BasicInfo} from '../models/BasicInfo';
 import {BasicInfoService} from './basic-info-service';
 import {ServerResponse} from './user/ServerResponse';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class MuseumService implements BasicInfoService {
     this.url = serverConfigService.getServerConfig().getUrl();
   }
 
-  public getMuseumList(): Promise<Museum[]> {
-    return this.http.get<Museum[]>(this.url + 'museum-list').toPromise();
+  public getMuseumList(): Observable<Museum[]> {
+    return this.http.get<Museum[]>(this.url + 'museum-list');
   }
 
   public getMuseum(id: string): Promise<Museum> {
@@ -33,7 +34,7 @@ export class MuseumService implements BasicInfoService {
   }
 
   public addMuseum(museum: BasicInfo, user: BasicUserInfo): Promise<ServerResponse> {
-    return this.http.post<ServerResponse>(this.url + 'museum-list', {museum, user}).toPromise();
+    return this.http.post<ServerResponse>(this.url + 'add-museum', {museum, user}).toPromise();
   }
 
   public updateMuseumInfo(museum: Museum, user: BasicUserInfo): Promise<any> {

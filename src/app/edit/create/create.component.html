@@ -2,7 +2,8 @@
   <h3 class="float-left">
     Please edit {{category}} info
   </h3>
-  <button class="float-right btn btn-success btn-lg"
+  <button class="float-right btn btn-lg btn-success"
+          [class]="basicInfoEditor?.basicInfoFormGroup?.valid ? '' : 'disabled'"
           (click)="submit()">
     Submit
   </button>

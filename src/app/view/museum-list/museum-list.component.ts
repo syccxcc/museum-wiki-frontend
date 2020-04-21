@@ -14,20 +14,24 @@ export class MuseumListComponent implements OnInit {
   loading = true;
   error = false;
 
+  page = 1;
+  pageSize = 10;
+
   constructor(private router: Router,
               private museumService: MuseumService) {
     // TODO: add pagination
   }
 
   ngOnInit(): void {
-    this.museumService.getMuseumList().then((museums: Museum[]) => {
-        this.museums = museums;
+    this.museumService.getMuseumList().subscribe(
+      (museums: Museum[]) => {
+        this.museums = this.museums.concat(museums);
         this.loading = false;
       },
-      (error => {
+      error => {
         this.error = true;
         console.log(error);
-      }));
+      });
   }
 
   public sortByName(): void {

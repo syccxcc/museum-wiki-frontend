@@ -48,6 +48,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.userInfoService.isLoggedIn) {
+      this.router.navigateByUrl('user-profile');
+    }
   }
 
   register(): void {

@@ -1,14 +1,19 @@
-<div class="form-group">
-  <label class="form-check-label" for="name">Name: </label>
-  <input class="form-control" id="name"
-         type="text" placeholder="Please input name here"
-         [(ngModel)]="name">
+<div class="form-group" [formGroup]="basicInfoFormGroup">
+  <label class="form-check-label" for="name">Name (required): </label>
+  <input class="form-control" id="name" type="text"
+         placeholder="Please input name here" required
+         formControlName="name">
 
-  <label class="form-check-label" for="introduction">Introduction: </label>
+  <label class="form-check-label" for="introduction">Introduction (required): </label>
   <input class="form-control" id="introduction" type="text"
-         placeholder="Please input a short text as the introduction"
-         [(ngModel)]="introduction">
+         placeholder="Please input a short text as the introduction" required
+         formControlName="introduction">
 
-  <label class="form-check-label">Description: </label>
-  <app-markdown-editor></app-markdown-editor>
+  <label class="form-check-label" for="image">Image URL (optional):</label>
+  <input class="form-control" id="image" type="url"
+         placeholder="Please input a URL to an image"
+         formControlName="image">
+
+  <label class="form-check-label">Description (optional): </label>
+  <app-markdown-editor [descriptionFormControl]="basicInfoFormGroup.get('description')"></app-markdown-editor>
 </div>
