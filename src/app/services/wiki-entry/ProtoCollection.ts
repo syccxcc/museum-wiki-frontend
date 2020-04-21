@@ -9,7 +9,7 @@ export class ProtoCollection {
 
   public toCollection(): Collection {
     this.collection.museum = this.museum;
-    this.collection.artifacts = this.artifacts;
+    this.collection.artifacts = this.artifacts ? this.artifacts : [];
     return this.collection;
   }
 }

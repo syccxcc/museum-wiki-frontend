@@ -1,5 +1,5 @@
 <div *ngIf="loading && !error">
-  <p>Loading, please wait...</p>
+  <p>{{loadingMessage}}</p>
 </div>
 <div *ngIf="loading && error">
   <p>{{errorMessage}}</p>

@@ -21,7 +21,7 @@ export class WikiEntry {
 
 
   get image(): string {
-    return this.imageAddress ? this.imageAddress : WikiEntry.noImageMessage;
+    return this.imageAddress ? this.imageAddress : '';
   }
 
   set image(value: string) {

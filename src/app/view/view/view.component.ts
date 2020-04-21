@@ -22,10 +22,12 @@ export class ViewComponent implements OnInit {
   error: boolean;
 
   content: WikiEntry;
-  contentParent: WikiEntry[];
+  contentParents: WikiEntry[];
+  parentName: string;
   contentSubList: WikiEntry[];
   subListName: string;
-  private readonly subListNameReference = {museum: 'Collections', collection: 'Artifacts'};
+  private readonly subListNameReference = {museum: 'Collection', collection: 'Artifact'};
+  private readonly parentNameReference = {collection: 'museum', artifact: 'collection'};
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -33,44 +35,50 @@ export class ViewComponent implements OnInit {
               private collectionService: CollectionService) {
     this.loading = true;
     this.error = false;
-  }
 
-  ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.viewCategory = paramMap.get('viewCategory');
       this.id = paramMap.get('id');
       this.subListName = this.subListNameReference[this.viewCategory];
-    });
+      this.parentName = this.parentNameReference[this.viewCategory];
 
-    if (this.viewCategory === 'museum') {
-      this.museumService.getMuseum(this.id).then(
-        (response: ProtoMuseum) => {
-          this.content = Museum.of(response.museum);
-          this.contentSubList = response.collectionList;
-          this.loading = false;
-        },
-        error => {
-          this.error = true;
-          console.log(error);
-        });
-    } else if (this.viewCategory === 'collection') {
-      this.collectionService.getCollection(this.id).then(
-        (protoCollection: ProtoCollection) => {
-          const collection = protoCollection.toCollection();
-          this.content = collection;
-          this.contentSubList = collection.artifacts;
-          this.contentParent = [collection.museum];
-        },
-        error => {
-          this.error = true;
-          console.log(error);
-        }
-      );
-    }
+      if (this.viewCategory === 'museum') {
+        this.museumService.getMuseum(this.id).subscribe(
+          (response: ProtoMuseum) => {
+            this.content = Museum.of(response.museum);
+            this.contentSubList = response.collectionList;
+            this.loading = false;
+          },
+          error => {
+            this.error = true;
+            console.log(error);
+          });
+      } else if (this.viewCategory === 'collection') {
+        this.collectionService.getCollection(this.id).then(
+          (protoCollection: ProtoCollection) => {
+            const collection = protoCollection.toCollection();
+            this.content = collection;
+            this.contentSubList = collection.artifacts;
+            this.contentParents = [collection.museum];
+          },
+          error => {
+            this.error = true;
+            console.log(error);
+          }
+        );
+      }
+    });
+  }
+
+  ngOnInit(): void {
   }
 
   goToSubListEntry(entry: WikiEntry): void {
     this.router.navigateByUrl('/view/' + this.subListName.toLowerCase() + '/' + entry.id);
+  }
+
+  goToParent(entry: WikiEntry): void {
+    this.router.navigateByUrl('/view/' + this.parentName + '/' + entry.id)
   }
 
 }

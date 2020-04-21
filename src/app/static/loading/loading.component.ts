@@ -11,7 +11,8 @@ export class LoadingComponent implements OnInit {
   @Input() loading: boolean;
   @Input() error: boolean;
 
-  errorMessage = ServerCannotConnect.MESSAGE;
+  readonly loadingMessage = 'Loading, please wait...';
+  readonly errorMessage = ServerCannotConnect.MESSAGE;
 
   constructor() {
     this.loading = false;

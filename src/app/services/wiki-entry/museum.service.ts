@@ -26,8 +26,8 @@ export class MuseumService {
     return this.http.get<Museum[]>(this.url + 'museum-list');
   }
 
-  public getMuseum(id: string): Promise<ProtoMuseum> {
-    return this.http.get<ProtoMuseum>(this.url + 'museum/' + id).toPromise();
+  public getMuseum(id: string): Observable<ProtoMuseum> {
+    return this.http.get<ProtoMuseum>(this.url + 'museum/' + id);
   }
 
   public addMuseum(museum: WikiEntry, user: BasicUserInfo): Promise<ServerResponse> {
