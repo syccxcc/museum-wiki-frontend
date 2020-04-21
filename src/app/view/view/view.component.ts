@@ -29,16 +29,21 @@ export class ViewComponent implements OnInit {
   private readonly subListNameReference = {museum: 'Collection', collection: 'Artifact'};
   private readonly parentNameReference = {collection: 'museum', artifact: 'collection'};
 
+  private resetLoadingStatus(): void {
+    this.loading = true;
+    this.error = false;
+  }
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private museumService: MuseumService,
               private collectionService: CollectionService) {
-    this.loading = true;
-    this.error = false;
+    this.resetLoadingStatus();
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.viewCategory = paramMap.get('viewCategory');
       this.id = paramMap.get('id');
+      this.resetLoadingStatus();
       this.subListName = this.subListNameReference[this.viewCategory];
       this.parentName = this.parentNameReference[this.viewCategory];
 
@@ -56,7 +61,7 @@ export class ViewComponent implements OnInit {
       } else if (this.viewCategory === 'collection') {
         this.collectionService.getCollection(this.id).subscribe(
           (protoCollection: ProtoCollection) => {
-            const collection = protoCollection.toCollection();
+            const collection = ProtoCollection.toCollection(protoCollection);
             this.content = collection;
             this.contentSubList = collection.artifacts;
             this.contentParents = [collection.museum];
@@ -79,7 +84,7 @@ export class ViewComponent implements OnInit {
   }
 
   goToParent(entry: WikiEntry): void {
-    this.router.navigateByUrl('/view/' + this.parentName + '/' + entry.id)
+    this.router.navigateByUrl('/view/' + this.parentName + '/' + entry.id);
   }
 
 }

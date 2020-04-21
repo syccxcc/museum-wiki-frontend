@@ -29,7 +29,7 @@ export class LoginService {
   }
 
   public getCompleteUserInfo(userCredentials: BasicUserInfo): Promise<User> {
-    return this.http.put<User>(this.url + 'user-profile', {
+    return this.http.post<User>(this.url + 'user-profile', {
       username: userCredentials.username,
       password: userCredentials.password
     }).toPromise();

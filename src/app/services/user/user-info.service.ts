@@ -5,6 +5,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {ServerResponse} from './ServerResponse';
 import {User} from '../../models/User';
 import {Observable, Subject} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,19 @@ export class UserInfoService {
         .login(new BasicUserInfo(cookieService.get('username'), cookieService.get('password')))
         .then((res: ServerResponse) => {
           if (!res.success) {
-            cookieService.delete('username');
-            cookieService.delete('password');
+            this.clearCookies();
+          }
+        }, (error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            this.clearCookies();
           }
         });
     }
+  }
+
+  private clearCookies(): void {
+    this.cookieService.delete('username');
+    this.cookieService.delete('password');
   }
 
   public getBasicUserInfo(): BasicUserInfo {

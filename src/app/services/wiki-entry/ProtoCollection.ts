@@ -7,9 +7,9 @@ export class ProtoCollection {
   collection: Collection;
   artifacts: Artifact[];
 
-  public toCollection(): Collection {
-    this.collection.museum = this.museum;
-    this.collection.artifacts = this.artifacts ? this.artifacts : [];
-    return this.collection;
+  public static toCollection(protoCollection: ProtoCollection): Collection {
+    protoCollection.collection.museum = protoCollection.museum;
+    protoCollection.collection.artifacts = protoCollection.artifacts ? protoCollection.artifacts : [];
+    return protoCollection.collection;
   }
 }
