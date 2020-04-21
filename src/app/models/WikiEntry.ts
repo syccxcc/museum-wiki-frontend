@@ -1,4 +1,4 @@
-export class BasicInfo {
+export class WikiEntry {
   public static readonly noImageMessage = 'no link provided for image';
 
   name: string;
@@ -15,13 +15,13 @@ export class BasicInfo {
     this.id = id;
   }
 
-  public static of(basicInfo: BasicInfo) {
-    return new BasicInfo(basicInfo.name, basicInfo.introduction, basicInfo.description, basicInfo.image, basicInfo.id);
+  public static of(wikiEntry: WikiEntry) {
+    return new WikiEntry(wikiEntry.name, wikiEntry.introduction, wikiEntry.description, wikiEntry.image, wikiEntry.id);
   }
 
 
   get image(): string {
-    return this.imageAddress ? this.imageAddress : BasicInfo.noImageMessage;
+    return this.imageAddress ? this.imageAddress : WikiEntry.noImageMessage;
   }
 
   set image(value: string) {

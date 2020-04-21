@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
-import {ServerConfigService} from './config/server-config.service';
-import {Museum} from '../models/Museum';
+import {ServerConfigService} from '../config/server-config.service';
+import {Museum} from '../../models/Museum';
 import {HttpClient} from '@angular/common/http';
-import {BasicUserInfo} from '../models/BasicUserInfo';
-import {BasicInfo} from '../models/BasicInfo';
-import {BasicInfoService} from './basic-info-service';
-import {ServerResponse} from './user/ServerResponse';
+import {BasicUserInfo} from '../../models/BasicUserInfo';
+import {WikiEntry} from '../../models/WikiEntry';
+import {WikiEntryService} from './wiki-entry.service';
+import {ServerResponse} from '../user/ServerResponse';
 import {Observable} from 'rxjs';
+import {ProtoMuseum} from './ProtoMuseum';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class MuseumService implements BasicInfoService {
+export class MuseumService {
 
   private readonly url: string;
 
@@ -25,15 +26,11 @@ export class MuseumService implements BasicInfoService {
     return this.http.get<Museum[]>(this.url + 'museum-list');
   }
 
-  public getMuseum(id: string): Promise<Museum> {
-    return this.http.get<Museum>(this.url + 'museum/' + id).toPromise();
+  public getMuseum(id: string): Promise<ProtoMuseum> {
+    return this.http.get<ProtoMuseum>(this.url + 'museum/' + id).toPromise();
   }
 
-  public getWithId(id: string): Promise<BasicInfo> {
-    return this.getMuseum(id);
-  }
-
-  public addMuseum(museum: BasicInfo, user: BasicUserInfo): Promise<ServerResponse> {
+  public addMuseum(museum: WikiEntry, user: BasicUserInfo): Promise<ServerResponse> {
     return this.http.post<ServerResponse>(this.url + 'add-museum', {museum, user}).toPromise();
   }
 

@@ -19,8 +19,8 @@ import {CreateComponent} from './edit/create/create.component';
 import {MarkdownEditorComponent} from './edit/markdown-editor/markdown-editor.component';
 import {MarkedPipe} from './edit/marked.pipe';
 import {MarkdownDisplayComponent} from './edit/markdown-display/markdown-display.component';
-import {BasicInfoEditorComponent} from './edit/basic-info-editor/basic-info-editor.component';
-import {BasicInfoViewComponent} from './view/basic-info-view/basic-info-view.component';
+import {WikiEntryEditorComponent} from './edit/wiki-entry-editor/wiki-entry-editor.component';
+import {WikiEntryViewComponent} from './view/wiki-entry-view/wiki-entry-view.component';
 import {LoginComponent} from './user/login/login.component';
 import {ModalComponent} from './user/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -45,8 +45,8 @@ import { TextLimitPipe } from './helper/text-limit.pipe';
     MarkdownEditorComponent,
     MarkedPipe,
     MarkdownDisplayComponent,
-    BasicInfoEditorComponent,
-    BasicInfoViewComponent,
+    WikiEntryEditorComponent,
+    WikiEntryViewComponent,
     LoginComponent,
     ModalComponent,
     RegistrationComponent,

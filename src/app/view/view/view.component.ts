@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {BasicInfo} from '../../models/BasicInfo';
-import {MuseumService} from '../../services/museum.service';
+import {WikiEntry} from '../../models/WikiEntry';
+import {MuseumService} from '../../services/wiki-entry/museum.service';
+import {ProtoMuseum} from '../../services/wiki-entry/ProtoMuseum';
+import {Museum} from '../../models/Museum';
+import {Collection} from '../../models/Collection';
 
 @Component({
   selector: 'app-view',
@@ -16,7 +19,10 @@ export class ViewComponent implements OnInit {
   loading: boolean;
   error: boolean;
 
-  content: BasicInfo;
+  content: WikiEntry;
+  museum: Museum;
+  collection: Collection;
+  artifact: any;
 
   categoryToService;
 
@@ -34,9 +40,11 @@ export class ViewComponent implements OnInit {
       this.id = paramMap.get('id');
     });
 
-    this.categoryToService[this.viewCategory].getWithId(this.id).then(
-      (response: BasicInfo) => {
-        this.content = response;
+    this.museumService.getMuseum(this.id).then(
+      (response: ProtoMuseum) => {
+        this.museum = Museum.of(response.museum);
+        this.content = this.museum;
+        this.museum.collections = response.collectionList;
         this.loading = false;
       },
       (error => {

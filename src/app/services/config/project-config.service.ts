@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Optional} from '@angular/core';
 import {ProjectConfig} from '../../config/ProjectConfig';
 
 @Injectable({
@@ -8,7 +8,7 @@ export class ProjectConfigService {
 
   private readonly projectConfig: ProjectConfig;
 
-  constructor(projectConfig?: ProjectConfig) {
+  constructor(@Optional() projectConfig?: ProjectConfig) {
     this.projectConfig = projectConfig ? projectConfig : ProjectConfig.getInstance();
   }
 

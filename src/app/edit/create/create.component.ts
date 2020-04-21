@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {MuseumService} from '../../services/museum.service';
+import {MuseumService} from '../../services/wiki-entry/museum.service';
 import {UserInfoService} from '../../services/user/user-info.service';
 import {Museum} from '../../models/Museum';
-import {BasicInfoEditorComponent} from '../basic-info-editor/basic-info-editor.component';
+import {WikiEntryEditorComponent} from '../wiki-entry-editor/wiki-entry-editor.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
 import {ServerCannotConnect} from '../../config/ServerCannotConnect';
@@ -19,8 +19,8 @@ export class CreateComponent implements OnInit {
 
   category: string;
 
-  @ViewChild(BasicInfoEditorComponent)
-  basicInfoEditor: BasicInfoEditorComponent;
+  @ViewChild(WikiEntryEditorComponent)
+  wikiEntryEditor: WikiEntryEditorComponent;
 
   constructor(private route: ActivatedRoute,
               private museumService: MuseumService,
@@ -35,10 +35,10 @@ export class CreateComponent implements OnInit {
   }
 
   public submit(): void {
-    if (!this.basicInfoEditor.basicInfoFormGroup.valid) {
+    if (!this.wikiEntryEditor.wikiEntryFormGroup.valid) {
       return;
     }
-    const newMuseum = Museum.of(this.basicInfoEditor.getBasicInfo());
+    const newMuseum = Museum.of(this.wikiEntryEditor.getWikiEntry());
     const modal = this.modalService.open(ModalMessageComponent);
     const modalComponent = modal.componentInstance;
     modalComponent.title = 'Create New Museum';

@@ -1,11 +1,15 @@
-import {BasicInfo} from './BasicInfo';
+import {WikiEntry} from './WikiEntry';
 
-export class Museum extends BasicInfo {
+export class Museum extends WikiEntry {
+
+  collections: WikiEntry[];
+
   constructor(name: string, introduction: string, image: string, description: string, id: string) {
     super(name, introduction, image, description, id);
+    this.collections = [];
   }
 
-  public static of(basicInfo: BasicInfo) {
-    return new Museum(basicInfo.name, basicInfo.introduction, basicInfo.image, basicInfo.description, basicInfo.id);
+  public static of(wikiEntry: WikiEntry) {
+    return new Museum(wikiEntry.name, wikiEntry.introduction, wikiEntry.image, wikiEntry.description, wikiEntry.id);
   }
 }

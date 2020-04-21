@@ -1,4 +1,4 @@
-<div class="form-group" [formGroup]="basicInfoFormGroup">
+<div class="form-group" [formGroup]="wikiEntryFormGroup">
   <label class="form-check-label" for="name">Name (required): </label>
   <input class="form-control" id="name" type="text"
          placeholder="Please input name here" required
@@ -15,5 +15,5 @@
          formControlName="image">
 
   <label class="form-check-label">Description (optional): </label>
-  <app-markdown-editor [descriptionFormControl]="basicInfoFormGroup.get('description')"></app-markdown-editor>
+  <app-markdown-editor [descriptionFormControl]="wikiEntryFormGroup.get('description')"></app-markdown-editor>
 </div>

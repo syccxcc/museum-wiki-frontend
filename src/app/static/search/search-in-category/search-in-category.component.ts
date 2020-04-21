@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {BasicInfo} from '../../../models/BasicInfo';
+import {WikiEntry} from '../../../models/WikiEntry';
 
 @Component({
   selector: 'app-search-in-category',
@@ -13,7 +13,7 @@ export class SearchInCategoryComponent implements OnInit {
   searchCategory;
   searchText;
 
-  searchResults: BasicInfo[];
+  searchResults: WikiEntry[];
 
   constructor(private route: ActivatedRoute) {
   }

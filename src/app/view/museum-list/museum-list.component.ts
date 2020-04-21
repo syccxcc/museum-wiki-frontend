@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Museum} from '../../models/Museum';
 import {Router} from '@angular/router';
-import {MuseumService} from '../../services/museum.service';
+import {MuseumService} from '../../services/wiki-entry/museum.service';
 
 @Component({
   selector: 'app-museum-list',

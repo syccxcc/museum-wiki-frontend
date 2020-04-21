@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BasicInfoEditorComponent } from './basic-info-editor.component';
+import { WikiEntryEditorComponent } from './wiki-entry-editor.component';
 
-describe('BasicInfoEditorComponent', () => {
-  let component: BasicInfoEditorComponent;
-  let fixture: ComponentFixture<BasicInfoEditorComponent>;
+describe('WikiEntryEditorComponent', () => {
+  let component: WikiEntryEditorComponent;
+  let fixture: ComponentFixture<WikiEntryEditorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BasicInfoEditorComponent ]
+      declarations: [ WikiEntryEditorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BasicInfoEditorComponent);
+    fixture = TestBed.createComponent(WikiEntryEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

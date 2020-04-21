@@ -3,11 +3,11 @@
     Please edit {{category}} info
   </h3>
   <button class="float-right btn btn-lg btn-success"
-          [class]="basicInfoEditor?.basicInfoFormGroup?.valid ? '' : 'disabled'"
+          [class]="wikiEntryEditor?.wikiEntryFormGroup?.valid ? '' : 'disabled'"
           (click)="submit()">
     Submit
   </button>
   <div class="clearfix"></div>
 </div>
 
-<app-basic-info-editor></app-basic-info-editor>
+<app-wiki-entry-editor></app-wiki-entry-editor>
