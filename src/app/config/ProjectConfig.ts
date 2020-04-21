@@ -1,15 +1,12 @@
 export class ProjectConfig {
-  private static readonly testingMode = true;
-  private static readonly usingInRamServerForHttp = false;
+  public static readonly testingMode = true;
 
-  private static readonly config: ProjectConfig = new ProjectConfig(ProjectConfig.testingMode, ProjectConfig.usingInRamServerForHttp);
+  private static readonly config: ProjectConfig = new ProjectConfig(ProjectConfig.testingMode);
 
   private readonly testing;
-  private readonly usingInRamServer;
 
-  constructor(testing, usingInRamServer) {
+  constructor(testing) {
     this.testing = testing;
-    this.usingInRamServer = usingInRamServer;
   }
 
   public static getInstance(): ProjectConfig {
@@ -20,7 +17,4 @@ export class ProjectConfig {
     return this.testing;
   }
 
-  public isUsingInRamServer(): boolean {
-    return this.usingInRamServer;
-  }
 }

@@ -8,8 +8,8 @@ export class ProjectConfigService {
 
   private readonly projectConfig: ProjectConfig;
 
-  constructor() {
-    this.projectConfig = ProjectConfig.getInstance();
+  constructor(projectConfig?: ProjectConfig) {
+    this.projectConfig = projectConfig ? projectConfig : ProjectConfig.getInstance();
   }
 
   public getProjectConfig(): ProjectConfig {
