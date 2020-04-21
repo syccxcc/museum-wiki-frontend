@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ViewComponent} from './view.component';
 import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';
@@ -7,13 +7,12 @@ import {MuseumService} from '../../services/wiki-entry/museum.service';
 import {Museum} from '../../models/Museum';
 import {ProtoMuseum} from '../../services/wiki-entry/ProtoMuseum';
 import {CollectionService} from '../../services/wiki-entry/collection.service';
-import {AppComponent} from '../../app/app.component';
 import {LoadingComponent} from '../../static/loading/loading.component';
 import {WikiEntryViewComponent} from '../wiki-entry-view/wiki-entry-view.component';
-import {MarkdownDisplayComponent} from '../../edit/markdown-display/markdown-display.component';
-import {Collection} from '../../models/Collection';
 import {WikiEntry} from '../../models/WikiEntry';
 import {TextLimitPipe} from '../../helper/text-limit.pipe';
+import {ProtoCollection} from '../../services/wiki-entry/ProtoCollection';
+import {Collection} from '../../models/Collection';
 
 describe('ViewComponent', () => {
   let component: ViewComponent;
@@ -21,7 +20,7 @@ describe('ViewComponent', () => {
 
   let activatedRouteStub: Partial<ActivatedRoute>;
   let museumServiceStub;
-  let collectionServiceStub: Partial<CollectionService>;
+  let collectionServiceStub;
 
   function changeActivatedRoute(viewCategory: string, id: string): void {
     activatedRouteStub = {
@@ -70,12 +69,45 @@ describe('ViewComponent', () => {
     expect(component).toBeTruthy();
     expect(component.viewCategory).toEqual(testCategory);
     expect(component.id).toEqual(testId);
-    fixture.detectChanges();
     expect(component.loading).toBe(false);
     expect(component.error).toBe(false);
     expect(component.parentName).toEqual(undefined);
     expect(component.content).toEqual(protoMuseum.museum);
     expect(component.contentSubList).toEqual(protoMuseum.collectionList);
+  });
+
+  it('should display collection info', () => {
+    const testName = 'Ancient Artifacts';
+    const testIntro = 'Contains artifacts before 600BC';
+    const testId = '123';
+    const testCategory = 'collection';
+
+    const protoCollection = new ProtoCollection();
+    protoCollection.museum = new Museum(testName, testIntro, '', '', testId);
+    protoCollection.collection = new Collection(new WikiEntry(testName, testIntro, '', '', testId), undefined);
+    protoCollection.artifacts = [];
+
+    const testCollection = protoCollection.toCollection();
+    protoCollection.collection = testCollection;
+
+    changeActivatedRoute(testCategory, testId);
+    const collectionService = jasmine.createSpyObj('CollectionService', ['getCollection']);
+    const spy = collectionService.getCollection.and.returnValue(of(protoCollection));
+    collectionServiceStub = collectionService;
+
+    prepareDependencies();
+    createComponent();
+
+    expect(component).toBeTruthy();
+    expect(component.viewCategory).toEqual(testCategory);
+    expect(component.id).toEqual(testId);
+    expect(component.loading).toBe(false);
+    expect(component.error).toBe(false);
+    expect(component.content).toEqual(testCollection);
+    expect(component.parentName).toEqual('museum');
+    expect(component.contentParents).toEqual([protoCollection.museum]);
+    expect(component.subListName).toEqual('Artifact');
+    expect(component.contentSubList).toEqual(protoCollection.artifacts);
   });
 
 });

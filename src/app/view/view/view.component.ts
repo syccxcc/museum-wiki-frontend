@@ -54,12 +54,13 @@ export class ViewComponent implements OnInit {
             console.log(error);
           });
       } else if (this.viewCategory === 'collection') {
-        this.collectionService.getCollection(this.id).then(
+        this.collectionService.getCollection(this.id).subscribe(
           (protoCollection: ProtoCollection) => {
             const collection = protoCollection.toCollection();
             this.content = collection;
             this.contentSubList = collection.artifacts;
             this.contentParents = [collection.museum];
+            this.loading = false;
           },
           error => {
             this.error = true;

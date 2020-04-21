@@ -6,6 +6,7 @@ import {ServerConfig} from '../../config/ServerConfig';
 import {ProtoCollection} from './ProtoCollection';
 import {ServerResponse} from '../user/ServerResponse';
 import {UserInfoService} from '../user/user-info.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,9 @@ export class CollectionService {
     this.serverConfig = serverConfigService.getServerConfig();
   }
 
-  public getCollection(id: string): Promise<ProtoCollection> {
+  public getCollection(id: string): Observable<ProtoCollection> {
     return this.http
-      .get<ProtoCollection>(this.serverConfig.getUrl() + 'collection/' + id)
-      .toPromise();
+      .get<ProtoCollection>(this.serverConfig.getUrl() + 'collection/' + id);
   }
 
   public addCollection(collection: Collection): Promise<ServerResponse> {
