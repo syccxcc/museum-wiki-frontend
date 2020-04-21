@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-
   constructor(private router: Router,
               private previousRoute: PreviousRouteService,
               private userInfoService: UserInfoService,
@@ -35,6 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
+    // FIXME: add form validation
     const REDIRECT_WAIT_TIME = 3000;
 
     const userInfo = new BasicUserInfo(this.username, this.password);

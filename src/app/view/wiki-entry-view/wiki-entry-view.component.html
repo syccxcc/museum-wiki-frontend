@@ -1,5 +1,9 @@
 <h4>{{wikiEntry.name}}</h4>
 
+<a [href]="wikiEntry.image">
+  <img [src]="wikiEntry.image" alt="Image cannot load.">
+</a>
+
 <p>{{wikiEntry.description}}</p>
 
 <app-markdown-display [markdownText]="wikiEntry.description"></app-markdown-display>

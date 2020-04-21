@@ -8,4 +8,15 @@
 
 <div *ngIf="!loading">
   <app-wiki-entry-view [wikiEntry]="content"></app-wiki-entry-view>
+  <div *ngIf="viewCategory != 'artifact'">
+    <h3>{{subListName}}</h3>
+    <div *ngFor="let subEntry of contentSubList">
+      <h5>{{subEntry.name}}</h5>
+      <br>
+      <img class="float-right w-auto" [src]="subEntry.image">
+      <p>{{subEntry.introduction | textLimit}}</p>
+      <button class="btn btn-primary" (click)="goToSubListEntry(subEntry)">View {{subListName}}</button>
+      <div class="clearfix"></div>
+    </div>
+  </div>
 </div>
