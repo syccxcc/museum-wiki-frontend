@@ -14,7 +14,7 @@
       <h5>{{subEntry.name}}</h5>
       <br>
       <img class="float-right w-auto" [src]="subEntry.image">
-      <p>{{subEntry.introduction | textLimit}}</p>
+      <p>{{subEntry.introduction | textLimit: ['100']}}</p>
       <button class="btn btn-primary" (click)="goToSubListEntry(subEntry)">View {{subListName}}</button>
       <div class="clearfix"></div>
     </div>

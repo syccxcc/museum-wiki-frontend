@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserInfoService} from '../../services/user/user-info.service';
 import {User} from '../../models/User';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,13 +16,18 @@ export class UserProfileComponent implements OnInit {
   loading: boolean;
   error: boolean;
 
-  constructor(private userInfoService: UserInfoService) {
+  constructor(private router: Router,
+              private userInfoService: UserInfoService) {
     this.username = userInfoService.getBasicUserInfo().username;
     this.loading = true;
     this.error = false;
   }
 
   ngOnInit(): void {
+    if (!this.userInfoService.isLoggedIn) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.userInfoService.getCompleteUserInfo().then((res: User) => {
       this.user = res;
       this.loading = false;
@@ -33,6 +39,7 @@ export class UserProfileComponent implements OnInit {
 
   logout(): void {
     this.userInfoService.logout();
+    this.router.navigateByUrl('/login');
   }
 
 }

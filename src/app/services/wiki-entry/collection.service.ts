@@ -28,10 +28,10 @@ export class CollectionService {
 
   public addCollection(collection: Collection): Promise<ServerResponse> {
     return this.http
-      .post(
+      .post<ServerResponse>(
         this.serverConfig.getUrl() + 'add-collection',
         {
-          museum: {id: collection.museumId},
+          museum: {id: collection.museum.id},
           collection,
           user: this.userInfoService.basicUserInfo
         })
