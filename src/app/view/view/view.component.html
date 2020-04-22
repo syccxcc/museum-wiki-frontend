@@ -17,8 +17,9 @@
   <app-wiki-entry-view [wikiEntry]="content"></app-wiki-entry-view>
 
   <div *ngIf="subListName">
-    <h3>{{subListName + 's'}}</h3>
-    <button class="btn btn-info ml-2" (click)="createSubItem()">Create New {{subListName}}</button>
+    <h3 class="float-left">{{subListName + 's'}}</h3>
+    <button class="btn btn-info float-left ml-2" (click)="createSubItem()">Create New {{subListName}}</button>
+    <div class="clearfix"></div>
     <div *ngFor="let subEntry of contentSubList">
       <h5>{{subEntry.name}}</h5>
       <img *ngIf="subEntry.image && subEntry.image !== ''"
