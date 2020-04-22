@@ -1,9 +1,9 @@
 import {EventEmitter, Injectable, OnInit} from '@angular/core';
-import {BasicUserInfo} from '../../models/BasicUserInfo';
+import {BasicUserInfo} from '../../models/basic-user-info';
 import {LoginService} from './login.service';
 import {CookieService} from 'ngx-cookie-service';
-import {ServerResponse} from './ServerResponse';
-import {User} from '../../models/User';
+import {ServerResponse} from '../server-response';
+import {User} from '../../models/user';
 import {Observable, Subject} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 

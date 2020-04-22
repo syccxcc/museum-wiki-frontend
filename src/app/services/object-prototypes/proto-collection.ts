@@ -1,6 +1,6 @@
-import {WikiEntry} from '../../models/WikiEntry';
-import {Collection} from '../../models/Collection';
-import {Artifact} from '../../models/Artifact';
+import {WikiEntry} from '../../models/wiki-entry';
+import {Collection} from '../../models/collection';
+import {Artifact} from '../../models/artifact';
 
 export class ProtoCollection {
   museum: WikiEntry;

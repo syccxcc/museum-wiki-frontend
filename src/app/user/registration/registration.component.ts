@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../../services/user/login.service';
-import {User} from '../../models/User';
+import {User} from '../../models/user';
 import {UserInfoService} from '../../services/user/user-info.service';
-import {ServerResponse} from '../../services/user/ServerResponse';
+import {ServerResponse} from '../../services/server-response';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';

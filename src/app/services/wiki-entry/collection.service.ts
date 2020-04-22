@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ServerConfigService} from '../config/server-config.service';
 import {HttpClient} from '@angular/common/http';
-import {Collection} from '../../models/Collection';
+import {Collection} from '../../models/collection';
 import {ServerConfig} from '../../config/ServerConfig';
-import {ProtoCollection} from './ProtoCollection';
-import {ServerResponse} from '../user/ServerResponse';
+import {ProtoCollection} from '../object-prototypes/proto-collection';
+import {ServerResponse} from '../server-response';
 import {UserInfoService} from '../user/user-info.service';
 import {Observable} from 'rxjs';
 

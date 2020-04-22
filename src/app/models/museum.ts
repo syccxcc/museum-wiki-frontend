@@ -1,4 +1,4 @@
-import {WikiEntry} from './WikiEntry';
+import {WikiEntry} from './wiki-entry';
 
 export class Museum extends WikiEntry {
 

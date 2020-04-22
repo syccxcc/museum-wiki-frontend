@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ServerResponse} from '../../services/user/ServerResponse';
+import {ServerResponse} from '../../services/server-response';
 import {ServerCannotConnect} from '../../config/ServerCannotConnect';
 import {HttpErrorResponse} from '@angular/common/http';
 

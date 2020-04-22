@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {WikiEntry} from '../../models/WikiEntry';
+import {WikiEntry} from '../../models/wiki-entry';
 import {MuseumService} from '../../services/wiki-entry/museum.service';
-import {ProtoMuseum} from '../../services/wiki-entry/ProtoMuseum';
-import {Museum} from '../../models/Museum';
-import {Collection} from '../../models/Collection';
+import {ProtoMuseum} from '../../services/object-prototypes/proto-museum';
+import {Museum} from '../../models/museum';
+import {Collection} from '../../models/collection';
 import {CollectionService} from '../../services/wiki-entry/collection.service';
-import {ProtoCollection} from '../../services/wiki-entry/ProtoCollection';
+import {ProtoCollection} from '../../services/object-prototypes/proto-collection';
+import {BasicEntry} from '../../models/basic-entry';
+import {Artifact} from '../../models/artifact';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-view',
@@ -22,7 +25,10 @@ export class ViewComponent implements OnInit {
   error: boolean;
 
   content: WikiEntry;
-  contentParents: WikiEntry[];
+  museum: Museum;
+  collection: Collection;
+  artifact: Artifact;
+  contentParents: BasicEntry[];
   parentName: string;
   contentSubList: WikiEntry[];
   subListName: string;
@@ -50,11 +56,12 @@ export class ViewComponent implements OnInit {
       if (this.viewCategory === 'museum') {
         this.museumService.getMuseum(this.id).subscribe(
           (response: ProtoMuseum) => {
-            this.content = Museum.of(response.museum);
+            this.museum = Museum.of(response.museum);
+            this.content = this.museum;
             this.contentSubList = response.collectionList;
             this.loading = false;
           },
-          error => {
+          (error: HttpErrorResponse) => {
             this.error = true;
             console.log(error);
           });
@@ -63,15 +70,18 @@ export class ViewComponent implements OnInit {
           (protoCollection: ProtoCollection) => {
             const collection = ProtoCollection.toCollection(protoCollection);
             this.content = collection;
+            this.collection = collection;
             this.contentSubList = collection.artifacts;
             this.contentParents = [collection.museum];
             this.loading = false;
           },
-          error => {
+          (error: HttpErrorResponse) => {
             this.error = true;
             console.log(error);
           }
         );
+      } else if (this.viewCategory === 'artifact') {
+        // TODO: add artifact behavior
       }
     });
   }
@@ -85,6 +95,16 @@ export class ViewComponent implements OnInit {
 
   goToParent(entry: WikiEntry): void {
     this.router.navigateByUrl('/view/' + this.parentName + '/' + entry.id);
+  }
+
+  createSubItem(): void {
+    let url = '/create/' + this.subListName.toLowerCase() + '/';
+    if (this.viewCategory === 'collection') {
+      url = url.concat(this.collection.museum.id);
+    } else if (this.viewCategory === 'artifact') {
+      url = url.concat(this.artifact.museum.id);
+    }
+    this.router.navigateByUrl(url);
   }
 
 }

@@ -23,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'view/:viewCategory/:id', component: ViewComponent},
   { path: 'create/:category', component: CreateComponent, canActivate: [LoginGuardService]},
+  { path: 'create/:category/:museumId', component: CreateComponent, canActivate: [LoginGuardService]},
   { path: 'login', component: LoginComponent},
   { path: 'user-profile', component: UserProfileComponent, canActivate: [LoginGuardService]},
   { path: 'register', component: RegistrationComponent},

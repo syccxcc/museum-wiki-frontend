@@ -1,4 +1,4 @@
-import {HashHelper} from '../helper/HashHelper';
+import {HashHelper} from '../helper/hash-helper';
 
 export class BasicUserInfo {
   username: string;

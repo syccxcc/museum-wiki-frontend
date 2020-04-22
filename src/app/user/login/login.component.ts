@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserInfoService} from '../../services/user/user-info.service';
-import {BasicUserInfo} from '../../models/BasicUserInfo';
-import {ServerResponse} from '../../services/user/ServerResponse';
+import {BasicUserInfo} from '../../models/basic-user-info';
+import {ServerResponse} from '../../services/server-response';
 import {Router} from '@angular/router';
 import {PreviousRouteService} from '../../services/previous-route.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';

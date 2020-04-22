@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {WikiEntry} from '../../../models/WikiEntry';
+import {WikiEntry} from '../../../models/wiki-entry';
 
 @Component({
   selector: 'app-search-in-category',

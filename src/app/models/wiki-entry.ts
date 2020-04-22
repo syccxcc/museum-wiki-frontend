@@ -1,18 +1,17 @@
-export class WikiEntry {
+import {BasicEntry} from './basic-entry';
+
+export class WikiEntry extends BasicEntry {
   public static readonly noImageMessage = 'no link provided for image';
 
-  name: string;
   introduction: string;
   description: string;
-  id: string;
   private imageAddress: string;
 
   constructor(name: string, introduction: string, image: string, description: string, id: string) {
-    this.name = name;
+    super(name, id);
     this.introduction = introduction;
     this.image = image;
     this.description = description;
-    this.id = id;
   }
 
   public static of(wikiEntry: WikiEntry) {

@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {ServerConfigService} from '../config/server-config.service';
-import {Museum} from '../../models/Museum';
+import {Museum} from '../../models/museum';
 import {HttpClient} from '@angular/common/http';
-import {BasicUserInfo} from '../../models/BasicUserInfo';
-import {WikiEntry} from '../../models/WikiEntry';
-import {WikiEntryService} from './wiki-entry.service';
-import {ServerResponse} from '../user/ServerResponse';
+import {BasicUserInfo} from '../../models/basic-user-info';
+import {WikiEntry} from '../../models/wiki-entry';
+import {ServerResponse} from '../server-response';
 import {Observable} from 'rxjs';
-import {ProtoMuseum} from './ProtoMuseum';
+import {ProtoMuseum} from '../object-prototypes/proto-museum';
+import {UserInfoService} from '../user/user-info.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,8 @@ export class MuseumService {
   private readonly url: string;
 
   constructor(private serverConfigService: ServerConfigService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private userInfo: UserInfoService) {
     this.url = serverConfigService.getServerConfig().getUrl();
   }
 
@@ -30,12 +31,15 @@ export class MuseumService {
     return this.http.get<ProtoMuseum>(this.url + 'museum/' + id);
   }
 
-  public addMuseum(museum: WikiEntry, user: BasicUserInfo): Promise<ServerResponse> {
-    return this.http.post<ServerResponse>(this.url + 'add-museum', {museum, user}).toPromise();
+  public addMuseum(museum: WikiEntry): Promise<ServerResponse> {
+    return this.http.post<ServerResponse>(this.url + 'add-museum', {museum, user: this.userInfo.basicUserInfo}).toPromise();
   }
 
-  public updateMuseumInfo(museum: Museum, user: BasicUserInfo): Promise<any> {
-    return this.http.put(this.url + 'museum-list/' + museum.id, {museum, user}, {}).toPromise();
+  public updateMuseumInfo(museum: Museum): Promise<ServerResponse> {
+    return this.http.put<ServerResponse>(this.url + 'museum-list/' + museum.id, {
+      museum,
+      user: this.userInfo.basicUserInfo
+    }).toPromise();
   }
 
   public deleteMuseum(museumId: string, user: BasicUserInfo): Promise<any> {

@@ -4,15 +4,15 @@ import {ViewComponent} from './view.component';
 import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';
 import {of} from 'rxjs';
 import {MuseumService} from '../../services/wiki-entry/museum.service';
-import {Museum} from '../../models/Museum';
-import {ProtoMuseum} from '../../services/wiki-entry/ProtoMuseum';
+import {Museum} from '../../models/museum';
+import {ProtoMuseum} from '../../services/object-prototypes/proto-museum';
 import {CollectionService} from '../../services/wiki-entry/collection.service';
 import {LoadingComponent} from '../../static/loading/loading.component';
 import {WikiEntryViewComponent} from '../wiki-entry-view/wiki-entry-view.component';
-import {WikiEntry} from '../../models/WikiEntry';
+import {WikiEntry} from '../../models/wiki-entry';
 import {TextLimitPipe} from '../../helper/text-limit.pipe';
-import {ProtoCollection} from '../../services/wiki-entry/ProtoCollection';
-import {Collection} from '../../models/Collection';
+import {ProtoCollection} from '../../services/object-prototypes/proto-collection';
+import {Collection} from '../../models/collection';
 
 describe('ViewComponent', () => {
   let component: ViewComponent;

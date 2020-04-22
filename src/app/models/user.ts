@@ -1,4 +1,4 @@
-import {BasicUserInfo} from './BasicUserInfo';
+import {BasicUserInfo} from './basic-user-info';
 
 export class User extends BasicUserInfo {
   email: string;

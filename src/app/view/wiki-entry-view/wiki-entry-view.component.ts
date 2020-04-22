@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WikiEntry} from '../../models/WikiEntry';
+import {WikiEntry} from '../../models/wiki-entry';
 
 @Component({
   selector: 'app-wiki-entry-view',
