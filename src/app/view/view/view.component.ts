@@ -51,6 +51,8 @@ export class ViewComponent implements OnInit {
               private projectConfigService: ProjectConfigService) {
     this.resetLoadingStatus();
 
+    this.config = this.projectConfigService.getProjectConfig();
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.viewCategory = paramMap.get('viewCategory');
       this.id = paramMap.get('id');
