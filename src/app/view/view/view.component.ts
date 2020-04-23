@@ -98,12 +98,7 @@ export class ViewComponent implements OnInit {
   }
 
   createSubItem(): void {
-    let url = '/create/' + this.subListName.toLowerCase() + '/';
-    if (this.viewCategory === 'collection') {
-      url = url.concat(this.collection.museum.id);
-    } else if (this.viewCategory === 'artifact') {
-      url = url.concat(this.artifact.museum.id);
-    }
+    const url = '/create/' + this.subListName.toLowerCase() + '/' + this.content.id;
     this.router.navigateByUrl(url);
   }
 
