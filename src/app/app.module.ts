@@ -27,6 +27,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { ModalMessageComponent } from './static/modal-message/modal-message.component';
 import { TextLimitPipe } from './helper/text-limit.pipe';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { TextLimitPipe } from './helper/text-limit.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

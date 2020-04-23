@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ServerResponse} from '../../services/server-response';
 import {ServerCannotConnect} from '../../config/ServerCannotConnect';
 import {HttpErrorResponse} from '@angular/common/http';
+import {faCheckCircle, faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-modal-message',
@@ -17,6 +18,9 @@ export class ModalMessageComponent implements OnInit {
   @Input() message: string;
 
   @Input() modal: NgbActiveModal;
+
+  faCheckCircle = faCheckCircle;
+  faTimesCircle = faTimesCircle;
 
   constructor() {
   }

@@ -7,9 +7,11 @@
 <div class="modal-body">
   <div *ngIf="!loading">
     <p *ngIf="success" class="alert alert-success">
+      <fa-icon style="color: darkgreen" [icon]="faCheckCircle"></fa-icon>
       Success!
     </p>
     <p *ngIf="!success" class="alert alert-danger">
+      <fa-icon style="color: darkred" [icon]="faTimesCircle"></fa-icon>
       Failed!
     </p>
   </div>
