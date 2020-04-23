@@ -7,7 +7,7 @@ export class WikiEntry extends BasicEntry {
   description: string;
   private imageAddress: string;
 
-  constructor(name: string, introduction: string, image: string, description: string, id: string) {
+  constructor(name?: string, introduction?: string, image?: string, description?: string, id?: number) {
     super(name, id);
     this.introduction = introduction;
     this.image = image;

@@ -1,8 +1,8 @@
 export class BasicEntry {
   name: string;
-  id: string;
+  id: number;
 
-  constructor(name: string, id: string) {
+  constructor(name?: string, id?: number) {
     this.name = name;
     this.id = id;
   }

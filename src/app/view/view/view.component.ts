@@ -10,6 +10,8 @@ import {ProtoCollection} from '../../services/object-prototypes/proto-collection
 import {BasicEntry} from '../../models/basic-entry';
 import {Artifact} from '../../models/artifact';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ProjectConfigService} from '../../services/config/project-config.service';
+import {ProjectConfig} from '../../config/ProjectConfig';
 
 @Component({
   selector: 'app-view',
@@ -35,6 +37,8 @@ export class ViewComponent implements OnInit {
   private readonly subListNameReference = {museum: 'Collection', collection: 'Artifact'};
   private readonly parentNameReference = {collection: 'museum', artifact: 'collection'};
 
+  config: ProjectConfig;
+
   private resetLoadingStatus(): void {
     this.loading = true;
     this.error = false;
@@ -43,7 +47,8 @@ export class ViewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private museumService: MuseumService,
-              private collectionService: CollectionService) {
+              private collectionService: CollectionService,
+              private projectConfigService: ProjectConfigService) {
     this.resetLoadingStatus();
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -56,6 +61,9 @@ export class ViewComponent implements OnInit {
       if (this.viewCategory === 'museum') {
         this.museumService.getMuseum(this.id).subscribe(
           (response: ProtoMuseum) => {
+            if (this.config.isLogging()) {
+              console.log(response);
+            }
             this.museum = Museum.of(response.museum);
             this.content = this.museum;
             this.contentSubList = response.collectionList;
@@ -68,6 +76,9 @@ export class ViewComponent implements OnInit {
       } else if (this.viewCategory === 'collection') {
         this.collectionService.getCollection(this.id).subscribe(
           (protoCollection: ProtoCollection) => {
+            if (this.config.isLogging()) {
+              console.log(protoCollection);
+            }
             const collection = ProtoCollection.toCollection(protoCollection);
             this.content = collection;
             this.collection = collection;
@@ -98,7 +109,7 @@ export class ViewComponent implements OnInit {
   }
 
   createSubItem(): void {
-    const url = '/create/' + this.subListName.toLowerCase() + '/' + this.content.id;
+    const url = '/create/' + this.subListName.toLowerCase() + '/' + this.id;
     this.router.navigateByUrl(url);
   }
 

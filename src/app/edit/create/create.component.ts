@@ -11,6 +11,10 @@ import {capitalizeFirstLetter} from '../../helper/capitalize-first-letter';
 import {Collection} from '../../models/collection';
 import {CollectionService} from '../../services/wiki-entry/collection.service';
 import {BasicEntry} from '../../models/basic-entry';
+import {ProjectConfigService} from '../../services/config/project-config.service';
+import {ProjectConfig} from '../../config/ProjectConfig';
+import {BasicEntryBuilder} from '../../models/builders/basic-entry-builder';
+import {WikiEntryBuilder} from '../../models/builders/wiki-entry-builder';
 
 @Component({
   selector: 'app-create',
@@ -25,10 +29,14 @@ export class CreateComponent implements OnInit {
   @ViewChild(WikiEntryEditorComponent)
   wikiEntryEditor: WikiEntryEditorComponent;
 
+  config: ProjectConfig;
+
   constructor(private route: ActivatedRoute,
               private museumService: MuseumService,
               private collectionService: CollectionService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private projectConfigService: ProjectConfigService) {
+    this.config = this.projectConfigService.getProjectConfig();
   }
 
   ngOnInit(): void {
@@ -43,6 +51,9 @@ export class CreateComponent implements OnInit {
 
   private processPromiseResponse(promise: Promise<any>, modalComponent: any): void {
     promise.then((res: ServerResponse) => {
+        if (this.config.isLogging()) {
+          console.log(res);
+        }
         modalComponent.fromServerResponse(res);
       },
       (err: HttpErrorResponse) => {
@@ -63,18 +74,30 @@ export class CreateComponent implements OnInit {
 
     if (this.category === 'museum') {
       const newMuseum = Museum.of(this.wikiEntryEditor.getWikiEntry());
+      if (this.config.isLogging()) {
+        console.log(newMuseum);
+      }
       this.processPromiseResponse(
         this.museumService.addMuseum(newMuseum),
         modalComponent,
       );
     } else if (this.category === 'collection') {
-      const newCollection = new Collection(this.wikiEntryEditor.getWikiEntry(), new BasicEntry('no name', this.museumId));
+      const newCollection = new Collection(
+        this.wikiEntryEditor.getWikiEntry(),
+        new BasicEntry('', parseInt(this.museumId, 10))
+      );
+      if (this.config.isLogging()) {
+        console.log(newCollection);
+      }
       this.processPromiseResponse(
         this.collectionService.addCollection(newCollection),
         modalComponent,
       );
     } else if (this.category === 'artifact') {
       const newArtifact = undefined;
+      if (this.config.isLogging()) {
+        console.log(newArtifact);
+      }
       // TODO: add artifact stuff here
     }
   }
