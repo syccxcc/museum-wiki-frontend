@@ -1,0 +1,23 @@
+<div *ngIf="entryList && entryList.length > 0">
+  <div *ngFor="let entry of entryList | slice : (page-1) * pageSize : (page-1) * pageSize + pageSize" class="mb-3">
+    <h4>{{entry.name}}</h4>
+    <img *ngIf="entry.image && entry.image !== ''"
+         class="float-right w-auto" [src]="entry.image">
+    <p class="no-bottom-margin">
+      {{entry.introduction ? (entry.introduction | textLimit: ['200']) : 'Introduction is empty.'}}
+    </p>
+    <button class="btn btn-primary" (click)="goToEntry(entry)">View {{category}}</button>
+    <div class="clearfix"></div>
+  </div>
+  <ngb-pagination
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [collectionSize]="entryList.length"
+    [maxSize]="5"
+    [rotate]="true"
+    [boundaryLinks]="true">
+  </ngb-pagination>
+</div>
+<div *ngIf="!entryList || entryList.length == 0">
+  <p>It appears that there are no {{category.toLowerCase()}}s</p>
+</div>

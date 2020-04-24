@@ -14,9 +14,6 @@ export class MuseumListComponent implements OnInit {
   loading = true;
   error = false;
 
-  page = 1;
-  pageSize = 10;
-
   constructor(private router: Router,
               private museumService: MuseumService) {
   }
@@ -31,10 +28,6 @@ export class MuseumListComponent implements OnInit {
         this.error = true;
         console.log(error);
       });
-  }
-
-  public sortByName(): void {
-    this.museums.sort((museum1, museum2) => museum1.name > museum2.name ? 1 : -1);
   }
 
   public goToMuseum(id: string) {

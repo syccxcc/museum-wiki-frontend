@@ -10,5 +10,7 @@
 <div *ngIf="!loading">
   <p>Your username is: {{user.username}}</p>
   <p>Your email address is: {{user.email}}</p>
+
+  <p>Notifications: </p>
 </div>
 <app-loading [loading]="loading" [error]="error"></app-loading>

@@ -28,6 +28,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { ModalMessageComponent } from './static/modal-message/modal-message.component';
 import { TextLimitPipe } from './helper/text-limit.pipe';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { EntryListComponent } from './view/entry-list/entry-list.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     ModalComponent,
     RegistrationComponent,
     ModalMessageComponent,
-    TextLimitPipe
+    TextLimitPipe,
+    EntryListComponent
   ],
   imports: [
     BrowserModule,
