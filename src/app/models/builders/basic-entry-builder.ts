@@ -1,23 +1,33 @@
 import {BasicEntry} from '../basic-entry';
+import {logging} from 'selenium-webdriver';
+import Entry = logging.Entry;
 
-export class BasicEntryBuilder {
-  private readonly entry: BasicEntry;
+export class BasicEntryBuilder<T extends BasicEntryBuilder<T, E>, E extends BasicEntry> {
+  protected entry: E;
 
-  constructor() {
-    this.entry = new BasicEntry();
+  constructor(Type?) {
+    if (Type) {
+      this.entry = new Type();
+    } else {
+      this.entry = new BasicEntry() as E;
+    }
   }
 
-  public setName(name: string): BasicEntryBuilder {
+  public name(name: string): T {
     this.entry.name = name;
-    return this;
+    return this.self();
   }
 
-  public setId(id: number): BasicEntryBuilder {
+  public id(id: number): T {
     this.entry.id = id;
-    return this;
+    return this.self();
   }
 
-  public build(): BasicEntry {
+  public build(): E {
     return this.entry;
+  }
+
+  public self(): T {
+    return this as unknown as T;
   }
 }

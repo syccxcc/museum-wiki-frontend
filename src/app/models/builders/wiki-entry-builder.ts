@@ -1,38 +1,42 @@
 import {WikiEntry} from '../wiki-entry';
+import {BasicEntryBuilder} from './basic-entry-builder';
 
-export class WikiEntryBuilder {
-  entry: WikiEntry;
+export class WikiEntryBuilder<T extends WikiEntryBuilder<T, E>, E extends WikiEntry>
+  extends BasicEntryBuilder<T, E> {
 
-  constructor() {
-    this.entry = new WikiEntry();
+  constructor(Type) {
+    super(Type);
   }
 
-  public name(name: string): WikiEntryBuilder {
-    this.entry.name = name;
-    return this;
-  }
-
-  public id(id: number): WikiEntryBuilder {
-    this.entry.id = id;
-    return this;
-  }
-
-  public introduction(introduction: string): WikiEntryBuilder {
+  public introduction(introduction: string): T {
     this.entry.introduction = introduction;
-    return this;
+    return this.self();
   }
 
-  public image(image: string): WikiEntryBuilder {
+  public image(image: string): T {
     this.entry.image = image;
-    return this;
+    return this.self();
   }
 
-  public description(description: string): WikiEntryBuilder {
+  public description(description: string): T {
     this.entry.description = description;
-    return this;
+    return this.self();
   }
 
-  public build(): WikiEntry {
+  public wikiEntry(entry: WikiEntry): T {
+    for (const property in entry) {
+      if (entry.hasOwnProperty(property)) {
+        this.entry[property] = entry[property];
+      }
+    }
+    return this.self();
+  }
+
+  public build(): E {
     return this.entry;
+  }
+
+  public self(): T {
+    return this as unknown as T;
   }
 }

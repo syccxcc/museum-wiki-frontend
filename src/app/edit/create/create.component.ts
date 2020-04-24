@@ -14,6 +14,9 @@ import {BasicEntry} from '../../models/basic-entry';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 import {ProjectConfig} from '../../config/ProjectConfig';
 import {Artifact} from '../../models/artifact';
+import {ArtifactBuilder} from '../../models/builders/artifact-builder';
+import {BasicEntryBuilder} from '../../models/builders/basic-entry-builder';
+import {ArtifactService} from '../../services/wiki-entry/artifact.service';
 
 @Component({
   selector: 'app-create',
@@ -23,7 +26,7 @@ import {Artifact} from '../../models/artifact';
 export class CreateComponent implements OnInit {
 
   category: string;
-  museumId: string;
+  parentId: string;
 
   @ViewChild(WikiEntryEditorComponent)
   wikiEntryEditor: WikiEntryEditorComponent;
@@ -33,6 +36,7 @@ export class CreateComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private museumService: MuseumService,
               private collectionService: CollectionService,
+              private artifactService: ArtifactService,
               private modalService: NgbModal,
               private projectConfigService: ProjectConfigService) {
     this.config = this.projectConfigService.getProjectConfig();
@@ -43,7 +47,7 @@ export class CreateComponent implements OnInit {
       this.category = params.get('category');
 
       if (this.category !== 'museum') {
-        this.museumId = params.get('museumId');
+        this.parentId = params.get('parentId');
       }
     });
   }
@@ -83,7 +87,7 @@ export class CreateComponent implements OnInit {
     } else if (this.category === 'collection') {
       const newCollection = new Collection(
         this.wikiEntryEditor.getWikiEntry(),
-        new BasicEntry('', parseInt(this.museumId, 10))
+        new BasicEntry('', parseInt(this.parentId, 10))
       );
       if (this.config.isLogging()) {
         console.log(newCollection);
@@ -93,11 +97,18 @@ export class CreateComponent implements OnInit {
         modalComponent,
       );
     } else if (this.category === 'artifact') {
-      const newArtifact = new Artifact();
+      const newArtifact =
+        new ArtifactBuilder()
+          .wikiEntry(this.wikiEntryEditor.getWikiEntry())
+          .collection(new BasicEntryBuilder().id(parseInt(this.parentId, 10)).build())
+          .build();
       if (this.config.isLogging()) {
         console.log(newArtifact);
       }
-      // TODO: add artifact stuff here
+      this.processPromiseResponse(
+        this.artifactService.addArtifact(newArtifact),
+        modalComponent
+      );
     }
   }
 }

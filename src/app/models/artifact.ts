@@ -6,8 +6,4 @@ export class Artifact extends WikiEntry {
   collection: BasicEntry;
 
   tags: string[];
-
-  public static of(entry: WikiEntry): Artifact {
-    return undefined;
-  }
 }

@@ -4,7 +4,7 @@ export class Museum extends WikiEntry {
 
   collections: WikiEntry[];
 
-  constructor(name: string, introduction: string, image: string, description: string, id: number) {
+  constructor(name?: string, introduction?: string, image?: string, description?: string, id?: number) {
     super(name, introduction, image, description, id);
     this.collections = [];
   }

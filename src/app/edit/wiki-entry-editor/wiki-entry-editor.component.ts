@@ -3,6 +3,8 @@ import {WikiEntry} from '../../models/wiki-entry';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EXAMPLE_DESCRIPTION} from '../../user/registration/ExampleDescription';
 import {WikiEntryBuilder} from '../../models/builders/wiki-entry-builder';
+import {Museum} from '../../models/museum';
+import {MuseumBuilder} from '../../models/builders/museum-builder';
 
 @Component({
   selector: 'app-wiki-entry-editor',
@@ -42,7 +44,7 @@ export class WikiEntryEditorComponent implements OnInit {
 
   public getWikiEntry(): WikiEntry {
     const form = this.wikiEntryFormGroup;
-    return new WikiEntryBuilder()
+    return new WikiEntryBuilder<MuseumBuilder, WikiEntry>(WikiEntry)
       .name(form.get('name').value)
       .introduction(form.get('introduction').value)
       .description(form.get('description').value)
