@@ -22,7 +22,7 @@ const appRoutes: Routes = [
   { path: 'search/:searchCategory/:searchText', component: SearchInCategoryComponent},
   { path: 'about', component: AboutComponent },
   { path: 'view/:viewCategory/:id', component: ViewComponent},
-  { path: 'create/museum', component: CreateComponent, canActivate: [LoginGuardService]},
+  { path: 'create/:category', component: CreateComponent, canActivate: [LoginGuardService]},
   { path: 'create/:category/:museumId', component: CreateComponent, canActivate: [LoginGuardService]},
   { path: 'login', component: LoginComponent},
   { path: 'user-profile', component: UserProfileComponent, canActivate: [LoginGuardService]},

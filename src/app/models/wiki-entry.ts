@@ -1,11 +1,12 @@
 import {BasicEntry} from './basic-entry';
+import {WikiEntryBuilder} from './builders/wiki-entry-builder';
 
 export class WikiEntry extends BasicEntry {
   public static readonly noImageMessage = 'no link provided for image';
 
   introduction: string;
   description: string;
-  private imageAddress: string;
+  image: string;
 
   constructor(name?: string, introduction?: string, image?: string, description?: string, id?: number) {
     super(name, id);
@@ -14,16 +15,4 @@ export class WikiEntry extends BasicEntry {
     this.description = description;
   }
 
-  public static of(wikiEntry: WikiEntry) {
-    return new WikiEntry(wikiEntry.name, wikiEntry.introduction, wikiEntry.description, wikiEntry.image, wikiEntry.id);
-  }
-
-
-  get image(): string {
-    return this.imageAddress ? this.imageAddress : '';
-  }
-
-  set image(value: string) {
-    this.imageAddress = value;
-  }
 }

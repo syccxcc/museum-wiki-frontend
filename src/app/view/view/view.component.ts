@@ -63,7 +63,7 @@ export class ViewComponent implements OnInit {
       if (this.viewCategory === 'museum') {
         this.museumService.getMuseum(this.id).subscribe(
           (response: ProtoMuseum) => {
-            if (this.config.isLogging()) {
+            if (this.config?.isLogging()) {
               console.log(response);
             }
             this.museum = Museum.of(response.museum);
@@ -78,7 +78,7 @@ export class ViewComponent implements OnInit {
       } else if (this.viewCategory === 'collection') {
         this.collectionService.getCollection(this.id).subscribe(
           (protoCollection: ProtoCollection) => {
-            if (this.config.isLogging()) {
+            if (this.config?.isLogging()) {
               console.log(protoCollection);
             }
             const collection = ProtoCollection.toCollection(protoCollection);

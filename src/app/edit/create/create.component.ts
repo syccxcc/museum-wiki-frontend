@@ -13,8 +13,6 @@ import {CollectionService} from '../../services/wiki-entry/collection.service';
 import {BasicEntry} from '../../models/basic-entry';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 import {ProjectConfig} from '../../config/ProjectConfig';
-import {BasicEntryBuilder} from '../../models/builders/basic-entry-builder';
-import {WikiEntryBuilder} from '../../models/builders/wiki-entry-builder';
 
 @Component({
   selector: 'app-create',
