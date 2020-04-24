@@ -13,6 +13,7 @@ import {CollectionService} from '../../services/wiki-entry/collection.service';
 import {BasicEntry} from '../../models/basic-entry';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 import {ProjectConfig} from '../../config/ProjectConfig';
+import {Artifact} from '../../models/artifact';
 
 @Component({
   selector: 'app-create',
@@ -92,7 +93,7 @@ export class CreateComponent implements OnInit {
         modalComponent,
       );
     } else if (this.category === 'artifact') {
-      const newArtifact = undefined;
+      const newArtifact = new Artifact();
       if (this.config.isLogging()) {
         console.log(newArtifact);
       }

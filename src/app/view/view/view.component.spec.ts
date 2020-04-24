@@ -85,7 +85,7 @@ describe('ViewComponent', () => {
     const protoCollection = new ProtoCollection();
     protoCollection.museum = new Museum(testName, testIntro, '', '', testId);
     protoCollection.collection = new Collection(new WikiEntry(testName, testIntro, '', '', testId), undefined);
-    protoCollection.artifacts = [];
+    protoCollection.artifactList = [];
 
     const testCollection = protoCollection.toCollection();
     protoCollection.collection = testCollection;
@@ -107,7 +107,7 @@ describe('ViewComponent', () => {
     expect(component.parentName).toEqual('museum');
     expect(component.contentParents).toEqual([protoCollection.museum]);
     expect(component.subListName).toEqual('Artifact');
-    expect(component.contentSubList).toEqual(protoCollection.artifacts);
+    expect(component.contentSubList).toEqual(protoCollection.artifactList);
   });
 
 });

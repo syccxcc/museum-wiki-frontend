@@ -3,5 +3,11 @@ import {BasicEntry} from './basic-entry';
 
 export class Artifact extends WikiEntry {
   museum: BasicEntry;
-  collections: BasicEntry[];
+  collection: BasicEntry;
+
+  tags: string[];
+
+  public static of(entry: WikiEntry): Artifact {
+    return undefined;
+  }
 }

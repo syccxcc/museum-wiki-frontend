@@ -12,6 +12,8 @@ import {Artifact} from '../../models/artifact';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 import {ProjectConfig} from '../../config/ProjectConfig';
+import {ArtifactService} from '../../services/wiki-entry/artifact.service';
+import {ProtoArtifact} from '../../services/object-prototypes/proto-artifact';
 
 @Component({
   selector: 'app-view',
@@ -30,8 +32,10 @@ export class ViewComponent implements OnInit {
   museum: Museum;
   collection: Collection;
   artifact: Artifact;
+
   contentParents: BasicEntry[];
   parentName: string;
+
   contentSubList: WikiEntry[];
   subListName: string;
   private readonly subListNameReference = {museum: 'Collection', collection: 'Artifact'};
@@ -48,6 +52,7 @@ export class ViewComponent implements OnInit {
               private router: Router,
               private museumService: MuseumService,
               private collectionService: CollectionService,
+              private artifactService: ArtifactService,
               private projectConfigService: ProjectConfigService) {
     this.resetLoadingStatus();
 
@@ -94,7 +99,21 @@ export class ViewComponent implements OnInit {
           }
         );
       } else if (this.viewCategory === 'artifact') {
-        // TODO: add artifact behavior
+        this.artifactService.getArtifact(this.id).subscribe((res: ProtoArtifact) => {
+            if (this.config?.isLogging()) {
+              console.log(res);
+            }
+            const artifact = res.toArtifact();
+            this.content = artifact;
+            this.artifact = artifact;
+            this.contentSubList = [];
+            this.contentParents = [artifact.collection];
+            this.loading = false;
+          },
+          (error: HttpErrorResponse) => {
+            this.error = true;
+            console.log(error);
+          });
       }
     });
   }
