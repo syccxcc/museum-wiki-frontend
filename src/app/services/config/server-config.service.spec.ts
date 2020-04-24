@@ -8,7 +8,7 @@ import {ProjectConfigService} from './project-config.service';
 describe('ServerConfigService', () => {
 
   function createService(testing: boolean): ServerConfigService {
-    const projectConfigService = new ProjectConfigService(new ProjectConfig(testing));
+    const projectConfigService = new ProjectConfigService(new ProjectConfig(testing, false));
     return new ServerConfigService(projectConfigService);
   }
 

@@ -13,6 +13,8 @@ import {WikiEntry} from '../../models/wiki-entry';
 import {TextLimitPipe} from '../../helper/text-limit.pipe';
 import {ProtoCollection} from '../../services/object-prototypes/proto-collection';
 import {Collection} from '../../models/collection';
+import {Artifact} from '../../models/artifact';
+import {ArtifactService} from '../../services/wiki-entry/artifact.service';
 
 describe('ViewComponent', () => {
   let component: ViewComponent;
@@ -21,8 +23,9 @@ describe('ViewComponent', () => {
   let activatedRouteStub: Partial<ActivatedRoute>;
   let museumServiceStub;
   let collectionServiceStub;
+  let artifactServiceStub;
 
-  function changeActivatedRoute(viewCategory: string, id: string): void {
+  function changeActivatedRoute(viewCategory: string, id: number): void {
     activatedRouteStub = {
       paramMap: of(convertToParamMap({
         viewCategory,
@@ -38,6 +41,7 @@ describe('ViewComponent', () => {
         {provide: ActivatedRoute, useValue: activatedRouteStub},
         {provide: MuseumService, useValue: museumServiceStub},
         {provide: CollectionService, useValue: collectionServiceStub},
+        {provide: ArtifactService, useValue: artifactServiceStub},
         {provide: Router, useValue: Router}]
     }).compileComponents();
   }
@@ -51,12 +55,12 @@ describe('ViewComponent', () => {
   it('should display museum info', () => {
     const testName = 'Lekso Museum';
     const testIntro = 'This is Lekso\'s fancy museum';
-    const testId = '123';
+    const testId = 123;
     const testCategory = 'museum';
 
     const protoMuseum = new ProtoMuseum();
     protoMuseum.museum = new Museum(testName, testIntro, '', '', testId);
-    protoMuseum.collectionList = [new WikiEntry('', '', '', '', '')];
+    protoMuseum.collectionList = [new WikiEntry('', '', '', '', 0)];
 
     changeActivatedRoute(testCategory, testId);
     const museumService = jasmine.createSpyObj('MuseumService', ['getMuseum']);
@@ -68,7 +72,7 @@ describe('ViewComponent', () => {
 
     expect(component).toBeTruthy();
     expect(component.viewCategory).toEqual(testCategory);
-    expect(component.id).toEqual(testId);
+    expect(component.id).toEqual(testId.toString());
     expect(component.loading).toBe(false);
     expect(component.error).toBe(false);
     expect(component.parentName).toEqual(undefined);
@@ -79,7 +83,7 @@ describe('ViewComponent', () => {
   it('should display collection info', () => {
     const testName = 'Ancient Artifacts';
     const testIntro = 'Contains artifacts before 600BC';
-    const testId = '123';
+    const testId = 123;
     const testCategory = 'collection';
 
     const protoCollection = new ProtoCollection();
@@ -87,7 +91,7 @@ describe('ViewComponent', () => {
     protoCollection.collection = new Collection(new WikiEntry(testName, testIntro, '', '', testId), undefined);
     protoCollection.artifactList = [];
 
-    const testCollection = protoCollection.toCollection();
+    const testCollection = ProtoCollection.toCollection(protoCollection);
     protoCollection.collection = testCollection;
 
     changeActivatedRoute(testCategory, testId);
@@ -100,7 +104,7 @@ describe('ViewComponent', () => {
 
     expect(component).toBeTruthy();
     expect(component.viewCategory).toEqual(testCategory);
-    expect(component.id).toEqual(testId);
+    expect(component.id).toEqual(testId.toString(10));
     expect(component.loading).toBe(false);
     expect(component.error).toBe(false);
     expect(component.content).toEqual(testCollection);
