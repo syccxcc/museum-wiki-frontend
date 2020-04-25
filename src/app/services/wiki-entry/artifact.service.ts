@@ -29,7 +29,8 @@ export class ArtifactService {
     return this.http.post<ServerResponse>(
       this.url + 'add-artifact',
       {
-        collection: artifact.collection.id,
+        museum: artifact.museum.id,
+        collection: artifact.collectionList.map((collection) => collection.id),
         artifact,
         user: this.userInfoService.basicUserInfo
       }).toPromise();

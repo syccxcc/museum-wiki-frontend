@@ -13,10 +13,10 @@ import {CollectionService} from '../../services/wiki-entry/collection.service';
 import {BasicEntry} from '../../models/basic-entry';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 import {ProjectConfig} from '../../config/ProjectConfig';
-import {Artifact} from '../../models/artifact';
 import {ArtifactBuilder} from '../../models/builders/artifact-builder';
 import {BasicEntryBuilder} from '../../models/builders/basic-entry-builder';
 import {ArtifactService} from '../../services/wiki-entry/artifact.service';
+import {WikiEntry} from '../../models/wiki-entry';
 
 @Component({
   selector: 'app-create',
@@ -27,6 +27,8 @@ export class CreateComponent implements OnInit {
 
   category: string;
   parentId: string;
+
+  collectionList: WikiEntry[];
 
   @ViewChild(WikiEntryEditorComponent)
   wikiEntryEditor: WikiEntryEditorComponent;
@@ -100,7 +102,8 @@ export class CreateComponent implements OnInit {
       const newArtifact =
         new ArtifactBuilder()
           .wikiEntry(this.wikiEntryEditor.getWikiEntry())
-          .collection(new BasicEntryBuilder().id(parseInt(this.parentId, 10)).build())
+          .museum(new BasicEntryBuilder().id(parseInt(this.parentId, 10)).build())
+          .collectionList(this.collectionList)
           .build();
       if (this.config.isLogging()) {
         console.log(newArtifact);

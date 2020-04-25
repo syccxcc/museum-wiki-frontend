@@ -3,12 +3,12 @@ import {Artifact} from '../../models/artifact';
 
 export class ProtoArtifact {
   museum: BasicEntry;
-  collection: BasicEntry;
+  collectionList: BasicEntry[];
   artifact: Artifact;
 
   public toArtifact(): Artifact {
     this.artifact.museum = this.museum;
-    this.artifact.collection = this.collection;
+    this.artifact.collectionList = this.collectionList;
     return this.artifact;
   }
 }

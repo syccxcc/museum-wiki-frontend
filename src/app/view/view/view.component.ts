@@ -107,7 +107,7 @@ export class ViewComponent implements OnInit {
             this.content = artifact;
             this.artifact = artifact;
             this.contentSubList = [];
-            this.contentParents = [artifact.collection];
+            this.contentParents = artifact.collectionList;
             this.loading = false;
           },
           (error: HttpErrorResponse) => {
@@ -119,10 +119,6 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  goToSubListEntry(entry: WikiEntry): void {
-    this.router.navigateByUrl('/view/' + this.subListName.toLowerCase() + '/' + entry.id);
   }
 
   goToParent(entry: WikiEntry): void {

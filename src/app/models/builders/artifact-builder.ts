@@ -12,13 +12,15 @@ export class ArtifactBuilder extends WikiEntryBuilder<ArtifactBuilder, Artifact>
     return this;
   }
 
-  public collection(collection: BasicEntry): ArtifactBuilder {
-    this.entry.collection = collection;
+  public collectionList(collection: BasicEntry[]): ArtifactBuilder {
+    this.entry.collectionList = collection;
     return this;
   }
 
-  public tags(tags: string[]): ArtifactBuilder {
-    this.entry.tags = tags;
-    return this;
+  public build(): Artifact {
+    if (!this.entry.collectionList) {
+      this.entry.collectionList = [];
+    }
+    return this.entry;
   }
 }
