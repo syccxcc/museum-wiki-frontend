@@ -1,6 +1,4 @@
 import {BasicEntry} from '../basic-entry';
-import {logging} from 'selenium-webdriver';
-import Entry = logging.Entry;
 
 export class BasicEntryBuilder<T extends BasicEntryBuilder<T, E>, E extends BasicEntry> {
   protected entry: E;
@@ -18,8 +16,8 @@ export class BasicEntryBuilder<T extends BasicEntryBuilder<T, E>, E extends Basi
     return this.self();
   }
 
-  public id(id: number): T {
-    this.entry.id = id;
+  public id(id: number | string): T {
+    this.entry.id = typeof id === 'number' ? id : parseInt(id, 10);
     return this.self();
   }
 

@@ -6,7 +6,7 @@ export class ProtoMuseum {
   collectionList: WikiEntry[];
 
   public toMuseum(): Museum {
-    this.museum.collections = this.collectionList;
+    this.museum.collectionList = this.collectionList;
     return this.museum;
   }
 }

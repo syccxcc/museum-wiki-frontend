@@ -9,7 +9,7 @@ export class MuseumBuilder extends WikiEntryBuilder<MuseumBuilder, Museum> {
   }
 
   public collections(collections: WikiEntry[]): MuseumBuilder {
-    this.entry.collections = collections;
+    this.entry.collectionList = collections;
     return this;
   }
 

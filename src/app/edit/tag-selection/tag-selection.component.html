@@ -1,0 +1,13 @@
+<app-loading [loading]="loading" [error]="error">
+</app-loading>
+
+<div *ngIf="!loading && !error">
+  <div *ngFor="let tag of tags"
+       class="float-left mr-2">
+    <mat-checkbox [labelPosition]="'after'"
+                  [checked]="tag.selected">
+      {{tag.name}}
+    </mat-checkbox>
+  </div>
+  <div class="clearfix"></div>
+</div>

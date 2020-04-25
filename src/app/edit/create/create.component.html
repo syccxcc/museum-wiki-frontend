@@ -1,5 +1,5 @@
 <div class="mt-3">
-  <p *ngIf="parentId">This will be a part of the museum with id {{parentId}}</p>
+  <p *ngIf="museumId">This will be a part of the museum with id {{museumId}}</p>
   <h3 class="float-left">
     Please edit {{category}} info
   </h3>
@@ -10,5 +10,10 @@
   </button>
   <div class="clearfix"></div>
 </div>
+
+<app-tag-selection *ngIf="category === 'artifact'"
+                   [museumId]="museumId"
+                   [existingCollections]="[]">
+</app-tag-selection>
 
 <app-wiki-entry-editor></app-wiki-entry-editor>

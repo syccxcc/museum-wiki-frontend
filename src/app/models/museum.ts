@@ -2,11 +2,11 @@ import {WikiEntry} from './wiki-entry';
 
 export class Museum extends WikiEntry {
 
-  collections: WikiEntry[];
+  collectionList: WikiEntry[];
 
   constructor(name?: string, introduction?: string, image?: string, description?: string, id?: number) {
     super(name, introduction, image, description, id);
-    this.collections = [];
+    this.collectionList = [];
   }
 
   public static of(wikiEntry: WikiEntry) {

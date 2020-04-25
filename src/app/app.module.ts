@@ -29,6 +29,10 @@ import { ModalMessageComponent } from './static/modal-message/modal-message.comp
 import { TextLimitPipe } from './helper/text-limit.pipe';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { EntryListComponent } from './view/entry-list/entry-list.component';
+import { TagSelectionComponent } from './edit/tag-selection/tag-selection.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +58,8 @@ import { EntryListComponent } from './view/entry-list/entry-list.component';
     RegistrationComponent,
     ModalMessageComponent,
     TextLimitPipe,
-    EntryListComponent
+    EntryListComponent,
+    TagSelectionComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +69,8 @@ import { EntryListComponent } from './view/entry-list/entry-list.component';
     HttpClientModule,
     NgbModule,
     FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

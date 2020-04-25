@@ -126,7 +126,7 @@ export class ViewComponent implements OnInit {
   }
 
   createSubItem(): void {
-    const url = '/create/' + this.subListName.toLowerCase() + '/' + this.id;
+    const url = '/create/' + this.subListName.toLowerCase() + '/' + (this.viewCategory === 'museum' ? this.id : this.collection.museum.id);
     this.router.navigateByUrl(url);
   }
 

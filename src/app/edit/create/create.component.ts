@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MuseumService} from '../../services/wiki-entry/museum.service';
 import {Museum} from '../../models/museum';
 import {WikiEntryEditorComponent} from '../wiki-entry-editor/wiki-entry-editor.component';
@@ -17,6 +17,7 @@ import {ArtifactBuilder} from '../../models/builders/artifact-builder';
 import {BasicEntryBuilder} from '../../models/builders/basic-entry-builder';
 import {ArtifactService} from '../../services/wiki-entry/artifact.service';
 import {WikiEntry} from '../../models/wiki-entry';
+import {TagSelectionComponent} from '../tag-selection/tag-selection.component';
 
 @Component({
   selector: 'app-create',
@@ -26,12 +27,15 @@ import {WikiEntry} from '../../models/wiki-entry';
 export class CreateComponent implements OnInit {
 
   category: string;
-  parentId: string;
+  museumId: string;
 
   collectionList: WikiEntry[];
 
   @ViewChild(WikiEntryEditorComponent)
   wikiEntryEditor: WikiEntryEditorComponent;
+
+  @ViewChild(TagSelectionComponent)
+  tagSelection: TagSelectionComponent;
 
   config: ProjectConfig;
 
@@ -49,7 +53,7 @@ export class CreateComponent implements OnInit {
       this.category = params.get('category');
 
       if (this.category !== 'museum') {
-        this.parentId = params.get('parentId');
+        this.museumId = params.get('museumId');
       }
     });
   }
@@ -89,7 +93,7 @@ export class CreateComponent implements OnInit {
     } else if (this.category === 'collection') {
       const newCollection = new Collection(
         this.wikiEntryEditor.getWikiEntry(),
-        new BasicEntry('', parseInt(this.parentId, 10))
+        new BasicEntry('', parseInt(this.museumId, 10))
       );
       if (this.config.isLogging()) {
         console.log(newCollection);
@@ -102,10 +106,11 @@ export class CreateComponent implements OnInit {
       const newArtifact =
         new ArtifactBuilder()
           .wikiEntry(this.wikiEntryEditor.getWikiEntry())
-          .museum(new BasicEntryBuilder().id(parseInt(this.parentId, 10)).build())
-          .collectionList(this.collectionList)
+          .museum(new BasicEntryBuilder().id(this.museumId).build())
+          .collectionList(this.tagSelection.getAllSelectedTags())
           .build();
       if (this.config.isLogging()) {
+        console.log(this.tagSelection.getAllSelectedTags());
         console.log(newArtifact);
       }
       this.processPromiseResponse(

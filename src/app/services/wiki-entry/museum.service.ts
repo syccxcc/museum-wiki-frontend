@@ -27,7 +27,7 @@ export class MuseumService {
     return this.http.get<Museum[]>(this.url + 'museum-list');
   }
 
-  public getMuseum(id: string): Observable<ProtoMuseum> {
+  public getMuseum(id: string | number): Observable<ProtoMuseum> {
     return this.http.get<ProtoMuseum>(this.url + 'museum/' + id);
   }
 
