@@ -1,12 +1,12 @@
 <app-search [previousCategory]="searchCategory" [previousText]="searchText"></app-search>
 
 <div>
-  <h4>You have searched for "{{searchText}}" in {{searchCategory}}. Here are the results: </h4>
+  <h2>You have searched for "{{searchText}}" in {{searchCategory}}. Here are the results: </h2>
 </div>
 
 <div *ngFor="let result of searchResults">
   <a [routerLink]="result.id">
-    <h4>{{result.name}}</h4>
+    <h2>{{result.name}}</h2>
   </a>
 
 </div>

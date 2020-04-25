@@ -1,12 +1,26 @@
 <div *ngIf="entryList && entryList.length > 0">
-  <div *ngFor="let entry of entryList | slice : (page-1) * pageSize : (page-1) * pageSize + pageSize" class="mb-3">
-    <h4>{{entry.name}}</h4>
+  <div>
+    <mat-form-field class="float-left">
+      <mat-label>Sort by</mat-label>
+      <mat-select [(value)]="sortMethod" (selectionChange)="sort()">
+        <mat-option *ngFor="let sortOption of sortOptions" [value]="sortOption">
+          {{sortOption}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="clearfix"></div>
+  </div>
+  <div *ngFor="let entry of entryList | slice : (page-1) * pageSize : (page-1) * pageSize + pageSize"
+       class="mb-3">
+    <h2 class="mb-2">{{entry.name}}</h2>
     <img *ngIf="entry.image && entry.image !== ''"
          class="float-right w-auto" [src]="entry.image">
-    <p class="no-bottom-margin">
+    <p class="mb-1">
       {{entry.introduction ? (entry.introduction | textLimit: ['200']) : 'Introduction is empty.'}}
     </p>
-    <button class="btn btn-primary" (click)="goToEntry(entry)">View {{category}}</button>
+    <button class="btn btn-primary" (click)="goToEntry(entry)">
+      View {{category}}
+    </button>
     <div class="clearfix"></div>
   </div>
   <ngb-pagination

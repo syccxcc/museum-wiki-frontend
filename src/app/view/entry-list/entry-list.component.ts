@@ -12,10 +12,20 @@ export class EntryListComponent implements OnInit {
   @Input() entryList: WikiEntry[];
   @Input() category: string;
 
+  sortMethod: string;
+  sortDict;
+  sortOptions = ['name'];
+  sortFunctions = [this.sortByName];
+
   page = 1;
   pageSize = 10;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.sortDict = {};
+    for (let i = 0; i < this.sortOptions.length; i++) {
+      this.sortDict[this.sortOptions[i]] = this.sortFunctions[i];
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -25,6 +35,10 @@ export class EntryListComponent implements OnInit {
   }
 
   sortByName(): void {
-    this.entryList.sort((entry1, entry2) => entry1.name > entry2.name ? 1 : -1);
+    this.entryList.sort((entry1, entry2) => entry1.name.localeCompare(entry2.name));
+  }
+
+  sort(): void {
+    this.sortDict[this.sortMethod]?.apply();
   }
 }

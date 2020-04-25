@@ -17,7 +17,7 @@
   <app-wiki-entry-view [wikiEntry]="content"></app-wiki-entry-view>
 
   <div *ngIf="subListName">
-    <h3 class="float-left">{{subListName + 's'}}</h3>
+    <h2 class="float-left">{{subListName + 's'}}</h2>
     <button class="btn btn-info float-left ml-2" (click)="createSubItem()">Create New {{subListName}}</button>
     <div class="clearfix"></div>
     <app-entry-list [category]="subListName" [entryList]="contentSubList"></app-entry-list>

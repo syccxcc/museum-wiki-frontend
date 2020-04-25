@@ -1,20 +1,14 @@
-<app-navigation-bar></app-navigation-bar>
+<div style="background-color: #efefef">
+  <app-navigation-bar></app-navigation-bar>
 
-<!-- Page Content -->
-<div class="container">
-
-  <div class="jumbotron">
-    <router-outlet></router-outlet>
-  </div>
-
-</div>
-<!-- /.container -->
-
-<!-- Footer -->
-<footer class="py-5 bg-dark">
+  <!-- Page Content -->
   <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; Lafayette53: Lekso Borashvili, Peter (Haohong) Li, Malolan
-      Vasu, Sena Yevenyo 2020</p>
+
+    <router-outlet></router-outlet>
+
   </div>
   <!-- /.container -->
-</footer>
+
+  <app-footer>
+  </app-footer>
+</div>

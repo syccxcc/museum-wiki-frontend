@@ -32,6 +32,11 @@ import { EntryListComponent } from './view/entry-list/entry-list.component';
 import { TagSelectionComponent } from './edit/tag-selection/tag-selection.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import { FooterComponent } from './static/footer/footer.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -59,7 +64,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ModalMessageComponent,
     TextLimitPipe,
     EntryListComponent,
-    TagSelectionComponent
+    TagSelectionComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +76,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     NgbModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
