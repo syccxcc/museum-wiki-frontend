@@ -5,7 +5,8 @@
   <div *ngFor="let tag of tags"
        class="float-left mr-2">
     <mat-checkbox [labelPosition]="'after'"
-                  [checked]="tag.selected">
+                  [checked]="tag.selected"
+                  (change)="selectTag(tag)">
       {{tag.name}}
     </mat-checkbox>
   </div>
