@@ -91,7 +91,7 @@ describe('ViewComponent', () => {
     protoCollection.collection = new Collection(new WikiEntry(testName, testIntro, '', '', testId), undefined);
     protoCollection.artifactList = [];
 
-    const testCollection = ProtoCollection.toCollection(protoCollection);
+    const testCollection = protoCollection.toObject();
     protoCollection.collection = testCollection;
 
     changeActivatedRoute(testCategory, testId);

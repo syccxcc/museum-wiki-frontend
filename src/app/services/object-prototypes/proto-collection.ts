@@ -1,15 +1,16 @@
 import {WikiEntry} from '../../models/wiki-entry';
 import {Collection} from '../../models/collection';
 import {Artifact} from '../../models/artifact';
+import {Prototype} from './prototype';
 
-export class ProtoCollection {
+export class ProtoCollection implements Prototype<Collection> {
   museum: WikiEntry;
   collection: Collection;
   artifactList: Artifact[];
 
-  public static toCollection(protoCollection: ProtoCollection): Collection {
-    protoCollection.collection.museum = protoCollection.museum;
-    protoCollection.collection.artifacts = protoCollection.artifactList ? protoCollection.artifactList : [];
-    return protoCollection.collection;
+  public toObject(): Collection {
+    this.collection.museum = this.museum;
+    this.collection.artifacts = this.artifactList ? this.artifactList : [];
+    return this.collection;
   }
 }

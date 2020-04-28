@@ -39,8 +39,6 @@ export class EditOrCreateComponent implements OnInit {
   existingCollection: Collection;
   existingArtifact: Artifact;
 
-  @Input() collectionList: WikiEntry[];
-
   @Input() mode: Mode;
 
   @ViewChild(WikiEntryEditorComponent)

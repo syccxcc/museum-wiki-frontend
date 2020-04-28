@@ -22,7 +22,7 @@ export class CollectionService {
     this.serverConfig = serverConfigService.getServerConfig();
   }
 
-  public getCollection(id: string): Observable<ProtoCollection> {
+  public getCollection(id: string | number): Observable<ProtoCollection> {
     return this.http
       .get<ProtoCollection>(this.serverConfig.getUrl() + 'collection/' + id);
   }

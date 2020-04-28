@@ -86,7 +86,7 @@ export class ViewComponent implements OnInit {
             if (this.config?.isLogging()) {
               console.log(protoCollection);
             }
-            const collection = ProtoCollection.toCollection(protoCollection);
+            const collection = protoCollection.toObject();
             this.content = collection;
             this.collection = collection;
             this.contentSubList = collection.artifacts;
@@ -103,7 +103,7 @@ export class ViewComponent implements OnInit {
             if (this.config?.isLogging()) {
               console.log(res);
             }
-            const artifact = res.toArtifact();
+            const artifact = res.toObject();
             this.content = artifact;
             this.artifact = artifact;
             this.contentSubList = [];

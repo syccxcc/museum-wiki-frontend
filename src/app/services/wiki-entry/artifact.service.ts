@@ -22,7 +22,7 @@ export class ArtifactService {
     this.url = this.serverConfigService.getServerConfig().getUrl();
   }
 
-  public getArtifact(id: string): Observable<ProtoArtifact> {
+  public getArtifact(id: string | number): Observable<ProtoArtifact> {
     return this.http.get<ProtoArtifact>(this.url + 'artifact/' + id);
   }
 
