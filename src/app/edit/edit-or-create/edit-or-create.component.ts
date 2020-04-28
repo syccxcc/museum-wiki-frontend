@@ -31,7 +31,7 @@ import {CollectionBuilder} from '../../models/builders/collection-builder';
 export class EditOrCreateComponent implements OnInit {
 
   @Input() category: string;
-  @Input() museumId: number;
+  @Input() museumId: number | string;
 
   @Input() existingObject: Museum | Collection | Artifact;
 

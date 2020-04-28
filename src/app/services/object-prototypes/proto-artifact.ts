@@ -1,8 +1,7 @@
 import {BasicEntry} from '../../models/basic-entry';
 import {Artifact} from '../../models/artifact';
-import {Prototype} from './prototype';
 
-export class ProtoArtifact implements Prototype<Artifact> {
+export class ProtoArtifact {
   museum: BasicEntry;
   collectionList: BasicEntry[];
   artifact: Artifact;

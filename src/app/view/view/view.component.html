@@ -14,7 +14,10 @@
     </div>
   </div>
 
-  <app-wiki-entry-view [wikiEntry]="content"></app-wiki-entry-view>
+  <app-wiki-entry-view [wikiEntry]="content"
+                       [canEdit]="viewCategory === 'artifact'"
+                       [category]="viewCategory">
+  </app-wiki-entry-view>
 
   <div *ngIf="subListName">
     <h2 class="float-left">{{subListName + 's'}}</h2>

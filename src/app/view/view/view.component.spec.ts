@@ -15,6 +15,8 @@ import {ProtoCollection} from '../../services/object-prototypes/proto-collection
 import {Collection} from '../../models/collection';
 import {Artifact} from '../../models/artifact';
 import {ArtifactService} from '../../services/wiki-entry/artifact.service';
+import {CollectionBuilder} from '../../models/builders/collection-builder';
+import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 
 describe('ViewComponent', () => {
   let component: ViewComponent;
@@ -91,7 +93,7 @@ describe('ViewComponent', () => {
     protoCollection.collection = new Collection(new WikiEntry(testName, testIntro, '', '', testId), undefined);
     protoCollection.artifactList = [];
 
-    const testCollection = protoCollection.toObject();
+    const testCollection = PrototypeBuilder.buildFromPrototype({collection: protoCollection}) as Collection;
     protoCollection.collection = testCollection;
 
     changeActivatedRoute(testCategory, testId);

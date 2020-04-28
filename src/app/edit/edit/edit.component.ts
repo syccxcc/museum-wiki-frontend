@@ -9,6 +9,7 @@ import {Museum} from '../../models/museum';
 import {Collection} from '../../models/collection';
 import {Artifact} from '../../models/artifact';
 import {HttpErrorResponse} from '@angular/common/http';
+import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 
 @Component({
   selector: 'app-edit',
@@ -43,7 +44,9 @@ export class EditComponent implements OnInit {
     this.getByCategoryService
       .getByCategoryAndId(this.category, this.id).subscribe(
       (res: ProtoMuseum | ProtoCollection | ProtoArtifact) => {
-        this.existingObject = res.toObject();
+        const prototype = {};
+        prototype[this.category] = res;
+        this.existingObject = PrototypeBuilder.buildFromPrototype(prototype);
         if (this.category !== 'museum') {
           this.museumId = res.museum.id;
         }

@@ -14,6 +14,8 @@ import {ProjectConfigService} from '../../services/config/project-config.service
 import {ProjectConfig} from '../../config/ProjectConfig';
 import {ArtifactService} from '../../services/wiki-entry/artifact.service';
 import {ProtoArtifact} from '../../services/object-prototypes/proto-artifact';
+import {CollectionBuilder} from '../../models/builders/collection-builder';
+import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 
 @Component({
   selector: 'app-view',
@@ -82,11 +84,11 @@ export class ViewComponent implements OnInit {
           });
       } else if (this.viewCategory === 'collection') {
         this.collectionService.getCollection(this.id).subscribe(
-          (protoCollection: ProtoCollection) => {
+          (res: ProtoCollection) => {
             if (this.config?.isLogging()) {
-              console.log(protoCollection);
+              console.log(res);
             }
-            const collection = protoCollection.toObject();
+            const collection = PrototypeBuilder.buildFromPrototype({collection: res}) as Collection;
             this.content = collection;
             this.collection = collection;
             this.contentSubList = collection.artifacts;
@@ -103,7 +105,7 @@ export class ViewComponent implements OnInit {
             if (this.config?.isLogging()) {
               console.log(res);
             }
-            const artifact = res.toObject();
+            const artifact = PrototypeBuilder.buildFromPrototype({artifact: res}) as Artifact;
             this.content = artifact;
             this.artifact = artifact;
             this.contentSubList = [];
@@ -121,7 +123,7 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goToParent(entry: WikiEntry): void {
+  goToParent(entry: BasicEntry): void {
     this.router.navigateByUrl('/view/' + this.parentName + '/' + entry.id);
   }
 
