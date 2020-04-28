@@ -1,19 +1,4 @@
-<div class="mt-3">
-  <p *ngIf="museumId">This will be a part of the museum with id {{museumId}}</p>
-  <h2 class="float-left">
-    Please edit {{category}} info
-  </h2>
-  <button class="float-right btn btn-lg btn-success"
-          [class]="wikiEntryEditor?.wikiEntryFormGroup?.valid ? '' : 'disabled'"
-          (click)="submit()">
-    Submit
-  </button>
-  <div class="clearfix"></div>
-</div>
-
-<app-tag-selection *ngIf="category === 'artifact'"
-                   [museumId]="museumId"
-                   [existingCollections]="[]"
-</app-tag-selection>
-
-<app-wiki-entry-editor></app-wiki-entry-editor>
+<app-edit-or-create [category]="category"
+                    [museumId]="museumId"
+                    [mode]="create">
+</app-edit-or-create>

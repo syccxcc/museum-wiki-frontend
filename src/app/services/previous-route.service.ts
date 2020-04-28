@@ -13,7 +13,7 @@ export class PreviousRouteService {
   private route: ActivatedRouteSnapshot;
 
   constructor(private router: Router) {
-    this.route = null;
+    this.route = undefined;
   }
 
   get previousRoute(): ActivatedRouteSnapshot {

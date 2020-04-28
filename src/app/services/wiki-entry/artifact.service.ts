@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {Artifact} from '../../models/artifact';
 import {UserInfoService} from '../user/user-info.service';
 import {ServerResponse} from '../server-response';
+import {Mode} from '../../edit/mode';
 
 
 @Injectable({
@@ -25,11 +26,11 @@ export class ArtifactService {
     return this.http.get<ProtoArtifact>(this.url + 'artifact/' + id);
   }
 
-  public addArtifact(artifact: Artifact): Promise<ServerResponse> {
+  public addArtifact(artifact: Artifact, mode: Mode = Mode.CREATE): Promise<ServerResponse> {
     return this.http.post<ServerResponse>(
-      this.url + 'add-artifact',
+      this.url + (mode === Mode.CREATE ? 'add-artifact' : 'edit-artifact'),
       {
-        museum: artifact.museum.id,
+        museum: {id: artifact.museum.id},
         collection: artifact.collectionList.map((collection) => collection.id),
         artifact,
         user: this.userInfoService.basicUserInfo

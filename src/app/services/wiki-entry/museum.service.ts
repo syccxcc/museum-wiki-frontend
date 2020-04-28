@@ -8,6 +8,7 @@ import {ServerResponse} from '../server-response';
 import {Observable} from 'rxjs';
 import {ProtoMuseum} from '../object-prototypes/proto-museum';
 import {UserInfoService} from '../user/user-info.service';
+import {Mode} from '../../edit/mode';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class MuseumService {
     return this.http.get<ProtoMuseum>(this.url + 'museum/' + id);
   }
 
-  public addMuseum(museum: WikiEntry): Promise<ServerResponse> {
+  public addMuseum(museum: WikiEntry, mode: Mode = Mode.CREATE): Promise<ServerResponse> {
     return this.http.post<ServerResponse>(this.url + 'add-museum', {museum, user: this.userInfo.basicUserInfo}).toPromise();
   }
 

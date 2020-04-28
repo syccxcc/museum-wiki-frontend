@@ -23,7 +23,11 @@ export class LoginComponent implements OnInit {
               private modalService: NgbModal) {
 
     if (userInfoService.isLoggedIn) {
-      router.navigateByUrl('/user-profile');
+      if (previousRoute.previousRoute) {
+        previousRoute.toPreviousRoute();
+      } else {
+        router.navigateByUrl('/user-profile');
+      }
     }
 
     this.username = '';
@@ -67,13 +71,6 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
-  public fakeLogin(): void {
-    // FIXME: remove this when testing is done
-    this.userInfoService.isLoggedIn = true;
-    this.userInfoService.basicUserInfo = new BasicUserInfo('Test User', '123456');
-    this.userInfoService.loginEvent.next(true);
   }
 
   public register(): void {

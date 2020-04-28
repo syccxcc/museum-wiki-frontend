@@ -7,6 +7,7 @@ import {ProtoCollection} from '../object-prototypes/proto-collection';
 import {ServerResponse} from '../server-response';
 import {UserInfoService} from '../user/user-info.service';
 import {Observable} from 'rxjs';
+import {Mode} from '../../edit/mode';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class CollectionService {
       .get<ProtoCollection>(this.serverConfig.getUrl() + 'collection/' + id);
   }
 
-  public addCollection(collection: Collection): Promise<ServerResponse> {
+  public addCollection(collection: Collection, mode: Mode = Mode.CREATE): Promise<ServerResponse> {
     return this.http
       .post<ServerResponse>(
         this.serverConfig.getUrl() + 'add-collection',

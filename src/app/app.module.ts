@@ -15,9 +15,9 @@ import {ViewComponent} from './view/view/view.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoadingComponent} from './static/loading/loading.component';
-import {CreateComponent} from './edit/create/create.component';
+import {EditOrCreateComponent} from './edit/edit-or-create/edit-or-create.component';
 import {MarkdownEditorComponent} from './edit/markdown-editor/markdown-editor.component';
-import {MarkedPipe} from './edit/marked.pipe';
+import {MarkedPipe} from './helper/marked.pipe';
 import {MarkdownDisplayComponent} from './edit/markdown-display/markdown-display.component';
 import {WikiEntryEditorComponent} from './edit/wiki-entry-editor/wiki-entry-editor.component';
 import {WikiEntryViewComponent} from './view/wiki-entry-view/wiki-entry-view.component';
@@ -37,6 +37,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { FooterComponent } from './static/footer/footer.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { EditComponent } from './edit/edit/edit.component';
+import { CreateComponent } from './edit/create/create.component';
 
 
 @NgModule({
@@ -65,7 +67,10 @@ import {MatSelectModule} from '@angular/material/select';
     TextLimitPipe,
     EntryListComponent,
     TagSelectionComponent,
-    FooterComponent
+    FooterComponent,
+    EditComponent,
+    CreateComponent,
+    EditOrCreateComponent
   ],
   imports: [
     BrowserModule,

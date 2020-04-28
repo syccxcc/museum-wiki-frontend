@@ -3,7 +3,6 @@ import {WikiEntry} from '../../models/wiki-entry';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EXAMPLE_DESCRIPTION} from '../../user/registration/ExampleDescription';
 import {WikiEntryBuilder} from '../../models/builders/wiki-entry-builder';
-import {Museum} from '../../models/museum';
 import {MuseumBuilder} from '../../models/builders/museum-builder';
 
 @Component({
@@ -15,7 +14,7 @@ export class WikiEntryEditorComponent implements OnInit {
 
   private static readonly URL_VALIDATION_REGEX = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
-  @Input() previousWikiEntry;
+  @Input() previousWikiEntry: WikiEntry;
 
   public wikiEntryFormGroup: FormGroup;
 
@@ -49,6 +48,7 @@ export class WikiEntryEditorComponent implements OnInit {
       .introduction(form.get('introduction').value)
       .description(form.get('description').value)
       .image(form.get('image').value)
+      .id(this.previousWikiEntry?.id)
       .build();
   }
 

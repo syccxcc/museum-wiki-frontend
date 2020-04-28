@@ -1,18 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {Mode} from '../mode';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class CreateComponent implements OnInit {
+export class EditComponent implements OnInit {
 
   category: string;
-  museumId: string;
-
-  readonly create = Mode.CREATE;
+  museumId: number;
 
   constructor(private route: ActivatedRoute) {
   }
@@ -22,7 +19,7 @@ export class CreateComponent implements OnInit {
       this.category = params.get('category');
 
       if (this.category !== 'museum') {
-        this.museumId = params.get('museumId');
+        this.museumId = parseInt(params.get('museumId'), 10);
       }
     });
   }

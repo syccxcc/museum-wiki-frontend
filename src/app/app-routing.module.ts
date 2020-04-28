@@ -8,10 +8,11 @@ import {PageNotFoundComponent} from './static/page-not-found/page-not-found.comp
 import {SearchInCategoryComponent} from './static/search/search-in-category/search-in-category.component';
 import {ViewComponent} from './view/view/view.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
-import {CreateComponent} from './edit/create/create.component';
+import {EditOrCreateComponent} from './edit/edit-or-create/edit-or-create.component';
 import {LoginGuardService} from './services/user/login-guard.service';
 import {LoginComponent} from './user/login/login.component';
 import {RegistrationComponent} from './user/registration/registration.component';
+import {EditComponent} from './edit/edit/edit.component';
 
 
 const appRoutes: Routes = [
@@ -22,8 +23,9 @@ const appRoutes: Routes = [
   { path: 'search/:searchCategory/:searchText', component: SearchInCategoryComponent},
   { path: 'about', component: AboutComponent },
   { path: 'view/:viewCategory/:id', component: ViewComponent},
-  { path: 'create/:category', component: CreateComponent, canActivate: [LoginGuardService]},
-  { path: 'create/:category/:museumId', component: CreateComponent, canActivate: [LoginGuardService]},
+  { path: 'create/:category', component: EditOrCreateComponent, canActivate: [LoginGuardService]},
+  { path: 'create/:category/:museumId', component: EditOrCreateComponent, canActivate: [LoginGuardService]},
+  { path: 'edit/:category/:id', component: EditComponent, canActivate: [LoginGuardService]},
   { path: 'login', component: LoginComponent},
   { path: 'user-profile', component: UserProfileComponent, canActivate: [LoginGuardService]},
   { path: 'register', component: RegistrationComponent},

@@ -17,7 +17,7 @@ import {ProjectConfig} from '../../config/ProjectConfig';
 export class TagSelectionComponent implements OnInit, OnChanges {
 
   @Input() museumId!: number;
-  @Input() existingCollections!: BasicEntry[];
+  @Input() existingCollections!: BasicEntry[] | undefined;
 
   tags: Tag[];
 
@@ -53,7 +53,7 @@ export class TagSelectionComponent implements OnInit, OnChanges {
   }
 
   updateSelectedTags(): void {
-    this.existingCollections.forEach((collection: BasicEntry) => {
+    this.existingCollections?.forEach((collection: BasicEntry) => {
       this.idToTag[collection.id].selected = true;
     });
   }
