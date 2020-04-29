@@ -4,7 +4,6 @@ import {MuseumService} from '../../services/wiki-entry/museum.service';
 import {ProtoMuseum} from '../../services/object-prototypes/proto-museum';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Tag} from './tag';
-import {faCheckSquare, faSquare} from '@fortawesome/free-solid-svg-icons';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 import {ProjectConfig} from '../../config/ProjectConfig';
 
@@ -27,9 +26,6 @@ export class TagSelectionComponent implements OnInit, OnChanges {
 
   loading: boolean;
   error: boolean;
-
-  faCheckSquare = faCheckSquare;
-  faSquare = faSquare;
 
   constructor(private museumService: MuseumService,
               private projectConfigService: ProjectConfigService) {

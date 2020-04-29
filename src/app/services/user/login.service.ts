@@ -4,6 +4,8 @@ import {BasicUserInfo} from '../../models/basic-user-info';
 import {ServerConfigService} from '../config/server-config.service';
 import {ServerResponse} from '../server-response';
 import {User} from '../../models/user';
+import {ProtoUser} from '../object-prototypes/proto-user';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +30,10 @@ export class LoginService {
       .toPromise();
   }
 
-  public getCompleteUserInfo(userCredentials: BasicUserInfo): Promise<User> {
-    return this.http.post<User>(this.url + 'user-profile', {
+  public getCompleteUserInfo(userCredentials: BasicUserInfo): Observable<ProtoUser> {
+    return this.http.post<ProtoUser>(this.url + 'user-profile', {
       username: userCredentials.username,
       password: userCredentials.password
-    }).toPromise();
+    });
   }
 }

@@ -10,18 +10,21 @@
     </mat-form-field>
     <div class="clearfix"></div>
   </div>
-  <div *ngFor="let entry of entryList | slice : (page-1) * pageSize : (page-1) * pageSize + pageSize"
-       class="mb-3">
-    <h2 class="mb-2">{{entry.name}}</h2>
-    <img *ngIf="entry.image && entry.image !== ''"
-         class="float-right w-auto" [src]="entry.image">
-    <p class="mb-1">
-      {{entry.introduction ? (entry.introduction | textLimit: ['200']) : 'Introduction is empty.'}}
-    </p>
-    <button class="btn btn-primary" (click)="goToEntry(entry)">
-      View {{category}}
-    </button>
-    <div class="clearfix"></div>
+  <div class="row text-center">
+    <div class="col-lg-4 col-md-6 mb-2" *ngFor="let entry of entryList | slice : (page-1) * pageSize : (page-1) * pageSize + pageSize">
+      <div class="card h-100">
+        <img *ngIf="entry.image && entry.image != ''" class="card-img-top" [src]="entry.image" alt="Image cannot load">
+        <div class="card-body">
+          <h2 class="card-title">{{entry.name}}</h2>
+          <p class="card-text">{{entry.introduction ? (entry.introduction | textLimit: ['200']) : 'Introduction is empty.'}}</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" (click)="goToEntry(entry)">
+            View {{category}}
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   <ngb-pagination
     [(page)]="page"

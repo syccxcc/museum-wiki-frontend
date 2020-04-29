@@ -6,6 +6,8 @@ import {ServerResponse} from '../server-response';
 import {User} from '../../models/user';
 import {Observable, Subject} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ProtoUser} from '../object-prototypes/proto-user';
+import {MuseumBuilder} from '../../models/builders/museum-builder';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +75,13 @@ export class UserInfoService {
     this.loginEvent.next(false);
   }
 
-  public getCompleteUserInfo(): Promise<User> {
+  public getCompleteUserInfo(): Observable<ProtoUser> {
+    return new Observable<ProtoUser>((observer) => {
+      const mockUser = new ProtoUser();
+      mockUser.user = new User('peter', 'lih@s.com');
+      mockUser.museumList = [new MuseumBuilder().id(1).name('test').build()];
+      observer.next(mockUser);
+    });
     return this.loginService.getCompleteUserInfo(this.basicUserInfo);
   }
 

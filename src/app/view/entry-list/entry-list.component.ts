@@ -18,7 +18,7 @@ export class EntryListComponent implements OnInit {
   sortFunctions = [this.sortByName];
 
   page = 1;
-  pageSize = 10;
+  pageSize = 12;
 
   constructor(private router: Router) {
     this.sortDict = {};
@@ -28,6 +28,7 @@ export class EntryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // TODO: use cards to display entry list instead
   }
 
   goToEntry(entry: WikiEntry): void {

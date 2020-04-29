@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserInfoService} from '../../services/user/user-info.service';
 import {User} from '../../models/user';
 import {Router} from '@angular/router';
+import {ProtoUser} from '../../services/object-prototypes/proto-user';
 
 @Component({
   selector: 'app-user-profile',
@@ -28,8 +29,9 @@ export class UserProfileComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
 
-    this.userInfoService.getCompleteUserInfo().then((res: User) => {
-      this.user = res;
+    this.userInfoService.getCompleteUserInfo().subscribe(
+      (res: ProtoUser) => {
+      this.user = res.toUser();
       this.loading = false;
     }, (error) => {
       this.error = true;

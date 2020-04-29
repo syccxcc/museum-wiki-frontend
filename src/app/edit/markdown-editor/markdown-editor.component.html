@@ -1,9 +1,10 @@
 <div>
-    <textarea placeholder="Input markdown text here"
-              class="form-control"
-              style="min-height: 300px"
-              [formControl]="descriptionFormControl">
-    </textarea>
+  <label for="description" class="form-check-label">Description (optional): </label>
+  <textarea id="description" placeholder="Input markdown text here"
+            class="form-control"
+            style="min-height: 300px"
+            [formControl]="descriptionFormControl">
+  </textarea>
   <div class="mt-3">
     <button [class]="'btn btn-info mr-3' + (realTimeRendering ? ' disabled' : '')"
             (click)="renderMarkdown()" type="button">
@@ -20,6 +21,7 @@
   <!-- form-group -->
 
   <div>
-    <app-markdown-display [markdownText]="realTimeRendering ? descriptionFormControl.value : previewText"></app-markdown-display>
+    <app-markdown-display
+      [markdownText]="realTimeRendering ? descriptionFormControl.value : previewText"></app-markdown-display>
   </div>
 </div>

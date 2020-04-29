@@ -16,7 +16,6 @@ import {ProjectConfig} from '../../config/ProjectConfig';
 import {ArtifactBuilder} from '../../models/builders/artifact-builder';
 import {BasicEntryBuilder} from '../../models/builders/basic-entry-builder';
 import {ArtifactService} from '../../services/wiki-entry/artifact.service';
-import {WikiEntry} from '../../models/wiki-entry';
 import {TagSelectionComponent} from '../tag-selection/tag-selection.component';
 import {Mode} from '../mode';
 import {Artifact} from '../../models/artifact';

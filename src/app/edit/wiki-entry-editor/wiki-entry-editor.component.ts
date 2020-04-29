@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, } from '@angular/core';
+import {Component, Input, OnInit,} from '@angular/core';
 import {WikiEntry} from '../../models/wiki-entry';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EXAMPLE_DESCRIPTION} from '../../user/registration/ExampleDescription';
@@ -12,6 +12,7 @@ import {MuseumBuilder} from '../../models/builders/museum-builder';
 })
 export class WikiEntryEditorComponent implements OnInit {
 
+  // credits: @stephenhay
   private static readonly URL_VALIDATION_REGEX = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
   @Input() previousWikiEntry: WikiEntry;

@@ -1,0 +1,24 @@
+<h2>Your museums: </h2>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col" *ngFor="let column of columnsToDisplay">
+      {{column}}
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let entry of list">
+    <th scope="row">{{entry.id}}</th>
+    <td>{{entry.name}}</td>
+    <td>
+      <button class="btn btn-info" (click)="view(entry)">
+        View
+      </button>
+      <button class="btn btn-danger" (click)="delete(entry)">
+        Delete
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -11,6 +11,8 @@
   <p>Your username is: {{user.username}}</p>
   <p>Your email address is: {{user.email}}</p>
 
-  <p>Notifications: </p>
+  <div *ngIf="user.museumList && user.museumList.length > 0">
+    <app-user-museum-list [list]="user.museumList"></app-user-museum-list>
+  </div>
 </div>
 <app-loading [loading]="loading" [error]="error"></app-loading>
