@@ -10,6 +10,7 @@ import {Collection} from '../../models/collection';
 import {Artifact} from '../../models/artifact';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PrototypeBuilder} from '../../models/builders/prototype-builder';
+import {ProjectConfig} from '../../config/ProjectConfig';
 
 @Component({
   selector: 'app-edit',
@@ -31,7 +32,8 @@ export class EditComponent implements OnInit {
   error: boolean;
 
   constructor(private route: ActivatedRoute,
-              private getByCategoryService: GetByCategoryService) {
+              private getByCategoryService: GetByCategoryService,
+              private projectConfig: ProjectConfig) {
   }
 
   ngOnInit(): void {
@@ -47,6 +49,10 @@ export class EditComponent implements OnInit {
         const prototype = {};
         prototype[this.category] = res;
         this.existingObject = PrototypeBuilder.buildFromPrototype(prototype);
+        if (this.projectConfig.isLogging()) {
+          console.log('Existing object of type ' + this.category);
+          console.log(this.existingObject);
+        }
         if (this.category !== 'museum') {
           this.museumId = res.museum.id;
         }

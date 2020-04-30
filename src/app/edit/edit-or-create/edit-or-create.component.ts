@@ -58,12 +58,14 @@ export class EditOrCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.category === 'museum') {
-      this.existingMuseum = this.existingObject as Museum;
-    } else if (this.category === 'collection') {
-      this.existingCollection = this.existingObject as Collection;
-    } else if (this.category === 'artifact') {
-      this.existingArtifact = this.existingObject as Artifact;
+    if (this.mode === Mode.EDIT) {
+      if (this.category === 'museum') {
+        this.existingMuseum = this.existingObject as Museum;
+      } else if (this.category === 'collection') {
+        this.existingCollection = this.existingObject as Collection;
+      } else if (this.category === 'artifact') {
+        this.existingArtifact = this.existingObject as Artifact;
+      }
     }
   }
 
