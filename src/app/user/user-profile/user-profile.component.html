@@ -11,8 +11,13 @@
   <p>Your username is: {{user.username}}</p>
   <p>Your email address is: {{user.email}}</p>
 
-  <div *ngIf="user.museumList && user.museumList.length > 0">
-    <app-user-museum-list [list]="user.museumList"></app-user-museum-list>
-  </div>
+  <app-user-museum-list [list]="user.museumList">
+  </app-user-museum-list>
+
+  <app-user-edit-list [action]="true" [editList]="user.actionsList">
+  </app-user-edit-list>
+
+  <app-user-edit-list [action]="false" [editList]="user.editsList">
+  </app-user-edit-list>
 </div>
 <app-loading [loading]="loading" [error]="error"></app-loading>

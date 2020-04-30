@@ -1,3 +1,3 @@
 export enum Mode {
-  CREATE, EDIT
+  CREATE = 'create', EDIT = 'edit'
 }

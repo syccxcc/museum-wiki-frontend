@@ -50,7 +50,9 @@ export class TagSelectionComponent implements OnInit, OnChanges {
 
   updateSelectedTags(): void {
     this.existingCollections?.forEach((collection: BasicEntry) => {
-      this.idToTag[collection.id].selected = true;
+      if (this.idToTag[collection.id]) {
+        this.idToTag[collection.id].selected = true;
+      }
     });
   }
 

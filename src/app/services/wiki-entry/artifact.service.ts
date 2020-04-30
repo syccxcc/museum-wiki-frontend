@@ -14,7 +14,7 @@ import {Mode} from '../../edit/mode';
 })
 export class ArtifactService {
 
-  private url: string;
+  private readonly url: string;
 
   constructor(private serverConfigService: ServerConfigService,
               private http: HttpClient,

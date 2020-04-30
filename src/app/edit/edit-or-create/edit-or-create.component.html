@@ -4,7 +4,7 @@
     Please edit {{category}} info
   </h2>
   <button class="float-right btn btn-lg btn-success"
-          [class]="(wikiEntryEditor?.wikiEntryFormGroup?.valid && (category !== 'artifact' || tagSelection.getAllSelectedTags().length > 0)) ? '' : 'disabled'"
+          [class.disabled]="!canSubmit()"
           (click)="submit()">
     Submit
   </button>

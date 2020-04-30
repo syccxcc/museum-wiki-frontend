@@ -17,10 +17,10 @@ export class ProtoEdit {
   toEdit(): Edit {
     return new EditBuilder()
       .id(this.id)
-      .artifact(this.artifact.toObject())
+      .artifact(this.artifact?.toObject())
       .category(this.category)
       .type(this.type)
-      .collection(this.collection.toCollection())
+      .collection(this.collection?.toCollection())
       .approvalStatus(this.approvalStatus)
       .build();
   }

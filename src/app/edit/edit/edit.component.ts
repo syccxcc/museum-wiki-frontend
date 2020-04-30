@@ -11,6 +11,7 @@ import {Artifact} from '../../models/artifact';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 import {ProjectConfig} from '../../config/ProjectConfig';
+import {ProjectConfigService} from '../../services/config/project-config.service';
 
 @Component({
   selector: 'app-edit',
@@ -33,7 +34,9 @@ export class EditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private getByCategoryService: GetByCategoryService,
-              private projectConfig: ProjectConfig) {
+              private projectConfigService: ProjectConfigService) {
+    this.loading = true;
+    this.error = false;
   }
 
   ngOnInit(): void {
@@ -49,7 +52,7 @@ export class EditComponent implements OnInit {
         const prototype = {};
         prototype[this.category] = res;
         this.existingObject = PrototypeBuilder.buildFromPrototype(prototype);
-        if (this.projectConfig.isLogging()) {
+        if (this.projectConfigService.getProjectConfig().isLogging()) {
           console.log('Existing object of type ' + this.category);
           console.log(this.existingObject);
         }

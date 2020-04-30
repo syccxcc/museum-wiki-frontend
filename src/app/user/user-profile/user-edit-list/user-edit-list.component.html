@@ -1,1 +1,42 @@
-<p>user-edit-list works!</p>
+<h2>
+  {{action ? "Edits Waiting for Review" : "Your Submitted Edits"}}
+</h2>
+<div *ngIf="editList && editList.length > 0; else noEditBlock">
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th scope="col" *ngFor="let column of columnsToDisplay" (click)="sort(column)"
+          [class.cursor-pointer]="columnSortStatus[column]">
+        {{column}}
+        <fa-icon *ngIf="columnSortStatus[column]" [icon]="columnSortStatus[column]"></fa-icon>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let entry of editList">
+      <th scope="row">{{entry.id}}</th>
+      <td>{{entry.type}}</td>
+      <td>{{entry.category}}</td>
+      <td>{{entry.approvalStatus}}</td>
+      <td class="btn-group">
+        <button class="btn btn-info" [class.mr-2]="action" (click)="view(entry)">
+          View
+        </button>
+        <div *ngIf="action">
+          <button class="btn btn-success mr-2" (click)="approve(entry)">
+            Approve
+          </button>
+          <button class="btn btn-danger" (click)="deny(entry)">
+            Deny
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noEditBlock>
+  <p class="float-left mr-2">It appears that you don't have any museums.</p>
+  <button class="btn btn-info float-left" [routerLink]="'/create/museum'">Create One</button>
+  <div class="clearfix"></div>
+</ng-template>

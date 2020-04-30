@@ -8,6 +8,8 @@ import {Observable, Subject} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ProtoUser} from '../object-prototypes/proto-user';
 import {MuseumBuilder} from '../../models/builders/museum-builder';
+import {ProtoEdit} from '../object-prototypes/proto-edit';
+import {Mocker} from '../mocker';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +74,8 @@ export class UserInfoService {
 
   public logout(): void {
     this.isLoggedIn = false;
+    this.basicUserInfo = undefined;
+    this.clearCookies();
     this.loginEvent.next(false);
   }
 
@@ -83,6 +87,13 @@ export class UserInfoService {
         new MuseumBuilder().id(1).name('test').build(),
         new MuseumBuilder().id(2).name('abc').build(),
         new MuseumBuilder().id(3).name('zcx').build()];
+      const editSize = 10;
+      const mockEdits = new Array<ProtoEdit>(editSize);
+      for (let i = 0; i < editSize; i++) {
+        mockEdits[i] = Mocker.mockProtoEdit();
+      }
+      mockUser.actionsList = mockEdits.filter((protoEdit) => protoEdit.approvalStatus === 'Under review');
+      mockUser.editsList = mockEdits;
       observer.next(mockUser);
     });
     return this.loginService.getCompleteUserInfo(this.basicUserInfo);

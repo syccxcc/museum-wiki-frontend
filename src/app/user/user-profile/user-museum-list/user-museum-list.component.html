@@ -1,26 +1,33 @@
 <h2>Your museums: </h2>
-<table class="table table-bordered table-striped">
-  <thead>
-  <tr>
-    <th scope="col" *ngFor="let column of columnsToDisplay" (click)="sort(column)"
-        [class.cursor-pointer]="columnSortStatus[column]">
-      {{column}}
-      <fa-icon *ngIf="columnSortStatus[column]" [icon]="columnSortStatus[column]"></fa-icon>
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let entry of list">
-    <th scope="row">{{entry.id}}</th>
-    <td>{{entry.name}}</td>
-    <td>
-      <button class="btn btn-info mr-2" (click)="view(entry)">
-        View
-      </button>
-      <button class="btn btn-danger" (click)="delete(entry)">
-        Delete
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div *ngIf="list && list.length > 0; else noMuseumBlock">
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th scope="col" *ngFor="let column of columnsToDisplay" (click)="sort(column)"
+          [class.cursor-pointer]="columnSortStatus[column]">
+        {{column}}
+        <fa-icon *ngIf="columnSortStatus[column]" [icon]="columnSortStatus[column]"></fa-icon>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let entry of list">
+      <th scope="row">{{entry.id}}</th>
+      <td>{{entry.name}}</td>
+      <td>
+        <button class="btn btn-info mr-2" (click)="view(entry)">
+          View
+        </button>
+        <button class="btn btn-danger" (click)="delete(entry)">
+          Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noMuseumBlock>
+  <p class="float-left mr-2">It appears that you don't have any museums.</p>
+  <button class="btn btn-info float-left" [routerLink]="'/create/museum'">Create One</button>
+  <div class="clearfix"></div>
+</ng-template>

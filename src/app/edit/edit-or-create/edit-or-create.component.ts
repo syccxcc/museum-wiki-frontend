@@ -58,6 +58,13 @@ export class EditOrCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.config.isLogging()) {
+      console.log(EditOrCreateComponent.name);
+      console.log('Mode: ' + this.mode);
+      console.log('Existing object:');
+      console.log(this.existingObject);
+    }
+
     if (this.mode === Mode.EDIT) {
       if (this.category === 'museum') {
         this.existingMuseum = this.existingObject as Museum;
@@ -82,8 +89,13 @@ export class EditOrCreateComponent implements OnInit {
       });
   }
 
+  canSubmit(): boolean {
+    return this.wikiEntryEditor?.wikiEntryFormGroup?.valid
+      && (this.category !== 'artifact' || this.tagSelection.getAllSelectedTags().length > 0);
+  }
+
   public submit(): void {
-    if (!this.wikiEntryEditor.wikiEntryFormGroup.valid) {
+    if (!this.canSubmit()) {
       return;
     }
     const modal = this.modalService.open(ModalMessageComponent);
