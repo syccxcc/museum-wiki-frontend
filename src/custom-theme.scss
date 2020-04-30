@@ -26,3 +26,20 @@ $museum-wiki-frontend-theme: mat-light-theme($museum-wiki-frontend-primary, $mus
 // that you are using.
 @include angular-material-theme($museum-wiki-frontend-theme);
 
+// @include table-theme($museum-wiki-frontend-theme);
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin table-theme($theme) {
+  // Extract the palettes you need from the theme definition.
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  // Define any styles affected by the theme.
+  thead {
+    // Use mat-color to extract individual colors from a palette.
+    background-color: mat-color($accent);
+    color: white;
+  }
+}
+
+@include table-theme($museum-wiki-frontend-theme)

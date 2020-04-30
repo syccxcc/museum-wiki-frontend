@@ -79,7 +79,10 @@ export class UserInfoService {
     return new Observable<ProtoUser>((observer) => {
       const mockUser = new ProtoUser();
       mockUser.user = new User('peter', 'lih@s.com');
-      mockUser.museumList = [new MuseumBuilder().id(1).name('test').build()];
+      mockUser.museumList = [
+        new MuseumBuilder().id(1).name('test').build(),
+        new MuseumBuilder().id(2).name('abc').build(),
+        new MuseumBuilder().id(3).name('zcx').build()];
       observer.next(mockUser);
     });
     return this.loginService.getCompleteUserInfo(this.basicUserInfo);

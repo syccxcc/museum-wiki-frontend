@@ -43,6 +43,8 @@ import {MatTableModule} from '@angular/material/table';
 import { UserMuseumListComponent } from './user/user-profile/user-museum-list/user-museum-list.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSortModule} from '@angular/material/sort';
+import { UserEditListComponent } from './user/user-profile/user-edit-list/user-edit-list.component';
 
 
 @NgModule({
@@ -75,7 +77,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     EditComponent,
     CreateComponent,
     EditOrCreateComponent,
-    UserMuseumListComponent
+    UserMuseumListComponent,
+    UserEditListComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +95,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

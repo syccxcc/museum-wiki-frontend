@@ -128,5 +128,10 @@
   "defaultProject": "museum-wiki-frontend",
   "cli": {
     "analytics": "4670a8b7-5f31-4044-a149-1b94c3ab495f"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
   }
 }
