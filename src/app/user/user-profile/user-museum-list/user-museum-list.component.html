@@ -12,7 +12,6 @@
     </thead>
     <tbody>
     <tr *ngFor="let entry of list">
-      <th scope="row">{{entry.id}}</th>
       <td>{{entry.name}}</td>
       <td>
         <button class="btn btn-info mr-2" (click)="view(entry)">

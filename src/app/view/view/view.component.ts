@@ -14,7 +14,6 @@ import {ProjectConfigService} from '../../services/config/project-config.service
 import {ProjectConfig} from '../../config/ProjectConfig';
 import {ArtifactService} from '../../services/wiki-entry/artifact.service';
 import {ProtoArtifact} from '../../services/object-prototypes/proto-artifact';
-import {CollectionBuilder} from '../../models/builders/collection-builder';
 import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 
 @Component({
@@ -125,11 +124,6 @@ export class ViewComponent implements OnInit {
 
   goToParent(entry: BasicEntry): void {
     this.router.navigateByUrl('/view/' + this.parentName + '/' + entry.id);
-  }
-
-  createSubItem(): void {
-    const url = '/create/' + this.subListName.toLowerCase() + '/' + (this.viewCategory === 'museum' ? this.id : this.collection.museum.id);
-    this.router.navigateByUrl(url);
   }
 
 }

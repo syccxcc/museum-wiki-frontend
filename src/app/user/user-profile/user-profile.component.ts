@@ -41,7 +41,7 @@ export class UserProfileComponent implements OnInit {
           console.log('User received from backend: ');
           console.log(res);
         }
-        this.user = res.toUser();
+        this.user = ProtoUser.toUser(res);
         this.loading = false;
       }, (error) => {
         this.error = true;

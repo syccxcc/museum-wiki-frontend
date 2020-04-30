@@ -14,9 +14,9 @@ export class UserMuseumListComponent implements OnInit {
 
   @Input() list: WikiEntry[];
 
-  readonly columnsToDisplay = ['Id', 'Name', 'Actions'];
-  readonly columnsToSort = ['Id', 'Name'];
-  readonly columnNameToFieldName = {Id: 'id', Name: 'name'};
+  readonly columnsToDisplay = ['Name', 'Actions'];
+  readonly columnsToSort = ['Name'];
+  readonly columnNameToFieldName = {Name: 'name'};
   columnSortStatus = {};
 
   sortUntouched = faSort;

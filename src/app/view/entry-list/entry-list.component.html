@@ -1,22 +1,25 @@
-<div *ngIf="entryList && entryList.length > 0">
-  <div>
-    <mat-form-field class="float-left">
-      <mat-label>Sort by</mat-label>
-      <mat-select [(value)]="sortMethod" (selectionChange)="sort()">
-        <mat-option *ngFor="let sortOption of sortOptions" [value]="sortOption">
-          {{sortOption}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div class="clearfix"></div>
-  </div>
+<div>
+  <h2 class="float-left mr-2">{{category + 's'}}</h2>
+  <button class="btn btn-info float-left" (click)="createItem()">Create New {{category}}</button>
+  <form class="form-group float-right mb-2">
+    <label for="searchInput" class="form-check-label mr-2">Search: </label>
+    <input id="searchInput" name="searchText" type="text"
+           [(ngModel)]="searchText" class="form-check-inline form-control"
+           placeholder="Put keywords here. Separate them with a space."
+           (ngModelChange)="updateSearch()">
+  </form>
+  <div class="clearfix"></div>
+</div>
+<div *ngIf="entryList && entryList.length > 0; else noEntryItem">
   <div class="row text-center">
-    <div class="col-lg-4 col-md-6 mb-2" *ngFor="let entry of entryList | slice : (page-1) * pageSize : (page-1) * pageSize + pageSize">
+    <div class="col-lg-4 col-md-6 mb-2"
+         *ngFor="let entry of displayList | slice : (page-1) * pageSize : (page-1) * pageSize + pageSize">
       <div class="card h-100">
         <img *ngIf="entry.image && entry.image != ''" class="card-img-top" [src]="entry.image" alt="Image cannot load">
         <div class="card-body">
           <h2 class="card-title">{{entry.name}}</h2>
-          <p class="card-text">{{entry.introduction ? (entry.introduction | textLimit: ['200']) : 'Introduction is empty.'}}</p>
+          <p
+            class="card-text">{{entry.introduction ? (entry.introduction | textLimit: ['200']) : 'Introduction is empty.'}}</p>
         </div>
         <div class="card-footer">
           <button class="btn btn-primary" (click)="goToEntry(entry)">
@@ -29,12 +32,12 @@
   <ngb-pagination
     [(page)]="page"
     [pageSize]="pageSize"
-    [collectionSize]="entryList.length"
+    [collectionSize]="displayList.length"
     [maxSize]="5"
     [rotate]="true"
     [boundaryLinks]="true">
   </ngb-pagination>
 </div>
-<div *ngIf="!entryList || entryList.length == 0">
+<ng-template #noEntryItem>
   <p>It appears that there are no {{category.toLowerCase()}}s</p>
-</div>
+</ng-template>

@@ -11,9 +11,9 @@ export class UserEditListComponent implements OnInit {
 
   @Input() action: boolean;
   @Input() editList: Edit[];
-  readonly columnsToDisplay = ['Id', 'Type', 'Category', 'Status', 'Actions'];
-  readonly columnsToSort = ['Id', 'Type', 'Category', 'Status'];
-  readonly columnNameToFieldName = {Id: 'id', Type: 'type', Category: 'category', Status: 'approvalStatus'};
+  readonly columnsToDisplay = ['Type', 'Category', 'Status', 'Actions'];
+  readonly columnsToSort = ['Type', 'Category', 'Status'];
+  readonly columnNameToFieldName = {Type: 'type', Category: 'category', Status: 'approvalStatus'};
   columnSortStatus = {};
 
   sortUntouched = faSort;

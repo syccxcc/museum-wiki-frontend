@@ -1,14 +1,7 @@
 <div class="container">
 
-  <div class="my-4">
-    <h1 class="float-left">Museum List</h1>
-    <button class="btn btn-info ml-2 float-left" routerLink="/create/museum/">Create New Museum</button>
-  </div>
-
-  <div class="clearfix"></div>
-
-  <div *ngIf="!loading && !error">
-    <app-entry-list [entryList]="museums" [category]="'museum'"></app-entry-list>
+  <div *ngIf="!loading && !error" class="mt-2">
+    <app-entry-list [entryList]="museums" [category]="'Museum'"></app-entry-list>
   </div>
 
   <app-loading [loading]="loading" [error]="error"></app-loading>

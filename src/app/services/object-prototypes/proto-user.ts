@@ -1,7 +1,5 @@
-import {BasicUserInfo} from '../../models/basic-user-info';
 import {User} from '../../models/user';
 import {WikiEntry} from '../../models/wiki-entry';
-import {Edit} from '../../models/edit';
 import {ProtoEdit} from './proto-edit';
 
 export class ProtoUser {
@@ -10,10 +8,10 @@ export class ProtoUser {
   actionsList: ProtoEdit[];
   editsList: ProtoEdit[];
 
-  toUser(): User {
-    this.user.museumList = this.museumList;
-    this.user.actionsList = this.actionsList?.map(protoEdit => protoEdit.toEdit());
-    this.user.editsList = this.editsList?.map(protoEdit => protoEdit.toEdit());
-    return this.user;
+  static toUser(protoUser: ProtoUser): User {
+    protoUser.user.museumList = protoUser.museumList;
+    protoUser.user.actionsList = protoUser.actionsList?.map(protoEdit => protoEdit.toEdit());
+    protoUser.user.editsList = protoUser.editsList?.map(protoEdit => protoEdit.toEdit());
+    return protoUser.user;
   }
 }

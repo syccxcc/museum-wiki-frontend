@@ -39,11 +39,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { EditComponent } from './edit/edit/edit.component';
 import { CreateComponent } from './edit/create/create.component';
-import {MatTableModule} from '@angular/material/table';
 import { UserMuseumListComponent } from './user/user-profile/user-museum-list/user-museum-list.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSortModule} from '@angular/material/sort';
 import { UserEditListComponent } from './user/user-profile/user-edit-list/user-edit-list.component';
 
 
