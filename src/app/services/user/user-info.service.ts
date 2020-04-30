@@ -79,7 +79,7 @@ export class UserInfoService {
     this.loginEvent.next(false);
   }
 
-  public getCompleteUserInfo(): Observable<ProtoUser> {
+  private mockProtoUser(): Observable<ProtoUser> {
     return new Observable<ProtoUser>((observer) => {
       const mockUser = new ProtoUser();
       mockUser.user = new User('peter', 'lih@s.com');
@@ -96,6 +96,9 @@ export class UserInfoService {
       mockUser.editsList = mockEdits;
       observer.next(mockUser);
     });
+  }
+
+  public getCompleteUserInfo(): Observable<ProtoUser> {
     return this.loginService.getCompleteUserInfo(this.basicUserInfo);
   }
 
