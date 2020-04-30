@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     // FIXME: add form validation
-    const REDIRECT_WAIT_TIME = 3000;
+    const REDIRECT_WAIT_TIME = 1000;
 
     const userInfo = new BasicUserInfo(this.username, this.password);
     const modal = this.modalService.open(ModalMessageComponent);

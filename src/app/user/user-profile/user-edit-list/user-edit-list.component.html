@@ -18,11 +18,11 @@
       <td>{{entry.type}}</td>
       <td>{{entry.category}}</td>
       <td>{{entry.approvalStatus}}</td>
-      <td class="btn-group">
-        <button class="btn btn-info" [class.mr-2]="action" (click)="view(entry)">
+      <td>
+        <button class="btn btn-info float-left" [class.mr-2]="action" (click)="view(entry)">
           View
         </button>
-        <div *ngIf="action">
+        <div *ngIf="action" class="float-left">
           <button class="btn btn-success mr-2" (click)="approve(entry)">
             Approve
           </button>
