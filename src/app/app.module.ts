@@ -43,6 +43,7 @@ import { UserMuseumListComponent } from './user/user-profile/user-museum-list/us
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { UserEditListComponent } from './user/user-profile/user-edit-list/user-edit-list.component';
+import { ViewEditComponent } from './view/view-edit/view-edit.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { UserEditListComponent } from './user/user-profile/user-edit-list/user-e
     CreateComponent,
     EditOrCreateComponent,
     UserMuseumListComponent,
-    UserEditListComponent
+    UserEditListComponent,
+    ViewEditComponent
   ],
   imports: [
     BrowserModule,

@@ -4,8 +4,8 @@
 
 <div class="clearfix"></div>
 
-<a *ngIf="wikiEntry.image && wikiEntry.image !== ''" [href]="wikiEntry.image" class="img-fluid">
-  <img [src]="wikiEntry.image" alt="Image cannot load.">
+<a *ngIf="wikiEntry.image && wikiEntry.image !== ''" [href]="wikiEntry.image">
+  <img class="img-fluid" [src]="wikiEntry.image" alt="Image cannot load.">
 </a>
 
 <p>{{wikiEntry.introduction}}</p>

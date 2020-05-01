@@ -10,6 +10,9 @@ export class Museum extends WikiEntry {
   }
 
   public static of(wikiEntry: WikiEntry) {
+    if (!wikiEntry) {
+      return undefined;
+    }
     return new Museum(wikiEntry.name, wikiEntry.introduction, wikiEntry.image, wikiEntry.description, wikiEntry.id);
   }
 }

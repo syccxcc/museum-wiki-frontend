@@ -10,8 +10,8 @@ export class ProtoUser {
 
   static toUser(protoUser: ProtoUser): User {
     protoUser.user.museumList = protoUser.museumList;
-    protoUser.user.actionsList = protoUser.actionsList?.map(protoEdit => protoEdit.toEdit());
-    protoUser.user.editsList = protoUser.editsList?.map(protoEdit => protoEdit.toEdit());
+    protoUser.user.actionsList = protoUser.actionsList?.map(protoEdit => ProtoEdit.toEdit(protoEdit));
+    protoUser.user.editsList = protoUser.editsList?.map(protoEdit => ProtoEdit.toEdit(protoEdit));
     return protoUser.user;
   }
 }

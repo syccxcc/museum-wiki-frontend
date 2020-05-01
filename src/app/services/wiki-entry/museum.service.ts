@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ServerConfigService} from '../config/server-config.service';
 import {Museum} from '../../models/museum';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BasicUserInfo} from '../../models/basic-user-info';
 import {WikiEntry} from '../../models/wiki-entry';
 import {ServerResponse} from '../server-response';
@@ -37,13 +37,20 @@ export class MuseumService {
   }
 
   public updateMuseumInfo(museum: Museum): Promise<ServerResponse> {
-    return this.http.put<ServerResponse>(this.url + 'museum-list/' + museum.id, {
+    return this.http.put<ServerResponse>(
+      this.url + 'museum-list/' + museum.id, {
       museum,
       user: this.userInfo.basicUserInfo
     }).toPromise();
   }
 
-  public deleteMuseum(museumId: string, user: BasicUserInfo): Promise<any> {
-    return this.http.delete(this.url + 'museum-list/' + museumId).toPromise();
+  public deleteMuseum(museumId: string | number): Promise<any> {
+    const user = this.userInfo.basicUserInfo;
+    return this.http
+      .post(this.url + 'delete-museum/' + museumId, {
+        username: user.username,
+        password: user.password
+      })
+      .toPromise();
   }
 }

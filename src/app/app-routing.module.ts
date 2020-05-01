@@ -14,6 +14,7 @@ import {LoginComponent} from './user/login/login.component';
 import {RegistrationComponent} from './user/registration/registration.component';
 import {EditComponent} from './edit/edit/edit.component';
 import {CreateComponent} from './edit/create/create.component';
+import {ViewEditComponent} from './view/view-edit/view-edit.component';
 
 
 const appRoutes: Routes = [
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'create/:category', component: CreateComponent, canActivate: [LoginGuardService]},
   { path: 'create/:category/:museumId', component: CreateComponent, canActivate: [LoginGuardService]},
   { path: 'edit/:category/:id', component: EditComponent, canActivate: [LoginGuardService]},
+  { path: 'view-edit/:editId', component: ViewEditComponent},
   { path: 'login', component: LoginComponent},
   { path: 'user-profile', component: UserProfileComponent, canActivate: [LoginGuardService]},
   { path: 'register', component: RegistrationComponent},

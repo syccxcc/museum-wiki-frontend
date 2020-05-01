@@ -1,0 +1,34 @@
+<div class="mt-2">
+  <h1 class="float-left">{{capitalizeFirstLetter(type)}} {{capitalizeFirstLetter(category)}}</h1>
+  <div class="float-right">
+    <button class="btn btn-success">Approve</button>
+    <button class="btn btn-danger ml-2">Deny</button>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<app-loading [loading]="loadingEdit" [error]="errorEdit">
+</app-loading>
+
+<div *ngIf="!loadingEdit && !errorEdit">
+  <div class="row">
+    <div *ngIf="displayCurrent" class="float-left col-12" [class.col-lg-6]="displayChanged">
+      <h2 class="text-center">Current Version:</h2>
+      <app-wiki-entry-view *ngIf="currentEntry; else loadingCurrentEntry"
+                           [category]="category" [canEdit]="false" [wikiEntry]="currentEntry">
+      </app-wiki-entry-view>
+      <ng-template #loadingCurrentEntry>
+        <p>Loading current version...</p>
+      </ng-template>
+    </div>
+
+    <div *ngIf="displayChanged && changedEntry"
+         class="float-right col-12 left-divider"
+         [class.col-lg-6]="displayCurrent">
+      <h2 class="text-center">Changed Version:</h2>
+      <app-wiki-entry-view [category]="category" [canEdit]="false" [wikiEntry]="changedEntry">
+      </app-wiki-entry-view>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>

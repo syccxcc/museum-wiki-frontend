@@ -16,7 +16,7 @@
     <tr *ngFor="let entry of editList">
       <td>{{entry.type}}</td>
       <td>{{entry.category}}</td>
-      <td>{{entry.approvalStatus}}</td>
+      <td>{{action? 'Under review': entry.approvalStatus}}</td>
       <td>
         <button class="btn btn-info float-left" [class.mr-2]="action" (click)="view(entry)">
           View
@@ -35,5 +35,5 @@
   </table>
 </div>
 <ng-template #noEditBlock>
-  <p class="float-left mr-2">It appears that you don't have any edits in this section.</p>
+  <p class="mr-2">It appears that you don't have any edits in this section.</p>
 </ng-template>

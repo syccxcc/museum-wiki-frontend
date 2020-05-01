@@ -4,6 +4,11 @@ import {Router} from '@angular/router';
 import {faSort} from '@fortawesome/free-solid-svg-icons';
 import {faSortUp} from '@fortawesome/free-solid-svg-icons';
 import {faSortDown} from '@fortawesome/free-solid-svg-icons';
+import {MuseumService} from '../../../services/wiki-entry/museum.service';
+import {ServerResponse} from '../../../services/server-response';
+import {HttpErrorResponse} from '@angular/common/http';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalMessageComponent} from '../../../static/modal-message/modal-message.component';
 
 @Component({
   selector: 'app-user-museum-list',
@@ -23,7 +28,9 @@ export class UserMuseumListComponent implements OnInit {
   sortUP = faSortUp;
   sortDown = faSortDown;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private museumService: MuseumService,
+              private modalService: NgbModal) {
     this.resetColumnSortStatus();
   }
 
@@ -42,8 +49,20 @@ export class UserMuseumListComponent implements OnInit {
   }
 
   delete(entry: WikiEntry): void {
-    alert('Not implemented');
-    // TODO: implement delete
+    // TODO: add confirmation modal
+    const modal = this.modalService.open(ModalMessageComponent);
+    const modalComponent: ModalMessageComponent = modal.componentInstance;
+    modalComponent.modal = modal;
+    modalComponent.title = 'Delete ' + entry.name;
+    modalComponent.waitingForServerResponse();
+    this.museumService.deleteMuseum(entry.id).then(
+      (res: ServerResponse) => {
+        modalComponent.fromServerResponse(res);
+      },
+      (err: HttpErrorResponse) => {
+        modalComponent.fromNetworkError(err);
+      }
+    );
   }
 
   sort(column: string): void {

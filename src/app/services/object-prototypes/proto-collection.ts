@@ -8,11 +8,14 @@ export class ProtoCollection {
   collection: Collection;
   artifactList: Artifact[];
 
-  toCollection(): Collection {
+  static toCollection(protoCollection: ProtoCollection): Collection {
+    if (!protoCollection) {
+      return undefined;
+    }
     return new CollectionBuilder()
-      .museum(this.museum)
-      .wikiEntry(this.collection)
-      .artifacts(this.artifactList)
+      .museum(protoCollection.museum)
+      .wikiEntry(protoCollection.collection)
+      .artifacts(protoCollection.artifactList)
       .build();
   }
 }

@@ -1,6 +1,7 @@
 import {Edit} from '../edit';
 import {Artifact} from '../artifact';
 import {Collection} from '../collection';
+import {Museum} from '../museum';
 
 export class EditBuilder {
   edit: Edit;
@@ -31,6 +32,11 @@ export class EditBuilder {
 
   collection(value: Collection): EditBuilder {
     this.edit.collection = value;
+    return this;
+  }
+
+  museum(value: Museum): EditBuilder {
+    this.edit.museum = value;
     return this;
   }
 

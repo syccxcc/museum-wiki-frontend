@@ -5,6 +5,8 @@ import {Edit} from '../../models/edit';
 import {EditBuilder} from '../../models/builders/edit-builder';
 import {ProtoCollection} from './proto-collection';
 import {CollectionBuilder} from '../../models/builders/collection-builder';
+import {ProtoMuseum} from './proto-museum';
+import {Museum} from '../../models/museum';
 
 export class ProtoEdit {
   id: number;
@@ -12,16 +14,18 @@ export class ProtoEdit {
   category: string;
   artifact: ProtoArtifact;
   collection: ProtoCollection;
+  museum: ProtoMuseum;
   approvalStatus: string;
 
-  toEdit(): Edit {
+  static toEdit(protoEdit: ProtoEdit): Edit {
     return new EditBuilder()
-      .id(this.id)
-      .artifact(this.artifact?.toObject())
-      .category(this.category)
-      .type(this.type)
-      .collection(this.collection?.toCollection())
-      .approvalStatus(this.approvalStatus)
+      .id(protoEdit.id)
+      .museum(Museum.of(protoEdit.museum?.museum))
+      .collection(ProtoCollection.toCollection(protoEdit.collection))
+      .artifact(ProtoArtifact.toArtifact(protoEdit.artifact))
+      .category(protoEdit.category)
+      .type(protoEdit.type)
+      .approvalStatus(protoEdit.approvalStatus)
       .build();
   }
 }

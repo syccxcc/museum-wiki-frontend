@@ -2,7 +2,7 @@
   <h2 class="float-left mr-2">{{category + 's'}}</h2>
   <button class="btn btn-info float-left" (click)="createItem()">Create New {{category}}</button>
   <form class="form-group float-right mb-2">
-    <label for="searchInput" class="form-check-label mr-2">Search: </label>
+    <label for="searchInput" class="form-check-label form-check-inline mr-2">Search: </label>
     <input id="searchInput" name="searchText" type="text"
            [(ngModel)]="searchText" class="form-check-inline form-control"
            placeholder="Put keywords here. Separate them with a space."

@@ -6,9 +6,12 @@ export class ProtoArtifact {
   collectionList: BasicEntry[];
   artifact: Artifact;
 
-  public toObject(): Artifact {
-    this.artifact.museum = this.museum;
-    this.artifact.collectionList = this.collectionList;
-    return this.artifact;
+  public static toArtifact(protoArtifact: ProtoArtifact): Artifact {
+    if (!protoArtifact || !protoArtifact.artifact) {
+      return undefined;
+    }
+    protoArtifact.artifact.museum = protoArtifact.museum;
+    protoArtifact.artifact.collectionList = protoArtifact.collectionList;
+    return protoArtifact.artifact;
   }
 }
