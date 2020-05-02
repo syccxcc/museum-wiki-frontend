@@ -1,10 +1,6 @@
-<div class="container">
-
-  <div *ngIf="!loading && !error" class="mt-2">
-    <app-entry-list [entryList]="museums" [category]="'Museum'"></app-entry-list>
-  </div>
-
-  <app-loading [loading]="loading" [error]="error"></app-loading>
-
+<div *ngIf="!loading && !error" class="mt-3">
+  <app-entry-list [entryList]="museums" [category]="'Museum'"></app-entry-list>
 </div>
-<!-- /.container -->
+
+<app-loading [loading]="loading" [error]="error"></app-loading>
+

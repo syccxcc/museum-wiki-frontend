@@ -6,6 +6,7 @@ import {ServerResponse} from '../../../services/server-response';
 import {HttpErrorResponse} from '@angular/common/http';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../../static/modal-message/modal-message.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-edit-list',
@@ -26,7 +27,8 @@ export class UserEditListComponent implements OnInit {
   sortDown = faSortDown;
 
   constructor(private editService: EditService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private router: Router) {
   }
 
   private resetColumnSortStatus() {
@@ -65,7 +67,7 @@ export class UserEditListComponent implements OnInit {
     modalComponent.title = 'Review Edit';
     modalComponent.modal = modal;
     modalComponent.waitingForServerResponse();
-    this.editService.reviewEdit(entry.id, true).then(
+    this.editService.reviewEdit(entry.id, action).then(
       (res: ServerResponse) => {
         modalComponent.fromServerResponse(res);
       },
@@ -76,6 +78,6 @@ export class UserEditListComponent implements OnInit {
   }
 
   view(entry: Edit): void {
-    // TODO: view
+    this.router.navigateByUrl('/view-edit/' + entry.id);
   }
 }

@@ -1,13 +1,16 @@
-<div>
+<div class="mb-2">
   <h2 class="float-left mr-2">{{category + 's'}}</h2>
   <button class="btn btn-info float-left" (click)="createItem()">Create New {{category}}</button>
-  <form class="form-group float-right mb-2">
-    <label for="searchInput" class="form-check-label form-check-inline mr-2">Search: </label>
-    <input id="searchInput" name="searchText" type="text"
-           [(ngModel)]="searchText" class="form-check-inline form-control"
-           placeholder="Put keywords here. Separate them with a space."
-           (ngModelChange)="updateSearch()">
-  </form>
+  <!--  <input id="searchInput" name="searchText" type="text"-->
+  <!--         [(ngModel)]="searchText" class="form-control float-right ml-2"-->
+  <!--         placeholder="Put keywords here. Separate them with a space."-->
+  <!--         (ngModelChange)="updateSearch()">-->
+  <!--  <label for="searchInput" class="form-check-label form-check-inline float-right">Search: </label>-->
+  <mat-form-field class="float-right">
+    <mat-label>Search</mat-label>
+    <input matInput type="text" name="searchText" [(ngModel)]="searchText" (ngModelChange)="updateSearch()"
+           placeholder="Separate keywords with a space">
+  </mat-form-field>
   <div class="clearfix"></div>
 </div>
 <div *ngIf="entryList && entryList.length > 0; else noEntryItem">
