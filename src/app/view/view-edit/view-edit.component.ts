@@ -8,6 +8,18 @@ import {Edit} from '../../models/edit';
 import {ProtoEdit} from '../../services/object-prototypes/proto-edit';
 import {HttpErrorResponse} from '@angular/common/http';
 import {capitalizeFirstLetter} from '../../helper/capitalize-first-letter';
+import {UserInfoService} from '../../services/user/user-info.service';
+import {GetByCategoryService} from '../../services/get-by-category.service';
+import {ProtoMuseum} from '../../services/object-prototypes/proto-museum';
+import {ProtoArtifact} from '../../services/object-prototypes/proto-artifact';
+import {ProtoCollection} from '../../services/object-prototypes/proto-collection';
+import {PrototypeBuilder} from '../../models/builders/prototype-builder';
+import {ProjectConfigService} from '../../services/config/project-config.service';
+import {Projects} from '@angular/cli/lib/config/schema';
+import {ProjectConfig} from '../../config/ProjectConfig';
+import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
+import {ServerResponse} from '../../services/server-response';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-edit',
@@ -33,18 +45,51 @@ export class ViewEditComponent implements OnInit {
 
   capitalizeFirstLetter = capitalizeFirstLetter;
 
+  currentUserName: string;
+
+  projectConfig: ProjectConfig;
+
   constructor(private activatedRoute: ActivatedRoute,
-              private editService: EditService) {
+              private editService: EditService,
+              private userInfoService: UserInfoService,
+              private getByCategoryService: GetByCategoryService,
+              private projectConfigService: ProjectConfigService,
+              private modalService: NgbModal) {
+    this.currentUserName = userInfoService.basicUserInfo?.username;
+    this.projectConfig = projectConfigService.getProjectConfig();
   }
 
   fetchCurrent(): void {
-    return;
+    this
+      .getByCategoryService
+      .getByCategoryAndId(this.category, this.changedEntry.id)
+      .subscribe((res: ProtoMuseum | ProtoArtifact | ProtoCollection) => {
+          if (this.projectConfig.isLogging()) {
+            console.log('Current ' + this.category + ':');
+            console.log(res);
+          }
+          if (this.category === 'museum') {
+            this.currentEntry = PrototypeBuilder.buildFromPrototype({museum: res as ProtoMuseum});
+          } else if (this.category === 'collection') {
+            this.currentEntry = PrototypeBuilder.buildFromPrototype({collection: res as ProtoCollection});
+          } else if (this.category === 'artifact') {
+            this.currentEntry = PrototypeBuilder.buildFromPrototype({artifact: res as ProtoArtifact});
+          }
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      );
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.editId = params.get('editId');
       this.editService.getEdit(this.editId).subscribe((res: ProtoEdit) => {
+        if (this.projectConfig.isLogging()) {
+          console.log('Received edit: ');
+          console.log(res);
+        }
         this.edit = ProtoEdit.toEdit(res);
         this.category = this.edit.category;
         this.type = this.edit.type.toLowerCase();
@@ -68,4 +113,27 @@ export class ViewEditComponent implements OnInit {
     });
   }
 
+  deny(entry: Edit): void {
+    this.reviewEdit(entry, false);
+  }
+
+  approve(entry: Edit): void {
+    this.reviewEdit(entry, true);
+  }
+
+  reviewEdit(entry: Edit, action: boolean): void {
+    const modal = this.modalService.open(ModalMessageComponent);
+    const modalComponent: ModalMessageComponent = modal.componentInstance;
+    modalComponent.title = 'Review Edit';
+    modalComponent.modal = modal;
+    modalComponent.waitingForServerResponse();
+    this.editService.reviewEdit(entry, action).then(
+      (res: ServerResponse) => {
+        modalComponent.fromServerResponse(res);
+      },
+      (err: HttpErrorResponse) => {
+        modalComponent.fromNetworkError(err);
+      }
+    );
+  }
 }

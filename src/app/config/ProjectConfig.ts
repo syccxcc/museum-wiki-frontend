@@ -1,7 +1,7 @@
 export class ProjectConfig {
   public static readonly testingMode = true;
   public static readonly logInConsole = true;
-  public static readonly useMockData = true;
+  public static readonly useMockData = false;
 
   private static readonly config = new ProjectConfig(
     ProjectConfig.testingMode,

@@ -10,6 +10,7 @@ import {ProjectConfig} from '../config/ProjectConfig';
 import {ProtoArtifact} from './object-prototypes/proto-artifact';
 import {Mocker} from './mocker';
 import {Mock} from 'protractor/built/driverProviders';
+import {Edit} from '../models/edit';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +29,12 @@ export class EditService {
     this.projectConfig = projectConfigService.getProjectConfig();
   }
 
-  reviewEdit(id: number, action: boolean): Promise<ServerResponse> {
+  reviewEdit(edit: Edit, action: boolean): Promise<ServerResponse> {
     return this.http.post<ServerResponse>(this.url + 'review-edit', {
       user: this.userInfoService.basicUserInfo,
-      editId: id,
+      editId: edit.id,
+      category: edit.category,
+      type: edit.type,
       action
     }).toPromise();
   }

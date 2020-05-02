@@ -31,7 +31,6 @@ export class EntryListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    // FIXME: search button not displayed inline
     this.displayList = this.entryList;
   }
 

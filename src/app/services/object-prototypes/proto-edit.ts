@@ -7,6 +7,7 @@ import {ProtoCollection} from './proto-collection';
 import {CollectionBuilder} from '../../models/builders/collection-builder';
 import {ProtoMuseum} from './proto-museum';
 import {Museum} from '../../models/museum';
+import {BasicUserInfo} from '../../models/basic-user-info';
 
 export class ProtoEdit {
   id: number;
@@ -16,6 +17,8 @@ export class ProtoEdit {
   collection: ProtoCollection;
   museum: ProtoMuseum;
   approvalStatus: string;
+  reviewer: BasicUserInfo;
+  reviewerUsername: string;
 
   static toEdit(protoEdit: ProtoEdit): Edit {
     return new EditBuilder()
@@ -26,6 +29,7 @@ export class ProtoEdit {
       .category(protoEdit.category)
       .type(protoEdit.type)
       .approvalStatus(protoEdit.approvalStatus)
+      .reviewerUsername(protoEdit.reviewer ? protoEdit.reviewer.username : protoEdit.reviewerUsername)
       .build();
   }
 }

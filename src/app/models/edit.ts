@@ -10,4 +10,5 @@ export class Edit {
   collection: Collection;
   museum: Museum;
   approvalStatus: string;
+  reviewerUsername: string;
 }

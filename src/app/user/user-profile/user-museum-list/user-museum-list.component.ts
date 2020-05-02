@@ -9,6 +9,7 @@ import {ServerResponse} from '../../../services/server-response';
 import {HttpErrorResponse} from '@angular/common/http';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../../static/modal-message/modal-message.component';
+import {ConfirmationModalComponent} from '../../../static/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-user-museum-list',
@@ -50,17 +51,29 @@ export class UserMuseumListComponent implements OnInit {
 
   delete(entry: WikiEntry): void {
     // TODO: add confirmation modal
-    const modal = this.modalService.open(ModalMessageComponent);
-    const modalComponent: ModalMessageComponent = modal.componentInstance;
-    modalComponent.modal = modal;
-    modalComponent.title = 'Delete ' + entry.name;
-    modalComponent.waitingForServerResponse();
-    this.museumService.deleteMuseum(entry.id).then(
-      (res: ServerResponse) => {
-        modalComponent.fromServerResponse(res);
-      },
-      (err: HttpErrorResponse) => {
-        modalComponent.fromNetworkError(err);
+    const confirmModal = this.modalService.open(ConfirmationModalComponent);
+    const confirmationModalComponent: ConfirmationModalComponent = confirmModal.componentInstance;
+    confirmationModalComponent.title = 'Delete Museum';
+    confirmationModalComponent.message = 'Are you sure?';
+    confirmationModalComponent.modal = confirmModal;
+    confirmModal.result.then(
+      (dismissReason: boolean) => {
+        if (!dismissReason) {
+          return;
+        }
+        const modal = this.modalService.open(ModalMessageComponent);
+        const modalComponent: ModalMessageComponent = modal.componentInstance;
+        modalComponent.modal = modal;
+        modalComponent.title = 'Delete ' + entry.name;
+        modalComponent.waitingForServerResponse();
+        this.museumService.deleteMuseum(entry.id).then(
+          (res: ServerResponse) => {
+            modalComponent.fromServerResponse(res);
+          },
+          (err: HttpErrorResponse) => {
+            modalComponent.fromNetworkError(err);
+          }
+        );
       }
     );
   }

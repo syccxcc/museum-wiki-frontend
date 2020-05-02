@@ -44,6 +44,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { UserEditListComponent } from './user/user-profile/user-edit-list/user-edit-list.component';
 import { ViewEditComponent } from './view/view-edit/view-edit.component';
+import { CollectionListComponent } from './view/collection-list/collection-list.component';
+import { ConfirmationModalComponent } from './static/confirmation-modal/confirmation-modal.component';
+import { ReviewEditComponent } from './static/review-edit/review-edit.component';
 
 
 @NgModule({
@@ -78,7 +81,10 @@ import { ViewEditComponent } from './view/view-edit/view-edit.component';
     EditOrCreateComponent,
     UserMuseumListComponent,
     UserEditListComponent,
-    ViewEditComponent
+    ViewEditComponent,
+    CollectionListComponent,
+    ConfirmationModalComponent,
+    ReviewEditComponent
   ],
   imports: [
     BrowserModule,

@@ -45,6 +45,11 @@ export class EditBuilder {
     return this;
   }
 
+  reviewerUsername(value: string): EditBuilder {
+    this.edit.reviewerUsername = value;
+    return this;
+  }
+
   build(): Edit {
     return this.edit;
   }

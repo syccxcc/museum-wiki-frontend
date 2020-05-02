@@ -67,7 +67,7 @@ export class UserEditListComponent implements OnInit {
     modalComponent.title = 'Review Edit';
     modalComponent.modal = modal;
     modalComponent.waitingForServerResponse();
-    this.editService.reviewEdit(entry.id, action).then(
+    this.editService.reviewEdit(entry, action).then(
       (res: ServerResponse) => {
         modalComponent.fromServerResponse(res);
       },

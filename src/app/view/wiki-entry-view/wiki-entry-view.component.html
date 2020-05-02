@@ -1,6 +1,8 @@
-<h2 class="float-left">{{wikiEntry.name}}</h2>
+<h2 class="float-left mr-2">{{wikiEntry.name}}</h2>
 
-<button *ngIf="canEdit" class="btn btn-primary float-left ml-2" (click)="edit()">Edit</button>
+<button *ngIf="canEdit" class="btn btn-primary float-left mr-2" (click)="edit()">Edit</button>
+
+<button *ngIf="canDelete" class="btn btn-danger float-left" (click)="delete()">Delete</button>
 
 <div class="clearfix"></div>
 

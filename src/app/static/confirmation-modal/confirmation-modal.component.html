@@ -1,0 +1,10 @@
+<div class="modal-header">
+  <h2 class="modal-title" id="modal-basic-title">{{title}}</h2>
+</div>
+<div class="modal-body">
+  <p>{{message}}</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-warning" (click)="modal.close(true)">Yes</button>
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">No</button>
+</div>

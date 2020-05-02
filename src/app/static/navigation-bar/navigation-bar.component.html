@@ -3,9 +3,10 @@
   <mat-toolbar-row>
     <span>Museum Wiki</span>
     <span class="fill-remaining-space"></span>
-    <button mat-button color="secondary" *ngFor="let itemName of navigationBarItemNames; let i = index"
+    <button mat-button class="btn-lg" color="secondary" *ngFor="let itemName of navigationBarItemNames; let i = index"
             (click)="navigate('/' + navigationBarItemLinks[i])">
       {{itemName}}
     </button>
+    <span class="fill-remaining-space"></span>
   </mat-toolbar-row>
 </mat-toolbar>

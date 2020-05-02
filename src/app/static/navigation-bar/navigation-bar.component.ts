@@ -13,8 +13,8 @@ export class NavigationBarComponent {
 
   navigationBarStatus = {};
 
-  navigationBarItemLinks = ['', 'home', 'museum-list', 'search', 'about'];
-  navigationBarItemNames = ['', 'Home', 'Museum List', 'Search', 'About'];
+  navigationBarItemLinks = ['', 'home'];
+  navigationBarItemNames = ['', 'Home'];
 
   readonly DEFAULT_NAVIGATION_BAR_STATUS = 'nav-item';
   readonly ACTIVE_NAVIGATION_BAR_STATUS = 'nav-item active';
@@ -22,20 +22,12 @@ export class NavigationBarComponent {
   constructor(private router: Router,
               private userInfoService: UserInfoService) {
     this.navBarCollapse = true;
-
     this.adjustNavbarBasedOnLoginStatus(userInfoService.isLoggedIn);
     this.userInfoService.trackLoginStatus().subscribe((loggedIn: boolean) => {
         this.adjustNavbarBasedOnLoginStatus(loggedIn);
       }
     );
 
-    this.setAllLinksInactive();
-    router.events.subscribe((value: Event) => {
-      if (value instanceof NavigationEnd) {
-        this.highlight(router.routerState.snapshot.url.split('/')[1]);
-      }
-      return;
-    });
   }
 
   private adjustNavbarBasedOnLoginStatus(loggedIn: boolean): void {
@@ -46,17 +38,6 @@ export class NavigationBarComponent {
       this.navigationBarItemLinks[0] = 'login';
       this.navigationBarItemNames[0] = 'Login';
     }
-  }
-
-  private setAllLinksInactive(): void {
-    for (const link of this.navigationBarItemLinks) {
-      this.navigationBarStatus[link] = this.DEFAULT_NAVIGATION_BAR_STATUS;
-    }
-  }
-
-  public highlight(link: string): void {
-    this.setAllLinksInactive();
-    this.navigationBarStatus[link] = this.ACTIVE_NAVIGATION_BAR_STATUS;
   }
 
   public expandNavBar(): void {

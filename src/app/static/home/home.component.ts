@@ -9,7 +9,6 @@ import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component
 export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
-
   }
 
 }
