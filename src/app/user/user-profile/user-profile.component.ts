@@ -30,12 +30,8 @@ export class UserProfileComponent implements OnInit {
     this.projectConfig = projectConfigService.getProjectConfig();
   }
 
-  ngOnInit(): void {
-    if (!this.userInfoService.isLoggedIn) {
-      this.router.navigateByUrl('/login');
-    }
-
-    this.userInfoService.getCompleteUserInfo().subscribe(
+  getUserInfo(): void {
+    this.userInfoService.getCompleteUserInfo().toPromise().then(
       (res: ProtoUser) => {
         if (this.projectConfig.isLogging()) {
           console.log('User received from backend: ');
@@ -47,6 +43,14 @@ export class UserProfileComponent implements OnInit {
         this.error = true;
         console.log(error);
       });
+  }
+
+  ngOnInit(): void {
+    if (!this.userInfoService.isLoggedIn) {
+      this.router.navigateByUrl('/login');
+    }
+
+    this.getUserInfo();
   }
 
   logout(): void {

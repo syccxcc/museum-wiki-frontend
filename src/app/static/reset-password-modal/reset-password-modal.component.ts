@@ -3,6 +3,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../../services/user/login.service';
 import {ServerResponse} from '../../services/server-response';
+import {Wrapper} from '../../models/Wrapper';
 
 @Component({
   selector: 'app-reset-password-modal',
@@ -19,10 +20,10 @@ export class ResetPasswordModalComponent implements OnInit {
   }
 
   submit() {
-    this.modal.close(this.loginService.resetPassword(this.username));
+    this.modal.close(new Wrapper(this.loginService.resetPassword(this.username)));
   }
 
   close() {
-    this.modal.close(undefined);
+    this.modal.dismiss();
   }
 }

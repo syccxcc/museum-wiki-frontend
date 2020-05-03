@@ -37,8 +37,8 @@ export class LoginService {
     });
   }
 
-  public resetPassword(email: string): Promise<ServerResponse> {
-    return this.http.post<ServerResponse>(this.url + 'rest-password', {email}).toPromise();
+  public resetPassword(username: string): Promise<ServerResponse> {
+    return this.http.post<ServerResponse>(this.url + 'reset-password', {username}).toPromise();
   }
 
 }

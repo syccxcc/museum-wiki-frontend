@@ -110,10 +110,9 @@ export class ViewEditComponent implements OnInit {
             this.displayCurrent = false;
             break;
           case 'deletion':
-            this.displayChanged = false;
+            this.displayCurrent = false;
             break;
         }
-        // TODO: for delete requests, simply show the artifact contained in JSON message
         if (this.displayCurrent) {
           this.fetchCurrent();
         }

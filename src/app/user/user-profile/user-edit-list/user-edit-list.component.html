@@ -15,7 +15,7 @@
     <tbody>
     <tr *ngFor="let entry of editList">
       <td>{{entry.type}}</td>
-      <td>{{entry.category}}</td>
+      <td>{{capitalizeFirstLetter(entry.category)}}</td>
       <td>{{action? 'Under review': entry.approvalStatus}}</td>
       <td>
         <button class="btn btn-info float-left" [class.mr-2]="action" (click)="view(entry)">

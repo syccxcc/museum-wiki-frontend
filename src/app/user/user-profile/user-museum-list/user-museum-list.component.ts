@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {WikiEntry} from '../../../models/wiki-entry';
 import {Router} from '@angular/router';
 import {faSort} from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,8 @@ import {ConfirmationModalComponent} from '../../../static/confirmation-modal/con
 export class UserMuseumListComponent implements OnInit {
 
   @Input() list: WikiEntry[];
+  @Input() headCuratorList: boolean;
+  @Output() reloadProfile = new EventEmitter<any>();
 
   readonly columnsToDisplay = ['Name', 'Actions'];
   readonly columnsToSort = ['Name'];
@@ -36,7 +38,6 @@ export class UserMuseumListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO: emit event to update user-profile after delete museum and edit approve/deny
   }
 
   private resetColumnSortStatus() {
@@ -51,7 +52,6 @@ export class UserMuseumListComponent implements OnInit {
   }
 
   delete(entry: WikiEntry): void {
-    // TODO: add confirmation modal
     const confirmModal = this.modalService.open(ConfirmationModalComponent);
     const confirmationModalComponent: ConfirmationModalComponent = confirmModal.componentInstance;
     confirmationModalComponent.title = 'Delete Museum';
@@ -70,6 +70,7 @@ export class UserMuseumListComponent implements OnInit {
         this.museumService.deleteMuseum(entry.id).then(
           (res: ServerResponse) => {
             modalComponent.fromServerResponse(res);
+            this.reloadProfile.emit();
           },
           (err: HttpErrorResponse) => {
             modalComponent.fromNetworkError(err);

@@ -13,6 +13,8 @@
     </div>
   </div>
 
+  <div class="clearfix mt-2"></div>
+
   <app-wiki-entry-view [wikiEntry]="content"
                        [canEdit]="viewCategory !== 'museum'"
                        [category]="viewCategory">
@@ -21,7 +23,8 @@
   <div class="clearfix"></div>
 
   <div *ngIf="subListName">
-    <app-entry-list [category]="subListName" [entryList]="contentSubList" [parentId]="viewCategory === 'museum' ? id : collection.museum.id">
+    <app-entry-list [category]="subListName" [entryList]="contentSubList"
+                    [parentId]="viewCategory === 'museum' ? id : collection.museum.id">
     </app-entry-list>
   </div>
 

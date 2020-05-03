@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Edit} from '../../../models/edit';
 import {faSort, faSortDown, faSortUp} from '@fortawesome/free-solid-svg-icons';
 import {EditService} from '../../../services/edit.service';
@@ -7,6 +7,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../../static/modal-message/modal-message.component';
 import {Router} from '@angular/router';
+import {capitalizeFirstLetter} from '../../../helper/capitalize-first-letter';
 
 @Component({
   selector: 'app-user-edit-list',
@@ -17,9 +18,13 @@ export class UserEditListComponent implements OnInit {
 
   @Input() action: boolean;
   @Input() editList: Edit[];
+  @Output() reloadProfile: EventEmitter<any> = new EventEmitter<any>();
   readonly columnsToDisplay = ['Type', 'Category', 'Status', 'Actions'];
   readonly columnsToSort = ['Type', 'Category', 'Status'];
   readonly columnNameToFieldName = {Type: 'type', Category: 'category', Status: 'approvalStatus'};
+
+  readonly capitalizeFirstLetter = capitalizeFirstLetter;
+
   columnSortStatus = {};
 
   sortUntouched = faSort;
@@ -71,6 +76,7 @@ export class UserEditListComponent implements OnInit {
     this.editService.reviewEdit(entry, action).then(
       (res: ServerResponse) => {
         modalComponent.fromServerResponse(res);
+        this.reloadProfile.emit();
       },
       (err: HttpErrorResponse) => {
         modalComponent.fromNetworkError(err);

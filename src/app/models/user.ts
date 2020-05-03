@@ -8,6 +8,7 @@ export class User extends BasicUserInfo {
   museumList: WikiEntry[];
   actionsList: Edit[];
   editsList: Edit[];
+  headCuratorList: WikiEntry[];
 
   constructor(username?: string, email?: string, password?: string) {
     super(username, password);

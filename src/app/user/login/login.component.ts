@@ -10,6 +10,7 @@ import {ResetPasswordModalComponent} from '../../static/reset-password-modal/res
 import {HttpErrorResponse} from '@angular/common/http';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 import {ProjectConfig} from '../../config/ProjectConfig';
+import {Wrapper} from '../../models/Wrapper';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +49,6 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     // FIXME: add form validation
-    // TODO: add password reset
     const REDIRECT_WAIT_TIME = 1000;
 
     const userInfo = new BasicUserInfo(this.username, this.password);
@@ -110,8 +110,11 @@ export class LoginComponent implements OnInit {
     const resetPasswordModal = this.modalService.open(ResetPasswordModalComponent);
     resetPasswordModal.componentInstance.modal = resetPasswordModal;
     resetPasswordModal.result.then(
-      (resetPromise: Promise<ServerResponse>) => {
-        this.openModalWithPromise(resetPromise);
+      (resetPromiseWrapper: Wrapper<Promise<ServerResponse>>) => {
+        this.openModalWithPromise(resetPromiseWrapper.value);
+      }, (dismiss: any) => {
+        console.log('Modal dismissed, reason: ');
+        console.log(dismiss);
       }
     );
   }

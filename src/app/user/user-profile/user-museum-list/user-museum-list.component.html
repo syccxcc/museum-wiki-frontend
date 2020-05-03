@@ -1,4 +1,4 @@
-<h2>Your museums: </h2>
+<h2>{{headCuratorList ? 'All museums' : 'Your museums: '}}</h2>
 <div *ngIf="list && list.length > 0; else noMuseumBlock">
   <table class="table table-bordered table-striped">
     <thead>
