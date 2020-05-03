@@ -17,6 +17,7 @@ export class TagSelectionComponent implements OnInit, OnChanges {
 
   @Input() museumId!: number;
   @Input() existingCollections!: BasicEntry[] | undefined;
+  @Input() allowEdit: boolean;
 
   tags: Tag[];
 

@@ -20,6 +20,8 @@ import {ProjectConfig} from '../../config/ProjectConfig';
 import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
 import {ServerResponse} from '../../services/server-response';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {WikiEntry} from '../../models/wiki-entry';
+import {BasicEntry} from '../../models/basic-entry';
 
 @Component({
   selector: 'app-view-edit',
@@ -146,5 +148,13 @@ export class ViewEditComponent implements OnInit {
         modalComponent.fromNetworkError(err);
       }
     );
+  }
+
+  getMuseumId(entry: WikiEntry): number {
+    return (entry as Artifact).museum.id;
+  }
+
+  getCollectionList(currentEntry: Museum | Collection | Artifact): BasicEntry[] {
+    return (currentEntry as Artifact).collectionList;
   }
 }

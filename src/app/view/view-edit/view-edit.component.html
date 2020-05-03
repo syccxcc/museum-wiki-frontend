@@ -18,8 +18,11 @@
     <div *ngIf="displayCurrent && currentEntry" class="float-left col-12" [class.col-lg-6]="displayChanged">
       <h2 class="text-center">Current Version:</h2>
       <div *ngIf="currentEntry; else loadingCurrentEntry">
-        <app-collection-list *ngIf="category === 'artifact'" [artifact]="currentEntry">
-        </app-collection-list>
+        <app-tag-selection *ngIf="category === 'artifact'"
+                           [museumId]="getMuseumId(currentEntry)"
+                           [existingCollections]="getCollectionList(currentEntry)"
+                           [allowEdit]="false">
+        </app-tag-selection>
         <app-wiki-entry-view [category]="category" [canEdit]="false" [wikiEntry]="currentEntry" [canDelete]="false">
         </app-wiki-entry-view>
       </div>
@@ -32,7 +35,11 @@
          class="float-right col-12 left-divider"
          [class.col-lg-6]="displayCurrent">
       <h2 class="text-center">Changed Version:</h2>
-      <app-collection-list *ngIf="category === 'artifact'" [artifact]="changedEntry"></app-collection-list>
+      <app-tag-selection *ngIf="category === 'artifact'"
+                         [museumId]="getMuseumId(changedEntry)"
+                         [existingCollections]="getCollectionList(changedEntry)"
+                         [allowEdit]="false">
+      </app-tag-selection>
       <app-wiki-entry-view [category]="category" [canEdit]="false" [wikiEntry]="changedEntry" [canDelete]="false">
       </app-wiki-entry-view>
     </div>

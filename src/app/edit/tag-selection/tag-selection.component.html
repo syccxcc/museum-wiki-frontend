@@ -4,7 +4,8 @@
 <div *ngIf="!loading && !error">
   <div *ngFor="let tag of tags"
        class="float-left mr-2">
-    <mat-checkbox [labelPosition]="'after'"
+    <mat-checkbox [disabled]="!allowEdit"
+                  [labelPosition]="'after'"
                   [checked]="tag.selected"
                   (change)="selectTag(tag)">
       {{tag.name}}

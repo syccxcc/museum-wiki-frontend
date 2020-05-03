@@ -18,6 +18,7 @@
 
 <app-tag-selection *ngIf="category === 'artifact'"
                    [museumId]="museumId"
+                   [allowEdit]="true"
                    [existingCollections]="existingArtifact?.collectionList">
 </app-tag-selection>
 
