@@ -105,5 +105,4 @@ export class UserInfoService {
   public trackLoginStatus(): Observable<boolean> {
     return this.loginEvent.asObservable();
   }
-
 }

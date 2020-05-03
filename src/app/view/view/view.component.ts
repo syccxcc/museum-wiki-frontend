@@ -57,6 +57,8 @@ export class ViewComponent implements OnInit {
               private projectConfigService: ProjectConfigService) {
     this.resetLoadingStatus();
 
+    // TODO: fix back button format issue
+
     this.config = this.projectConfigService.getProjectConfig();
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {

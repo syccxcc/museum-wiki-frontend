@@ -32,7 +32,7 @@ export class NavigationBarComponent {
 
   private adjustNavbarBasedOnLoginStatus(loggedIn: boolean): void {
     if (loggedIn) {
-      this.navigationBarItemNames[0] = 'Username: ' + this.userInfoService.getBasicUserInfo().username;
+      this.navigationBarItemNames[0] = 'User Profile';
       this.navigationBarItemLinks[0] = 'user-profile';
     } else {
       this.navigationBarItemLinks[0] = 'login';

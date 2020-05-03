@@ -39,6 +39,7 @@ export class EditOrCreateComponent implements OnInit {
   existingArtifact: Artifact;
 
   @Input() mode: Mode;
+  createMode = Mode.CREATE;
 
   @ViewChild(WikiEntryEditorComponent)
   wikiEntryEditor: WikiEntryEditorComponent;

@@ -26,7 +26,7 @@ export class WikiEntryEditorComponent implements OnInit {
     let prevName = '';
     let prevIntroduction = '';
     let prevImage = '';
-    let prevDescription = EXAMPLE_DESCRIPTION;
+    let prevDescription = '';
     if (this.previousWikiEntry) {
       prevName = this.previousWikiEntry.name;
       prevIntroduction = this.previousWikiEntry.introduction;

@@ -6,6 +6,10 @@ import {Router} from '@angular/router';
 import {PreviousRouteService} from '../../services/previous-route.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
+import {ResetPasswordModalComponent} from '../../static/reset-password-modal/reset-password-modal.component';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ProjectConfigService} from '../../services/config/project-config.service';
+import {ProjectConfig} from '../../config/ProjectConfig';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +21,15 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
+  projectConfig: ProjectConfig;
+
   constructor(private router: Router,
               private previousRoute: PreviousRouteService,
               private userInfoService: UserInfoService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              projectConfigService: ProjectConfigService) {
+
+    this.projectConfig = projectConfigService.getProjectConfig();
 
     if (userInfoService.isLoggedIn) {
       if (previousRoute.previousRoute) {
@@ -39,6 +48,7 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     // FIXME: add form validation
+    // TODO: add password reset
     const REDIRECT_WAIT_TIME = 1000;
 
     const userInfo = new BasicUserInfo(this.username, this.password);
@@ -77,4 +87,32 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/register');
   }
 
+  public openModalWithPromise(promise: Promise<ServerResponse>) {
+    if (!promise) {
+      return;
+    }
+    const modal = this.modalService.open(ModalMessageComponent);
+    const modalMessageComponent: ModalMessageComponent = modal.componentInstance;
+    modalMessageComponent.modal = modal;
+    modalMessageComponent.title = 'Reset Password';
+    modalMessageComponent.waitingForServerResponse();
+    promise.then(
+      (response: ServerResponse) => {
+        modalMessageComponent.fromServerResponse(response);
+      },
+      (err: HttpErrorResponse) => {
+        modalMessageComponent.fromNetworkError(err);
+      }
+    );
+  }
+
+  resetPassword(): void {
+    const resetPasswordModal = this.modalService.open(ResetPasswordModalComponent);
+    resetPasswordModal.componentInstance.modal = resetPasswordModal;
+    resetPasswordModal.result.then(
+      (resetPromise: Promise<ServerResponse>) => {
+        this.openModalWithPromise(resetPromise);
+      }
+    );
+  }
 }

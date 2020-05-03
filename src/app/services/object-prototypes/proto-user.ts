@@ -5,6 +5,7 @@ import {ProtoEdit} from './proto-edit';
 export class ProtoUser {
   user: User;
   museumList: WikiEntry[];
+  headCuratorList: WikiEntry[];
   actionsList: ProtoEdit[];
   editsList: ProtoEdit[];
 

@@ -1,15 +1,10 @@
 <div class="mb-2">
   <h2 class="float-left mr-2">{{category + 's'}}</h2>
   <button class="btn btn-info float-left" (click)="createItem()">Create New {{category}}</button>
-  <!--  <input id="searchInput" name="searchText" type="text"-->
-  <!--         [(ngModel)]="searchText" class="form-control float-right ml-2"-->
-  <!--         placeholder="Put keywords here. Separate them with a space."-->
-  <!--         (ngModelChange)="updateSearch()">-->
-  <!--  <label for="searchInput" class="form-check-label form-check-inline float-right">Search: </label>-->
   <mat-form-field class="float-right">
     <mat-label>Search</mat-label>
     <input matInput type="text" name="searchText" [(ngModel)]="searchText" (ngModelChange)="updateSearch()"
-           placeholder="Separate keywords with a space">
+           placeholder="Separate with a space">
   </mat-form-field>
   <div class="clearfix"></div>
 </div>
@@ -18,11 +13,14 @@
     <div class="col-lg-4 col-md-6 mb-2"
          *ngFor="let entry of displayList | slice : (page-1) * pageSize : (page-1) * pageSize + pageSize">
       <div class="card h-100">
-        <img *ngIf="entry.image && entry.image != ''" class="card-img-top" [src]="entry.image" alt="Image cannot load">
+        <img *ngIf="entry.image && entry.image != ''"
+             style="max-height: 200px"
+             class="card-img-top" [src]="entry.image" alt="Image cannot load">
         <div class="card-body">
           <h2 class="card-title">{{entry.name}}</h2>
-          <p
-            class="card-text">{{entry.introduction ? (entry.introduction | textLimit: ['200']) : 'Introduction is empty.'}}</p>
+          <p class="card-text">
+            {{entry.introduction ? (entry.introduction | textLimit: ['200']) : 'Introduction is empty.'}}
+          </p>
         </div>
         <div class="card-footer">
           <button class="btn btn-primary" (click)="goToEntry(entry)">

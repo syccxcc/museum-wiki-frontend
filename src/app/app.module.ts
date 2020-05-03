@@ -46,7 +46,7 @@ import { UserEditListComponent } from './user/user-profile/user-edit-list/user-e
 import { ViewEditComponent } from './view/view-edit/view-edit.component';
 import { CollectionListComponent } from './view/collection-list/collection-list.component';
 import { ConfirmationModalComponent } from './static/confirmation-modal/confirmation-modal.component';
-import { ReviewEditComponent } from './static/review-edit/review-edit.component';
+import { ResetPasswordModalComponent } from './static/reset-password-modal/reset-password-modal.component';
 
 
 @NgModule({
@@ -84,7 +84,7 @@ import { ReviewEditComponent } from './static/review-edit/review-edit.component'
     ViewEditComponent,
     CollectionListComponent,
     ConfirmationModalComponent,
-    ReviewEditComponent
+    ResetPasswordModalComponent,
   ],
   imports: [
     BrowserModule,

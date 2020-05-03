@@ -36,6 +36,7 @@ export class UserMuseumListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // TODO: emit event to update user-profile after delete museum and edit approve/deny
   }
 
   private resetColumnSortStatus() {

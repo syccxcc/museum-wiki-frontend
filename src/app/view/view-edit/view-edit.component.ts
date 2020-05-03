@@ -55,8 +55,19 @@ export class ViewEditComponent implements OnInit {
               private getByCategoryService: GetByCategoryService,
               private projectConfigService: ProjectConfigService,
               private modalService: NgbModal) {
-    this.currentUserName = userInfoService.basicUserInfo?.username;
+    this.updateCurrentUsername(this.userInfoService.isLoggedIn);
+    this.userInfoService.trackLoginStatus().subscribe((loggedIn: boolean) => {
+      this.updateCurrentUsername(loggedIn);
+    });
     this.projectConfig = projectConfigService.getProjectConfig();
+  }
+
+  private updateCurrentUsername(loggedIn: boolean = false) {
+    if (loggedIn) {
+      this.currentUserName = this.userInfoService.basicUserInfo?.username;
+    } else {
+      this.currentUserName = '';
+    }
   }
 
   fetchCurrent(): void {
@@ -95,13 +106,14 @@ export class ViewEditComponent implements OnInit {
         this.type = this.edit.type.toLowerCase();
         this.changedEntry = this.edit[this.category];
         switch (this.type) {
-          case 'create':
+          case 'addition':
             this.displayCurrent = false;
             break;
-          case 'delete':
+          case 'deletion':
             this.displayChanged = false;
             break;
         }
+        // TODO: for delete requests, simply show the artifact contained in JSON message
         if (this.displayCurrent) {
           this.fetchCurrent();
         }

@@ -40,6 +40,7 @@ export class UserEditListComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetColumnSortStatus();
+    this.sort('Status');
   }
 
   sort(column: string): void {

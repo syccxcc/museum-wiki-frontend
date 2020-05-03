@@ -1,5 +1,4 @@
-<div>
-  <p>You are viewing {{viewCategory}} with id {{id}}</p>
+<div class="mt-2">
 </div>
 
 <div *ngIf="loading">
@@ -8,16 +7,18 @@
 
 <div *ngIf="!loading">
 
-  <div *ngIf="parentName">
-    <div *ngFor="let contentParent of contentParents">
+  <div *ngIf="parentName" class="btn-group">
+    <div *ngFor="let contentParent of contentParents" class="mr-2">
       <button class="btn btn-light" (click)="goToParent(contentParent)">Back to {{contentParent.name}}</button>
     </div>
   </div>
 
   <app-wiki-entry-view [wikiEntry]="content"
-                       [canEdit]="viewCategory === 'artifact'"
+                       [canEdit]="viewCategory !== 'museum'"
                        [category]="viewCategory">
   </app-wiki-entry-view>
+
+  <div class="clearfix"></div>
 
   <div *ngIf="subListName">
     <app-entry-list [category]="subListName" [entryList]="contentSubList" [parentId]="viewCategory === 'museum' ? id : collection.museum.id">

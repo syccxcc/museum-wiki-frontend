@@ -30,7 +30,7 @@ export class CollectionService {
   public addCollection(collection: Collection, mode: Mode = Mode.CREATE): Promise<ServerResponse> {
     return this.http
       .post<ServerResponse>(
-        this.serverConfig.getUrl() + 'add-collection',
+        this.serverConfig.getUrl() + (mode === Mode.CREATE ? 'add-collection' : 'edit-collection'),
         {
           museum: {id: collection.museum.id},
           collection,

@@ -36,4 +36,9 @@ export class LoginService {
       password: userCredentials.password
     });
   }
+
+  public resetPassword(email: string): Promise<ServerResponse> {
+    return this.http.post<ServerResponse>(this.url + 'rest-password', {email}).toPromise();
+  }
+
 }
