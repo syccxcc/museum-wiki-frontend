@@ -7,10 +7,10 @@
 
 <div *ngIf="!loading">
 
+  <div *ngIf="viewCategory === 'museum'">
+    <button class="btn btn-light" [routerLink]="'/home'">Back</button>
+  </div>
   <div *ngIf="parentName" class="btn-group">
-    <div *ngIf="viewCategory === 'museum'">
-      <button class="btn btn-light" [routerLink]="'/home'">Back</button>
-    </div>
     <div *ngFor="let contentParent of contentParents" class="mr-2">
       <button class="btn btn-light" (click)="goToParent(contentParent)">Back to {{contentParent.name}}</button>
     </div>
