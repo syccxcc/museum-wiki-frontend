@@ -1,6 +1,7 @@
 {
   "name": "museum-wiki-frontend",
-  "version": "0.0.0",
+  "author": "Peter Li",
+  "version": "1.0.0",
   "main": "electron-main.js",
   "scripts": {
     "ng": "ng",
