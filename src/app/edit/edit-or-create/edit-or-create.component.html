@@ -3,9 +3,9 @@
     Please edit {{category}} info
   </h2>
   <button class="btn btn-info float-left"
-          [routerLink]="mode === createMode ?
-          '/view/museum/' + museumId
-          : '/view/' + category + '/' + existingObject.id">
+          [routerLink]="category === 'museum' ? '/home' :
+           (mode === createMode ? '/view/museum/' + museumId
+          : '/view/' + category + '/' + existingObject.id)">
     Back
   </button>
   <button class="float-right btn btn-lg btn-success"

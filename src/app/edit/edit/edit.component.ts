@@ -37,8 +37,6 @@ export class EditComponent implements OnInit {
               private projectConfigService: ProjectConfigService) {
     this.loading = true;
     this.error = false;
-
-    // TODO: when showing collection list, use disabled checkboxes just like create/edit artifact
   }
 
   ngOnInit(): void {
