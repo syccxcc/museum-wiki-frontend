@@ -24,6 +24,6 @@ export class ResetPasswordModalComponent implements OnInit {
   }
 
   close() {
-    this.modal.dismiss();
+    this.modal.dismiss('User clicked close button');
   }
 }

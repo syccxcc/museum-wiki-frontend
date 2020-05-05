@@ -22,7 +22,6 @@ import {MarkdownDisplayComponent} from './edit/markdown-display/markdown-display
 import {WikiEntryEditorComponent} from './edit/wiki-entry-editor/wiki-entry-editor.component';
 import {WikiEntryViewComponent} from './view/wiki-entry-view/wiki-entry-view.component';
 import {LoginComponent} from './user/login/login.component';
-import {ModalComponent} from './user/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { ModalMessageComponent } from './static/modal-message/modal-message.component';
@@ -69,7 +68,6 @@ import { ResetPasswordModalComponent } from './static/reset-password-modal/reset
     WikiEntryEditorComponent,
     WikiEntryViewComponent,
     LoginComponent,
-    ModalComponent,
     RegistrationComponent,
     ModalMessageComponent,
     TextLimitPipe,

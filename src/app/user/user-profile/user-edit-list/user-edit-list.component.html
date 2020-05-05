@@ -1,13 +1,19 @@
 <h2>
   {{action ? "Edits Waiting for Your Review" : "Your Submitted Edits"}}
 </h2>
+
+<!--if a list of edits exist and has length > 0, display the table, otherwise, display a message-->
 <div *ngIf="editList && editList.length > 0; else noEditBlock">
   <table class="table table-bordered table-striped">
     <thead>
     <tr>
-      <th scope="col" *ngFor="let column of columnsToDisplay" (click)="sort(column)"
+      <!--loop through each column header
+      if the current column can be sorted, let the cursor become a pointer when on this column header-->
+      <th scope="col"
+          *ngFor="let column of columnsToDisplay" (click)="sort(column)"
           [class.cursor-pointer]="columnSortStatus[column]">
         {{column}}
+        <!--If this column can be sorted, then display an icon that matches its current sorting status-->
         <fa-icon *ngIf="columnSortStatus[column]" [icon]="columnSortStatus[column]"></fa-icon>
       </th>
     </tr>
@@ -16,11 +22,14 @@
     <tr *ngFor="let entry of editList">
       <td>{{entry.type}}</td>
       <td>{{capitalizeFirstLetter(entry.category)}}</td>
-      <td>{{action? 'Under review': entry.approvalStatus}}</td>
+      <!--If user can take an action against this edit, then it must be under review-->
+      <td>{{action ? 'Under review' : entry.approvalStatus}}</td>
       <td>
+        <!-- if action is true, there will be more buttons to the right, hence the mr-2 class-->
         <button class="btn btn-info float-left" [class.mr-2]="action" (click)="view(entry)">
           View
         </button>
+        <!-- if the user can take action to this edit, show these two buttons -->
         <div *ngIf="action" class="float-left">
           <button class="btn btn-success mr-2" (click)="approve(entry)">
             Approve

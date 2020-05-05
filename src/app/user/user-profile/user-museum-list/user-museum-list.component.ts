@@ -22,11 +22,25 @@ export class UserMuseumListComponent implements OnInit {
   @Input() headCuratorList: boolean;
   @Output() reloadProfile = new EventEmitter<any>();
 
+  /**
+   * columns that are displayed in the table
+   */
   readonly columnsToDisplay = ['Name', 'Actions'];
+  /**
+   * columns in the table that can be sorted
+   */
   readonly columnsToSort = ['Name'];
+  /**
+   * the corresponding field name of a column name
+   */
   readonly columnNameToFieldName = {Name: 'name'};
+
+  /**
+   * store the sort status of all columns (untouched, sort ascending, sort descending)
+   */
   columnSortStatus = {};
 
+  // font awesome sort icons
   sortUntouched = faSort;
   sortUP = faSortUp;
   sortDown = faSortDown;
@@ -40,6 +54,9 @@ export class UserMuseumListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * reset the sorting status of all columns to untouched
+   */
   private resetColumnSortStatus() {
     this.columnSortStatus = {};
     for (const column of this.columnsToSort) {
@@ -51,17 +68,30 @@ export class UserMuseumListComponent implements OnInit {
     this.router.navigateByUrl('/view/museum/' + entry.id);
   }
 
+  /**
+   * delete a museum
+   *
+   * @param entry the museum to be deleted
+   */
   delete(entry: WikiEntry): void {
+    // let the user confirm that the museum should be deleted
     const confirmModal = this.modalService.open(ConfirmationModalComponent);
     const confirmationModalComponent: ConfirmationModalComponent = confirmModal.componentInstance;
     confirmationModalComponent.title = 'Delete Museum';
     confirmationModalComponent.message = 'Are you sure?';
     confirmationModalComponent.modal = confirmModal;
     confirmModal.result.then(
+      /**
+       * act based on the user response in confirmation modal
+       *
+       * @param dismissReason true if user clicked yes, false otherwise
+       */
       (dismissReason: boolean) => {
+        // if user chose no, don't do anything
         if (!dismissReason) {
           return;
         }
+        // open a modal and display the result of deletion attempt
         const modal = this.modalService.open(ModalMessageComponent);
         const modalComponent: ModalMessageComponent = modal.componentInstance;
         modalComponent.modal = modal;
@@ -70,6 +100,7 @@ export class UserMuseumListComponent implements OnInit {
         this.museumService.deleteMuseum(entry.id).then(
           (res: ServerResponse) => {
             modalComponent.fromServerResponse(res);
+            // reload the user profile after this change
             this.reloadProfile.emit();
           },
           (err: HttpErrorResponse) => {
@@ -80,15 +111,29 @@ export class UserMuseumListComponent implements OnInit {
     );
   }
 
+  /**
+   * sort a certain column
+   * if that column is untouched or sorting down, sort up, otherwise, sort down
+   * @param column the name of the colume whose sort status will be changed
+   */
   sort(column: string): void {
+    // check if this column can be sorted
     if (!this.columnSortStatus[column]) {
       return;
     }
+    // the next sort status of the current column
     const nextStatus = this.columnSortStatus[column] === this.sortUP ? this.sortDown : this.sortUP;
     this.resetColumnSortStatus();
     this.columnSortStatus[column] = nextStatus;
+
+    // name of the field that will be compared
     const fieldName = this.columnNameToFieldName[column];
-    this.list.sort((entry1, entry2) => (nextStatus === this.sortDown !== entry1[fieldName] > entry2[fieldName]) ? 1 : -1);
+
+    this.list.sort(
+      (entry1, entry2) =>
+        // compare the two entries, if trying to sort down, the comparison result will be inverted
+        // the !== operator is equivalent to a ^ binary operator
+        (nextStatus === this.sortDown !== entry1[fieldName] > entry2[fieldName]) ? 1 : -1);
   }
 
 }

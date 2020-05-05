@@ -21,19 +21,25 @@ export class RegistrationComponent implements OnInit {
   private static readonly _MIN_PASSWORD_LENGTH = 6;
   private static readonly _MAX_PASSWORD_LENGTH = 20;
 
+  // form group for user registration
   registrationForm = new FormGroup({
-    username: new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.minLength(RegistrationComponent._MIN_USERNAME_LENGTH),
-        Validators.maxLength(RegistrationComponent._MAX_USERNAME_LENGTH)]),
-    password: new FormControl('',
-      [Validators.minLength(RegistrationComponent._MIN_PASSWORD_LENGTH),
-        Validators.maxLength(RegistrationComponent._MAX_PASSWORD_LENGTH)]),
-    retypePassword: new FormControl('', RegistrationComponent.retypePasswordValidator),
-    email: new FormControl('', [Validators.email])
-  }, {validators: [RegistrationComponent.retypePasswordValidator]});
+      username: new FormControl(
+        '',
+        [
+          Validators.required,
+          Validators.minLength(RegistrationComponent._MIN_USERNAME_LENGTH),
+          Validators.maxLength(RegistrationComponent._MAX_USERNAME_LENGTH)]),
+      password: new FormControl('',
+        [
+          Validators.minLength(RegistrationComponent._MIN_PASSWORD_LENGTH),
+          Validators.maxLength(RegistrationComponent._MAX_PASSWORD_LENGTH)]),
+      retypePassword: new FormControl('', RegistrationComponent.retypePasswordValidator),
+      email: new FormControl('', [Validators.email])
+    },
+    {
+      // validate that retyped password matches the password
+      validators: [RegistrationComponent.retypePasswordValidator]
+    });
 
   constructor(private router: Router,
               private loginService: LoginService,
@@ -48,6 +54,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // no need to register if user already logged in
+    // go straight to user profile
     if (this.userInfoService.isLoggedIn) {
       this.router.navigateByUrl('user-profile');
     }
@@ -55,11 +63,14 @@ export class RegistrationComponent implements OnInit {
 
   register(): void {
     const form = this.registrationForm;
+    // create new user object
     const newUser: User = new User(
       form.get('username').value,
       form.get('email').value,
-      form.get('password').value);
+      form.get('password').value
+    );
 
+    // open modal and let it display the message for waiting for server response
     const modal = this.modalService.open(ModalMessageComponent);
     const modalComponent = modal.componentInstance;
     modalComponent.title = 'Registration';
@@ -73,11 +84,12 @@ export class RegistrationComponent implements OnInit {
         (res: ServerResponse) => {
           modalComponent.fromServerResponse(res);
           if (res.success) {
-            modalComponent.message += '\nRedirecting to login page in 3 seconds.';
+            // let user login after successful registration
+            modalComponent.message += '\nRedirecting to login page in 1 second.';
             setTimeout(() => {
               modal.close();
               this.router.navigateByUrl('/login');
-            }, 3000);
+            }, 1000);
           }
         },
         (error) => {
@@ -86,7 +98,6 @@ export class RegistrationComponent implements OnInit {
         }
       );
   }
-
 
   get MIN_USERNAME_LENGTH(): number {
     return RegistrationComponent._MIN_USERNAME_LENGTH;

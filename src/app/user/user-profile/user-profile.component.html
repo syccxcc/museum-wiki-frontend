@@ -2,25 +2,37 @@
   <h2 class="float-left">
     Profile of {{username}}
   </h2>
-  <button class="float-right btn btn-lg btn-danger" (click)="logout()">
+  <button class="float-right btn btn-lg btn-danger"
+          (click)="logout()">
     Logout
   </button>
-  <div class="clearfix"></div>
+  <div class="clearfix">
+  </div>
 </div>
-<div *ngIf="!loading">
-  <p>Your username is: {{user.username}}</p>
-  <p>Your email address is: {{user.email}}</p>
 
-  <app-user-museum-list [list]="user.museumList" [headCuratorList]="false" (reloadProfile)="getUserInfo()">
+<div *ngIf="!loading">
+  <p>
+    Your username is: {{user.username}}
+  </p>
+  <p>
+    Your email address is: {{user.email}}
+  </p>
+
+  <app-user-museum-list [list]="user.museumList" [headCuratorList]="false"
+                        (reloadProfile)="getUserInfo()">
   </app-user-museum-list>
 
-  <app-user-edit-list [action]="true" [editList]="user.actionsList" (reloadProfile)="getUserInfo()">
+  <app-user-edit-list [action]="true" [editList]="user.actionsList"
+                      (reloadProfile)="getUserInfo()">
   </app-user-edit-list>
 
   <app-user-edit-list [action]="false" [editList]="user.editsList">
   </app-user-edit-list>
 
-  <app-user-museum-list *ngIf="user.headCuratorList" [headCuratorList]="true" [list]="user.headCuratorList" (reloadProfile)="getUserInfo()">
+  <app-user-museum-list *ngIf="user.headCuratorList" [headCuratorList]="true"
+                        [list]="user.headCuratorList"
+                        (reloadProfile)="getUserInfo()">
   </app-user-museum-list>
+
 </div>
 <app-loading [loading]="loading" [error]="error"></app-loading>

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MuseumService} from '../../services/wiki-entry/museum.service';
 import {Museum} from '../../models/museum';
 import {WikiEntryEditorComponent} from '../wiki-entry-editor/wiki-entry-editor.component';
@@ -54,7 +54,8 @@ export class EditOrCreateComponent implements OnInit {
               private collectionService: CollectionService,
               private artifactService: ArtifactService,
               private modalService: NgbModal,
-              private projectConfigService: ProjectConfigService) {
+              private projectConfigService: ProjectConfigService,
+              private router: Router) {
     this.config = this.projectConfigService.getProjectConfig();
   }
 
@@ -83,6 +84,13 @@ export class EditOrCreateComponent implements OnInit {
           console.log(res);
         }
         modalComponent.fromServerResponse(res);
+        if (res.success) {
+          setTimeout(() => {
+              this.router.navigateByUrl('/user-profile');
+            },
+            3000
+          );
+        }
       },
       (err: HttpErrorResponse) => {
         modalComponent.fromNetworkError(err);

@@ -30,13 +30,21 @@ export class UserProfileComponent implements OnInit {
     this.projectConfig = projectConfigService.getProjectConfig();
   }
 
+  /**
+   * request detailed user info from the server
+   * called either when user profile page is visited or when an action (delete museum, approve/deny edit) changes
+   * user profile, making reloading necessary
+   */
   getUserInfo(): void {
-    this.userInfoService.getCompleteUserInfo().toPromise().then(
-      (res: ProtoUser) => {
+    this.userInfoService
+      .getCompleteUserInfo()
+      .toPromise()
+      .then((res: ProtoUser) => {
         if (this.projectConfig.isLogging()) {
           console.log('User received from backend: ');
           console.log(res);
         }
+        // convert received JSON object to User object
         this.user = ProtoUser.toUser(res);
         this.loading = false;
       }, (error) => {
