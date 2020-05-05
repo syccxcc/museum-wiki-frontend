@@ -11,7 +11,9 @@
     and at most {{this.MAX_USERNAME_LENGTH}} characters.
   </div>
 
-  <label class="form-check-label" for="password">Password: </label>
+  <label class="form-check-label" for="password">
+    Password:
+  </label>
   <input class="form-control" id="password" type="password" required
          formControlName="password">
   <div
@@ -21,7 +23,9 @@
     and at most {{this.MAX_PASSWORD_LENGTH}} characters.
   </div>
 
-  <label class="form-check-label" for="retypePassword">Retype Password: </label>
+  <label class="form-check-label" for="retypePassword">
+    Retype Password:
+  </label>
   <input [style.border-color]="registrationForm.errors?.passwordNotMatch? 'red' : 'green'" class="form-control" id="retypePassword" type="password"
          formControlName="retypePassword">
   <div
@@ -30,7 +34,9 @@
     Retyped password does not match password.
   </div>
 
-  <label class="form-check-label" for="email">Email: </label>
+  <label class="form-check-label" for="email">
+    Email:
+  </label>
   <input class="form-control" id="email" type="email" required
          formControlName="email">
   <div
@@ -44,4 +50,5 @@
       Register
     </button>
   </div>
+
 </form>

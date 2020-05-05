@@ -13,6 +13,9 @@ import {FormGroup, FormControl, Validators, AbstractControl, ValidatorFn, Valida
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+/**
+ * facilitates user registration
+ */
 export class RegistrationComponent implements OnInit {
 
   private static readonly _MIN_USERNAME_LENGTH = 2;
