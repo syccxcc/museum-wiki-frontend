@@ -11,6 +11,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../../static/modal-message/modal-message.component';
 import {ConfirmationModalComponent} from '../../../static/confirmation-modal/confirmation-modal.component';
 
+/**
+ * a list of user-owned in the user profile page
+ */
 @Component({
   selector: 'app-user-museum-list',
   templateUrl: './user-museum-list.component.html',
@@ -18,8 +21,18 @@ import {ConfirmationModalComponent} from '../../../static/confirmation-modal/con
 })
 export class UserMuseumListComponent implements OnInit {
 
+  /**
+   * an array of museums to be shown
+   */
   @Input() list: WikiEntry[];
+  /**
+   * whether this list is a special museum list for the head curator
+   */
   @Input() headCuratorList: boolean;
+  /**
+   * emits an event whenever a change happened to the user profile page
+   * so that user profile can reload
+   */
   @Output() reloadProfile = new EventEmitter<any>();
 
   /**
@@ -40,17 +53,35 @@ export class UserMuseumListComponent implements OnInit {
    */
   columnSortStatus = {};
 
-  // font awesome sort icons
+  /**
+   * font awesome sort icon
+   */
   sortUntouched = faSort;
+  /**
+   * font awesome sort icon with only one arrow pointing up
+   */
   sortUP = faSortUp;
+  /**
+   * font awesome sort icon with only one arrow pointing down
+   */
   sortDown = faSortDown;
 
+  /**
+   * constructor
+   *
+   * @param router routes to detailed museum info
+   * @param museumService facilitate museum deletion
+   * @param modalService open modal for confirmation & user feedback
+   */
   constructor(private router: Router,
               private museumService: MuseumService,
               private modalService: NgbModal) {
     this.resetColumnSortStatus();
   }
 
+  /**
+   * do nothing on initialization since all data are passed through input binding
+   */
   ngOnInit(): void {
   }
 
@@ -64,6 +95,11 @@ export class UserMuseumListComponent implements OnInit {
     }
   }
 
+  /**
+   * look at the details of a museum
+   *
+   * @param entry the desired museum entry
+   */
   view(entry: WikiEntry): void {
     this.router.navigateByUrl('/view/museum/' + entry.id);
   }
@@ -114,6 +150,7 @@ export class UserMuseumListComponent implements OnInit {
   /**
    * sort a certain column
    * if that column is untouched or sorting down, sort up, otherwise, sort down
+   *
    * @param column the name of the colume whose sort status will be changed
    */
   sort(column: string): void {

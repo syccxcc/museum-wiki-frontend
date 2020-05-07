@@ -48,3 +48,6 @@ Thumbs.db
 
 # electron build files
 /electron-builds
+
+# generated documentation
+/documentation/

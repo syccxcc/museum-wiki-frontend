@@ -72,6 +72,9 @@ export class UserInfoService {
     return loginPromise;
   }
 
+  /**
+   * reset login status to not logged in and remove cookies storing user account information
+   */
   public logout(): void {
     this.isLoggedIn = false;
     this.basicUserInfo = undefined;

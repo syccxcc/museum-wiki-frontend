@@ -17,6 +17,7 @@ export class ProtoEdit {
   collection: ProtoCollection;
   museum: ProtoMuseum;
   approvalStatus: string;
+  time: string;
   reviewer: BasicUserInfo;
   reviewerUsername: string;
 
@@ -28,6 +29,7 @@ export class ProtoEdit {
       .artifact(ProtoArtifact.toArtifact(protoEdit.artifact))
       .category(protoEdit.category)
       .type(protoEdit.type)
+      .date(protoEdit.time)
       .approvalStatus(protoEdit.approvalStatus)
       .reviewerUsername(protoEdit.reviewer ? protoEdit.reviewer.username : protoEdit.reviewerUsername)
       .build();

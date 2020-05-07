@@ -46,6 +46,7 @@ import { ViewEditComponent } from './view/view-edit/view-edit.component';
 import { CollectionListComponent } from './view/collection-list/collection-list.component';
 import { ConfirmationModalComponent } from './static/confirmation-modal/confirmation-modal.component';
 import { ResetPasswordModalComponent } from './static/reset-password-modal/reset-password-modal.component';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({

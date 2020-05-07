@@ -24,6 +24,12 @@
       <td>{{capitalizeFirstLetter(entry.category)}}</td>
       <!--If user can take an action against this edit, then it must be under review-->
       <td>{{action ? 'Under review' : entry.approvalStatus}}</td>
+      <td class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
+        {{entry.date | date:'short'}}
+      </td>
+      <td class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+        {{entry.date | date: 'medium'}}
+      </td>
       <td>
         <!-- if action is true, there will be more buttons to the right, hence the mr-2 class-->
         <button class="btn btn-info float-left" [class.mr-2]="action" (click)="view(entry)">

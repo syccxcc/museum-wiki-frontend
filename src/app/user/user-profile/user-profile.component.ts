@@ -6,6 +6,9 @@ import {ProtoUser} from '../../services/object-prototypes/proto-user';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 import {ProjectConfig} from '../../config/ProjectConfig';
 
+/**
+ * displays user profile: username, email, museums owned, and edits
+ */
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -13,14 +16,34 @@ import {ProjectConfig} from '../../config/ProjectConfig';
 })
 export class UserProfileComponent implements OnInit {
 
+  /**
+   * username of current user
+   */
   username: string;
+  /**
+   * complete user information
+   */
   user: User;
 
+  /**
+   * whether the program is waiting for server response of user info
+   */
   loading: boolean;
+  /**
+   * whether an error occurred while loading user info
+   */
   error: boolean;
 
+  /**
+   * stores logging configuration
+   */
   projectConfig: ProjectConfig;
 
+  /**
+   * @param router routes user to login page if not logged in
+   * @param userInfoService retrieves the complete user information
+   * @param projectConfigService retrieves logging configuration
+   */
   constructor(private router: Router,
               private userInfoService: UserInfoService,
               private projectConfigService: ProjectConfigService) {
@@ -53,6 +76,11 @@ export class UserProfileComponent implements OnInit {
       });
   }
 
+  /**
+   * if not logged in, ask for login
+   *
+   * if logged in, retrieve user info
+   */
   ngOnInit(): void {
     if (!this.userInfoService.isLoggedIn) {
       this.router.navigateByUrl('/login');
@@ -61,6 +89,9 @@ export class UserProfileComponent implements OnInit {
     this.getUserInfo();
   }
 
+  /**
+   * log out of the account can go to login page
+   */
   logout(): void {
     this.userInfoService.logout();
     this.router.navigateByUrl('/login');

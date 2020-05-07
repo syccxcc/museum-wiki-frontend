@@ -12,6 +12,9 @@ import {ProjectConfigService} from '../../services/config/project-config.service
 import {ProjectConfig} from '../../config/ProjectConfig';
 import {Wrapper} from '../../models/Wrapper';
 
+/**
+ * displays a user login page
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,20 +22,40 @@ import {Wrapper} from '../../models/Wrapper';
 })
 export class LoginComponent implements OnInit {
 
+  /**
+   * the username that the user typed, default to empty string
+   */
   username: string;
+  /**
+   * the password that the user typed, default to empty string
+   */
   password: string;
 
+  /**
+   * project configuration about logging
+   */
   projectConfig: ProjectConfig;
 
+  /**
+   * constructor
+   *
+   * @param router routes to another page if already logged in
+   * @param previousRoute helps determine whether the user was blocked from accessing another page
+   * @param userInfoService login related Http calls
+   * @param modalService open modal telling user the result of login attempt
+   * @param projectConfigService used to determine whether the program should be logging
+   */
   constructor(private router: Router,
               private previousRoute: PreviousRouteService,
               private userInfoService: UserInfoService,
               private modalService: NgbModal,
               private projectConfigService: ProjectConfigService) {
-
     this.projectConfig = projectConfigService.getProjectConfig();
   }
 
+  /**
+   * check if user is already logged in, if so, redirect to other pages
+   */
   ngOnInit(): void {
     // if user is logged in, should not prompt user to login again
     if (this.userInfoService.isLoggedIn) {
@@ -96,6 +119,9 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  /**
+   * go to the registration page
+   */
   public register(): void {
     this.router.navigateByUrl('/register');
   }

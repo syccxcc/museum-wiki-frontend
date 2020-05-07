@@ -50,6 +50,13 @@ export class EditBuilder {
     return this;
   }
 
+  date(value: string): EditBuilder {
+    if (value) {
+      this.edit.date = value;
+    }
+    return this;
+  }
+
   build(): Edit {
     return this.edit;
   }

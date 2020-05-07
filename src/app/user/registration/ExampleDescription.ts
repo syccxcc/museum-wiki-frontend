@@ -1,3 +1,6 @@
+/**
+ * an example Markdown Description, currently not in use
+ */
 export const EXAMPLE_DESCRIPTION =
   `# Example Markdown Description
 

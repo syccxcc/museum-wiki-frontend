@@ -8,7 +8,14 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../../static/modal-message/modal-message.component';
 import {Router} from '@angular/router';
 import {capitalizeFirstLetter} from '../../../helper/capitalize-first-letter';
+import {DatePipe} from '@angular/common';
 
+/**
+ * a list of edits related to a user
+ *
+ * this list can either be a list of edits waiting for the user to review,
+ * or simply a list of edits submitted by the user
+ */
 @Component({
   selector: 'app-user-edit-list',
   templateUrl: './user-edit-list.component.html',
@@ -36,15 +43,15 @@ export class UserEditListComponent implements OnInit {
   /**
    * columns that are displayed in the table
    */
-  readonly columnsToDisplay = ['Type', 'Category', 'Status', 'Actions'];
+  readonly columnsToDisplay = ['Type', 'Category', 'Status', 'Date', 'Actions'];
   /**
    * columns in the table that can be sorted
    */
-  readonly columnsToSort = ['Type', 'Category', 'Status'];
+  readonly columnsToSort = ['Type', 'Category', 'Status', 'Date'];
   /**
    * the corresponding field name of a column name
    */
-  readonly columnNameToFieldName = {Type: 'type', Category: 'category', Status: 'approvalStatus'};
+  readonly columnNameToFieldName = {Type: 'type', Category: 'category', Status: 'approvalStatus', Date: 'date'};
 
   /**
    * a function that capitalizes the first letter of a string
@@ -80,8 +87,8 @@ export class UserEditListComponent implements OnInit {
     this.resetColumnSortStatus();
     // by default, sort by descending order in status so that
     // the edits that are "Under review" come first
-    this.sort('Status');
-    this.sort('Status');
+    this.sort('Date');
+    this.sort('Date');
   }
 
   /**
