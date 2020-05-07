@@ -37,7 +37,7 @@ export class WikiEntryEditorComponent implements OnInit {
       {
         name: new FormControl(prevName, Validators.required),
         introduction: new FormControl(prevIntroduction, Validators.required),
-        image: new FormControl(prevImage, Validators.pattern(WikiEntryEditorComponent.URL_VALIDATION_REGEX)),
+        image: new FormControl(prevImage, ), // Validators.pattern(WikiEntryEditorComponent.URL_VALIDATION_REGEX)),
         description: new FormControl(prevDescription)
       });
   }

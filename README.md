@@ -26,6 +26,10 @@ To see how the *current* project looks like in electron, run `npm run electron-b
 
 To distribute the frontend app using electron, navigate to `museum-wiki-frontend/electron` and run `npm install`. Then, run `electron-packager .`. This will package the build in `electron/dist` into an electron app that run on the operating system of the host computer. For more information, please read about the documentation of electron-packager. 
 
+## Documentation
+
+To generate the documentation for this project, simply run `npm run compodoc`, and a new folder called documentation will appear. Open `documentation/index.html` to see the documentation. 
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
