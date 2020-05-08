@@ -16,6 +16,10 @@ import {ArtifactService} from '../../services/wiki-entry/artifact.service';
 import {ProtoArtifact} from '../../services/object-prototypes/proto-artifact';
 import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 
+/**
+ * The view of a museum/collection/artifact.
+ * Includes
+ */
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',

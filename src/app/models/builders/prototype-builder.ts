@@ -9,7 +9,15 @@ import {Artifact} from '../artifact';
 import {CollectionBuilder} from './collection-builder';
 import {ArtifactBuilder} from './artifact-builder';
 
+/**
+ * Build museum/collection/artifact from prototype
+ */
 export class PrototypeBuilder {
+  /**
+   * Build museum/collection/artifact from prototype
+   *
+   * @param prototype The prototype from which the object is built
+   */
   static buildFromPrototype(prototype:
                               {
                                 museum?: ProtoMuseum,

@@ -13,6 +13,9 @@ import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 import {ProjectConfig} from '../../config/ProjectConfig';
 import {ProjectConfigService} from '../../services/config/project-config.service';
 
+/**
+ * Edit an existing entry
+ */
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -20,18 +23,46 @@ import {ProjectConfigService} from '../../services/config/project-config.service
 })
 export class EditComponent implements OnInit {
 
+  /**
+   * Category of the entry to be edited.
+   */
   category: string;
+  /**
+   * Id of edited entry.
+   */
   id: number | string;
 
+  /**
+   * If category is not museum, this will be id of museum to which the entry belongs.
+   */
   museumId: number;
 
-  edit = Mode.EDIT;
+  /**
+   * Edit object passed as a parameter to the editor
+   */
+  readonly edit = Mode.EDIT;
 
+  /**
+   * The existing museum/collection/artifact
+   */
   existingObject: Museum | Collection | Artifact;
 
+  /**
+   * Whether the program is waiting for backend server's response
+   */
   loading: boolean;
+  /**
+   * Whether there's an error when trying to retrieve server data
+   */
   error: boolean;
 
+  /**
+   * Constructor.
+   *
+   * @param route The current Url.
+   * @param getByCategoryService Gets a corresponding object of a certain category and id.
+   * @param projectConfigService Project configuration for determining whether the program should log in console.
+   */
   constructor(private route: ActivatedRoute,
               private getByCategoryService: GetByCategoryService,
               private projectConfigService: ProjectConfigService) {
@@ -39,6 +70,11 @@ export class EditComponent implements OnInit {
     this.error = false;
   }
 
+  /**
+   * Analyze the url and make a request for the existing object.
+   * After the object is received, show the edit page which contains information
+   * of the original object.
+   */
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.category = params.get('category');

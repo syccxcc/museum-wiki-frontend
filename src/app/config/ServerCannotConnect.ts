@@ -1,3 +1,6 @@
+/**
+ * The message for the user when the server is unable to be reached
+ */
 export class ServerCannotConnect {
   public static readonly MESSAGE =
     'A network error occurred. Either you are not connected to the Internet, or the server is down. ' +

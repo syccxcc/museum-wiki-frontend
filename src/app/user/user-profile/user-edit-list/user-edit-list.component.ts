@@ -8,7 +8,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalMessageComponent} from '../../../static/modal-message/modal-message.component';
 import {Router} from '@angular/router';
 import {capitalizeFirstLetter} from '../../../helper/capitalize-first-letter';
-import {DatePipe} from '@angular/common';
 
 /**
  * a list of edits related to a user
@@ -63,11 +62,26 @@ export class UserEditListComponent implements OnInit {
    */
   columnSortStatus = {};
 
-  // font awesome sort icons
+  /**
+   * font awesome sort icon
+   */
   sortUntouched = faSort;
+  /**
+   * font awesome sort icon with only one arrow pointing up
+   */
   sortUP = faSortUp;
+  /**
+   * font awesome sort icon with only one arrow pointing down
+   */
   sortDown = faSortDown;
 
+  /**
+   * Constructor
+   *
+   * @param editService Service for sending edit reviews
+   * @param modalService Opens modals for confirmation
+   * @param router Routes to view edit
+   */
   constructor(private editService: EditService,
               private modalService: NgbModal,
               private router: Router) {
@@ -159,6 +173,11 @@ export class UserEditListComponent implements OnInit {
     );
   }
 
+  /**
+   * Routes to the view of an edit
+   *
+   * @param entry The edit to be seen
+   */
   view(entry: Edit): void {
     this.router.navigateByUrl('/view-edit/' + entry.id);
   }

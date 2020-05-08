@@ -12,16 +12,31 @@ import {MuseumBuilder} from '../../models/builders/museum-builder';
 })
 export class WikiEntryEditorComponent implements OnInit {
 
-  // credits: @stephenhay
+  /**
+   * credits: @stephenhay
+   * Currently unused because it overkills sometimes
+   */
   private static readonly URL_VALIDATION_REGEX = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
+  /**
+   * The previous version of the wiki entry, if there is any
+   */
   @Input() previousWikiEntry: WikiEntry;
 
+  /**
+   * A form group containing all fields for a new wiki entry
+   */
   public wikiEntryFormGroup: FormGroup;
 
+  /**
+   * Constructor
+   */
   constructor() {
   }
 
+  /**
+   * Initialize form group
+   */
   ngOnInit(): void {
     let prevName = '';
     let prevIntroduction = '';
@@ -37,11 +52,14 @@ export class WikiEntryEditorComponent implements OnInit {
       {
         name: new FormControl(prevName, Validators.required),
         introduction: new FormControl(prevIntroduction, Validators.required),
-        image: new FormControl(prevImage, ), // Validators.pattern(WikiEntryEditorComponent.URL_VALIDATION_REGEX)),
+        image: new FormControl(prevImage,), // Validators.pattern(WikiEntryEditorComponent.URL_VALIDATION_REGEX)),
         description: new FormControl(prevDescription)
       });
   }
 
+  /**
+   * Return the new wiki entry created by user input
+   */
   public getWikiEntry(): WikiEntry {
     const form = this.wikiEntryFormGroup;
     return new WikiEntryBuilder<MuseumBuilder, WikiEntry>(WikiEntry)
