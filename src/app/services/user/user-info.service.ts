@@ -11,16 +11,35 @@ import {MuseumBuilder} from '../../models/builders/museum-builder';
 import {ProtoEdit} from '../object-prototypes/proto-edit';
 import {Mocker} from '../mocker';
 
+/**
+ * Retrieves user information.
+ * Uses login service.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoService {
 
+  /**
+   * Whether the user is logged in
+   */
   isLoggedIn: boolean;
+  /**
+   * Information of the logged in user
+   */
   basicUserInfo: BasicUserInfo;
 
+  /**
+   * Emits a new event whenever login status changed
+   */
   loginEvent = new Subject<boolean>();
 
+  /**
+   * Constructor that automatically tries to login user in from cookies
+   *
+   * @param loginService Sends request to the server
+   * @param cookieService Stores username and password hash as cookies
+   */
   constructor(private loginService: LoginService,
               private cookieService: CookieService) {
     this.isLoggedIn = false;
@@ -41,15 +60,27 @@ export class UserInfoService {
     }
   }
 
+  /**
+   * Remove all cookies related to username and password
+   */
   private clearCookies(): void {
     this.cookieService.delete('username');
     this.cookieService.delete('password');
   }
 
+  /**
+   * Get the username and password hash of logged in user.
+   * Security vulnerability in allowing access to password hash in a public method?
+   */
   public getBasicUserInfo(): BasicUserInfo {
-    return this.isLoggedIn ? this.basicUserInfo : null;
+    return this.isLoggedIn ? this.basicUserInfo : undefined;
   }
 
+  /**
+   * Attempt to login. If successful, record username and password in cookies.
+   *
+   * @param loginCredentials Username and password hash.
+   */
   public login(loginCredentials: BasicUserInfo): Promise<ServerResponse> {
     const loginPromise: Promise<ServerResponse> = this.loginService.login(loginCredentials);
     loginPromise.then((res: ServerResponse) => {
@@ -82,6 +113,9 @@ export class UserInfoService {
     this.loginEvent.next(false);
   }
 
+  /**
+   * Create a fake server response in the format of protoUser.
+   */
   private mockProtoUser(): Observable<ProtoUser> {
     return new Observable<ProtoUser>((observer) => {
       const mockUser = new ProtoUser();
@@ -101,10 +135,17 @@ export class UserInfoService {
     });
   }
 
+  /**
+   * Retrieve the complete user info of a user
+   */
   public getCompleteUserInfo(): Observable<ProtoUser> {
     return this.loginService.getCompleteUserInfo(this.basicUserInfo);
   }
 
+  /**
+   * Let another component/service track the login status of the user.
+   * The returned observable emits an event whenever user login/logout.
+   */
   public trackLoginStatus(): Observable<boolean> {
     return this.loginEvent.asObservable();
   }

@@ -9,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'CS205';
+  /**
+   * Title of project
+   */
+  title = 'Museum Wiki Frontend';
 }

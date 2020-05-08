@@ -9,21 +9,32 @@ import {ProtoArtifact} from './object-prototypes/proto-artifact';
 import {ProtoCollection} from './object-prototypes/proto-collection';
 import {ServerConfigService} from './config/server-config.service';
 
+/**
+ * Get an entry by its category
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class GetByCategoryService {
 
-  private readonly url: string;
-
-  constructor(private http: HttpClient,
-              private serverConfigService: ServerConfigService,
-              private museumService: MuseumService,
+  /**
+   * Constructor
+   *
+   * @param museumService Gets museum
+   * @param collectionService Gets collection
+   * @param artifactService Gets artifact
+   */
+  constructor(private museumService: MuseumService,
               private collectionService: CollectionService,
               private artifactService: ArtifactService) {
-    this.url = serverConfigService.getServerConfig().getUrl();
   }
 
+  /**
+   * Get an entry by its category and id
+   *
+   * @param category Can be museum, collection, or artifact
+   * @param id Id of entry
+   */
   public getByCategoryAndId(category: string, id: number | string): Observable<ProtoMuseum | ProtoArtifact | ProtoCollection> {
     if (category === 'museum') {
       return this.museumService.getMuseum(id);

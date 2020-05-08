@@ -15,7 +15,6 @@ import {ProtoArtifact} from '../../services/object-prototypes/proto-artifact';
 import {ProtoCollection} from '../../services/object-prototypes/proto-collection';
 import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 import {ProjectConfigService} from '../../services/config/project-config.service';
-import {Projects} from '@angular/cli/lib/config/schema';
 import {ProjectConfig} from '../../config/ProjectConfig';
 import {ModalMessageComponent} from '../../static/modal-message/modal-message.component';
 import {ServerResponse} from '../../services/server-response';
@@ -23,6 +22,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {WikiEntry} from '../../models/wiki-entry';
 import {BasicEntry} from '../../models/basic-entry';
 
+/**
+ * View for the details of an edit
+ */
 @Component({
   selector: 'app-view-edit',
   templateUrl: './view-edit.component.html',
@@ -30,27 +32,73 @@ import {BasicEntry} from '../../models/basic-entry';
 })
 export class ViewEditComponent implements OnInit {
 
+  /**
+   * Id of the edit
+   */
   editId: string;
+  /**
+   * Category of the eit
+   */
   category: string;
+  /**
+   * Type of edit (addition/deletion/edit)
+   */
   type: string;
 
+  /**
+   * The complete edit object
+   */
   edit: Edit;
 
+  /**
+   * The current entry in the database
+   */
   currentEntry: Museum | Collection | Artifact;
+  /**
+   * The changed entry.
+   */
   changedEntry: Museum | Collection | Artifact;
 
+  /**
+   * Whether program is waiting for backend response
+   */
   loadingEdit = true;
+  /**
+   * Whether server gives an error
+   */
   errorEdit = false;
 
+  /**
+   * Whether current version of the edited entry should be displayed
+   */
   displayCurrent = true;
+  /**
+   * Whether changed version of the edited entry should be displayed
+   */
   displayChanged = true;
 
+  /**
+   * Function to capitalize the first letter in a word
+   */
   capitalizeFirstLetter = capitalizeFirstLetter;
 
+  /**
+   * The current username of the logged in user
+   */
   currentUserName: string;
 
-  projectConfig: ProjectConfig;
+  private projectConfig: ProjectConfig;
 
+  /**
+   * Constructor tracks user login information to track username of logged in user
+   *
+   * @param activatedRoute Url
+   * @param editService Provides edit info
+   * @param userInfoService Provides user info
+   * @param getByCategoryService Get an entry by category and id
+   * @param projectConfigService Logging configuration
+   * @param modalService Opens a modal for user feedback
+   */
   constructor(private activatedRoute: ActivatedRoute,
               private editService: EditService,
               private userInfoService: UserInfoService,
@@ -64,6 +112,11 @@ export class ViewEditComponent implements OnInit {
     this.projectConfig = projectConfigService.getProjectConfig();
   }
 
+  /**
+   * Update the current user name based on user info
+   *
+   * @param loggedIn Whether the user is logged in
+   */
   private updateCurrentUsername(loggedIn: boolean = false) {
     if (loggedIn) {
       this.currentUserName = this.userInfoService.basicUserInfo?.username;
@@ -72,7 +125,10 @@ export class ViewEditComponent implements OnInit {
     }
   }
 
-  fetchCurrent(): void {
+  /**
+   * Fetch the current status of the edit
+   */
+  private fetchCurrent(): void {
     this
       .getByCategoryService
       .getByCategoryAndId(this.category, this.changedEntry.id)
@@ -95,6 +151,9 @@ export class ViewEditComponent implements OnInit {
       );
   }
 
+  /**
+   * Fetch the current edit by id
+   */
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.editId = params.get('editId');
@@ -126,15 +185,31 @@ export class ViewEditComponent implements OnInit {
     });
   }
 
+  /**
+   * Deny an edit
+   *
+   * @param entry The edit to be denied
+   */
   deny(entry: Edit): void {
     this.reviewEdit(entry, false);
   }
 
+  /**
+   * Approve an edit
+   *
+   * @param entry The edit to be approved
+   */
   approve(entry: Edit): void {
     this.reviewEdit(entry, true);
   }
 
-  reviewEdit(entry: Edit, action: boolean): void {
+  /**
+   * Send in the review of an edit
+   *
+   * @param entry Edit that is reviewed
+   * @param action True for approve; false for deny
+   */
+  private reviewEdit(entry: Edit, action: boolean): void {
     const modal = this.modalService.open(ModalMessageComponent);
     const modalComponent: ModalMessageComponent = modal.componentInstance;
     modalComponent.title = 'Review Edit';
@@ -150,10 +225,20 @@ export class ViewEditComponent implements OnInit {
     );
   }
 
+  /**
+   * Retrieve the id of the museum of an artifact
+   *
+   * @param entry The artifact
+   */
   getMuseumId(entry: WikiEntry): number {
     return (entry as Artifact).museum.id;
   }
 
+  /**
+   * Retrieve the collection list of the museum of an artifact
+   *
+   * @param currentEntry The artifact
+   */
   getCollectionList(currentEntry: Museum | Collection | Artifact): BasicEntry[] {
     return (currentEntry as Artifact).collectionList;
   }

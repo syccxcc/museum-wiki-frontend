@@ -18,7 +18,8 @@ import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 
 /**
  * The view of a museum/collection/artifact.
- * Includes
+ * Includes back buttons, entry info (name, image, intro, description), and a list of entries
+ * belonging to this entry (e.g. collections belonging to the current museum)
  */
 @Component({
   selector: 'app-view',
@@ -27,32 +28,94 @@ import {PrototypeBuilder} from '../../models/builders/prototype-builder';
 })
 export class ViewComponent implements OnInit {
 
+  /**
+   * The category of the current entry view
+   */
   viewCategory: string;
+  /**
+   * Id of current item. Retrieved from url parameter
+   */
   id: string;
 
+  /**
+   * Whether app is waiting for backend server response
+   */
   loading: boolean;
+  /**
+   * Whether an error occurred while trying to get server response
+   */
   error: boolean;
 
+  /**
+   * The content to be displayed
+   */
   content: WikiEntry;
-  museum: Museum;
+  /**
+   * The museum being displayed
+   * Undefined if category is not museum
+   */
+  private museum: Museum;
+  /**
+   * The collection currently displayed.
+   * Undefined if category is not collection.
+   */
   collection: Collection;
+  /**
+   * The artifact currently displayed.
+   * Undefined if category is not artifact
+   */
   artifact: Artifact;
 
+  /**
+   * Parents of the current content.
+   * For example, store collections if current content is an artifact.
+   */
   contentParents: BasicEntry[];
+  /**
+   * Name of the parent.
+   */
   parentName: string;
 
+  /**
+   * List of entries belonging to the current entry.
+   */
   contentSubList: WikiEntry[];
+  /**
+   * Category of entries belonging to the current entry.
+   */
   subListName: string;
+  /**
+   * Name of the sublist
+   */
   private readonly subListNameReference = {museum: 'Collection', collection: 'Artifact'};
+  /**
+   * Name of the parent
+   */
   private readonly parentNameReference = {collection: 'museum', artifact: 'collection'};
 
+  /**
+   * Project configuration which stores logging settings.
+   */
   config: ProjectConfig;
 
+  /**
+   * Reset the status of the app to loading
+   */
   private resetLoadingStatus(): void {
     this.loading = true;
     this.error = false;
   }
 
+  /**
+   * Starts retrieving information from the server based on analyzed url.
+   *
+   * @param route Current url
+   * @param router Navigates based on user click
+   * @param museumService Get museum
+   * @param collectionService Get collection
+   * @param artifactService Get artifact
+   * @param projectConfigService Project config about logging
+   */
   constructor(private route: ActivatedRoute,
               private router: Router,
               private museumService: MuseumService,
@@ -123,9 +186,17 @@ export class ViewComponent implements OnInit {
     });
   }
 
+  /**
+   * Everything is in constructor. No need for anything currently.
+   */
   ngOnInit(): void {
   }
 
+  /**
+   * Navigate back to the parent.
+   *
+   * @param entry The target entry
+   */
   goToParent(entry: BasicEntry): void {
     this.router.navigateByUrl('/view/' + this.parentName + '/' + entry.id);
   }

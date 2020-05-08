@@ -4,7 +4,9 @@ This project was written by Peter Li. It is the frontend of the Museum Wiki proj
 
 ## Setup
 
-First, clone this project using `git clone`. 
+First, clone this project using 
+
+`$ git clone https://github.com/syccxcc/museum-wiki-frontend`
 
 Node.js is required for this project. Please install the latest stable version of node.js and then run `npm install` in the project root directory to install all dependencies. Because they amount to over 700MB, this process may take a while. 
 

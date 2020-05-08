@@ -12,15 +12,32 @@ import {Mocker} from './mocker';
 import {Mock} from 'protractor/built/driverProviders';
 import {Edit} from '../models/edit';
 
+/**
+ * Edit related server interactions
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class EditService {
 
-  private url: string;
+  /**
+   * Server endpoint url
+   */
+  private readonly url: string;
 
-  private projectConfig: ProjectConfig;
+  /**
+   * Project configuration
+   */
+  private readonly projectConfig: ProjectConfig;
 
+  /**
+   * Constructor
+   *
+   * @param http Http request api
+   * @param serverConfigService Server configuration
+   * @param userInfoService User information
+   * @param projectConfigService Project configuration
+   */
   constructor(private http: HttpClient,
               private serverConfigService: ServerConfigService,
               private userInfoService: UserInfoService,
@@ -29,6 +46,12 @@ export class EditService {
     this.projectConfig = projectConfigService.getProjectConfig();
   }
 
+  /**
+   * Review an edit
+   *
+   * @param edit The edit to be reviewed
+   * @param action True if edit is approved; false otherwise
+   */
   reviewEdit(edit: Edit, action: boolean): Promise<ServerResponse> {
     return this.http.post<ServerResponse>(this.url + 'review-edit', {
       user: this.userInfoService.basicUserInfo,
@@ -39,6 +62,11 @@ export class EditService {
     }).toPromise();
   }
 
+  /**
+   * Get detailed information of an edit
+   *
+   * @param id Id of edit
+   */
   getEdit(id: number | string): Observable<ProtoEdit> {
     if (this.projectConfig.isUsingMockData()) {
       return new Observable<ProtoEdit>((observer) => {

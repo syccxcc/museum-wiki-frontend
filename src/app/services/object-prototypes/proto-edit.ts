@@ -9,18 +9,56 @@ import {ProtoMuseum} from './proto-museum';
 import {Museum} from '../../models/museum';
 import {BasicUserInfo} from '../../models/basic-user-info';
 
+/**
+ * Edit received from the backend
+ */
 export class ProtoEdit {
+  /**
+   * Id of edit
+   */
   id: number;
+  /**
+   * Type of edit (addition/deletion/edit)
+   */
   type: string;
+  /**
+   * Category of the entry being edited
+   */
   category: string;
+  /**
+   * The changed artifact if it exists
+   */
   artifact: ProtoArtifact;
+  /**
+   * The changed collection if it exists
+   */
   collection: ProtoCollection;
+  /**
+   * The changed museum if it exists
+   */
   museum: ProtoMuseum;
+  /**
+   * Under review/Approved/Denied
+   */
   approvalStatus: string;
+  /**
+   * ISO time string for the date this edit request is made
+   */
   time: string;
+  /**
+   * The user responsible for reviewing this edit
+   */
   reviewer: BasicUserInfo;
+  /**
+   * The username of the reviewer
+   */
   reviewerUsername: string;
 
+  /**
+   * Convert a ProtoEdit to an Edit
+   *
+   * @param protoEdit The ProtoEdit to be converted
+   */
   static toEdit(protoEdit: ProtoEdit): Edit {
     return new EditBuilder()
       .id(protoEdit.id)

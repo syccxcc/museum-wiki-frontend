@@ -79,11 +79,17 @@ export class TagSelectionComponent implements OnInit, OnChanges {
     });
   }
 
+  /**
+   * Update the dictionary that maps id to tag
+   */
   private updateIdToTag(): void {
     this.idToTag = {};
     this.tags.forEach(tag => this.idToTag[tag.id] = tag);
   }
 
+  /**
+   * Update the selected tags
+   */
   private updateSelectedTags(): void {
     this.existingCollections?.forEach((collection: BasicEntry) => {
       if (this.idToTag[collection.id]) {
